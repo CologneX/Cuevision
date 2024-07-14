@@ -1,14 +1,14 @@
 //
-//  billihelperTests.swift
-//  billihelperTests
+//  CuevisionTests.swift
+//  CuevisionTests
 //
 //  Created by Kyrell Leano Siauw on 12/07/24.
 //
 
 import XCTest
-@testable import billihelper
+@testable import Cuevision
 
-final class billihelperTests: XCTestCase {
+final class CuevisionTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

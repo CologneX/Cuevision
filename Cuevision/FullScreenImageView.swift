@@ -1,6 +1,6 @@
 //
 //  FullScreenImageView.swift
-//  billihelper
+//  Cuevision
 //
 //  Created by Kyrell Leano Siauw on 13/07/24.
 //

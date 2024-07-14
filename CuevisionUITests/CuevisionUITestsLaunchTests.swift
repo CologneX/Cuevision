@@ -1,13 +1,13 @@
 //
-//  billihelperUITestsLaunchTests.swift
-//  billihelperUITests
+//  CuevisionUITestsLaunchTests.swift
+//  CuevisionUITests
 //
 //  Created by Kyrell Leano Siauw on 12/07/24.
 //
 
 import XCTest
 
-final class billihelperUITestsLaunchTests: XCTestCase {
+final class CuevisionUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
