@@ -9,14 +9,18 @@
 /* Begin PBXBuildFile section */
 		9359152C2C419EE5004C4714 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359152B2C419EE5004C4714 /* FullScreenImageView.swift */; };
 		93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F3E2C4110D900153DCA /* CuevisionApp.swift */; };
-		93A69F412C4110D900153DCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F402C4110D900153DCA /* ContentView.swift */; };
+		93A69F412C4110D900153DCA /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F402C4110D900153DCA /* CameraView.swift */; };
 		93A69F432C4110DA00153DCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F422C4110DA00153DCA /* Assets.xcassets */; };
 		93A69F462C4110DA00153DCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F452C4110DA00153DCA /* Preview Assets.xcassets */; };
 		93A69F502C4110DB00153DCA /* CuevisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F4F2C4110DB00153DCA /* CuevisionTests.swift */; };
 		93A69F5A2C4110DB00153DCA /* CuevisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F592C4110DB00153DCA /* CuevisionUITests.swift */; };
 		93A69F5C2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */; };
 		93A69F692C41155300153DCA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F682C41155300153DCA /* .gitignore */; };
-		93A69F6B2C4148D300153DCA /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F6A2C4148D300153DCA /* CameraView.swift */; };
+		93A69F6B2C4148D300153DCA /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F6A2C4148D300153DCA /* CameraViewController.swift */; };
+		93C992BE2C45A231007D9B2F /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992BD2C45A231007D9B2F /* CameraViewModel.swift */; };
+		93C992C02C45AC5D007D9B2F /* PhotoLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992BF2C45AC5D007D9B2F /* PhotoLibraryViewModel.swift */; };
+		93C992C22C45AC7D007D9B2F /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992C12C45AC7D007D9B2F /* PhotoLibraryView.swift */; };
+		93C992C42C45AF84007D9B2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992C32C45AF84007D9B2F /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +45,7 @@
 		9359152B2C419EE5004C4714 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
 		93A69F3B2C4110D900153DCA /* Cuevision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuevision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A69F3E2C4110D900153DCA /* CuevisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionApp.swift; sourceTree = "<group>"; };
-		93A69F402C4110D900153DCA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		93A69F402C4110D900153DCA /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		93A69F422C4110DA00153DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93A69F452C4110DA00153DCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93A69F4B2C4110DB00153DCA /* CuevisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuevisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +54,11 @@
 		93A69F592C4110DB00153DCA /* CuevisionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionUITests.swift; sourceTree = "<group>"; };
 		93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		93A69F682C41155300153DCA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		93A69F6A2C4148D300153DCA /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		93A69F6A2C4148D300153DCA /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		93C992BD2C45A231007D9B2F /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		93C992BF2C45AC5D007D9B2F /* PhotoLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewModel.swift; sourceTree = "<group>"; };
+		93C992C12C45AC7D007D9B2F /* PhotoLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
+		93C992C32C45AF84007D9B2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		931CFB0E2C444DA1005B6487 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				93A69F6A2C4148D300153DCA /* CameraViewController.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		931CFB0F2C444DAD005B6487 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9359152B2C419EE5004C4714 /* FullScreenImageView.swift */,
+				93A69F402C4110D900153DCA /* CameraView.swift */,
+				93C992C12C45AC7D007D9B2F /* PhotoLibraryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		934FDCA22C45A17B001737AA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				93C992BD2C45A231007D9B2F /* CameraViewModel.swift */,
+				93C992BF2C45AC5D007D9B2F /* PhotoLibraryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		93A69F322C4110D900153DCA = {
 			isa = PBXGroup;
 			children = (
@@ -102,11 +137,12 @@
 		93A69F3D2C4110D900153DCA /* Cuevision */ = {
 			isa = PBXGroup;
 			children = (
+				93C992C32C45AF84007D9B2F /* AppDelegate.swift */,
+				934FDCA22C45A17B001737AA /* ViewModel */,
+				931CFB0F2C444DAD005B6487 /* View */,
+				931CFB0E2C444DA1005B6487 /* Model */,
 				9308DB8D2C444064007A3D70 /* Info.plist */,
 				93A69F3E2C4110D900153DCA /* CuevisionApp.swift */,
-				93A69F6A2C4148D300153DCA /* CameraView.swift */,
-				9359152B2C419EE5004C4714 /* FullScreenImageView.swift */,
-				93A69F402C4110D900153DCA /* ContentView.swift */,
 				93A69F422C4110DA00153DCA /* Assets.xcassets */,
 				93A69F442C4110DA00153DCA /* Preview Content */,
 			);
@@ -269,10 +305,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A69F6B2C4148D300153DCA /* CameraView.swift in Sources */,
+				93C992C42C45AF84007D9B2F /* AppDelegate.swift in Sources */,
+				93A69F6B2C4148D300153DCA /* CameraViewController.swift in Sources */,
 				9359152C2C419EE5004C4714 /* FullScreenImageView.swift in Sources */,
-				93A69F412C4110D900153DCA /* ContentView.swift in Sources */,
+				93A69F412C4110D900153DCA /* CameraView.swift in Sources */,
+				93C992C22C45AC7D007D9B2F /* PhotoLibraryView.swift in Sources */,
+				93C992C02C45AC5D007D9B2F /* PhotoLibraryViewModel.swift in Sources */,
 				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
+				93C992BE2C45A231007D9B2F /* CameraViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,12 +475,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"billihelper/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
 				DEVELOPMENT_TEAM = KNP937X993;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = billihelper/Info.plist;
+				INFOPLIST_FILE = Cuevision/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Cuevision;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app need your camera permission";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -448,7 +489,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -474,12 +515,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"billihelper/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
 				DEVELOPMENT_TEAM = KNP937X993;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = billihelper/Info.plist;
+				INFOPLIST_FILE = Cuevision/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Cuevision;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app need your camera permission";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -487,7 +529,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

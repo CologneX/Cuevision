@@ -8,10 +8,12 @@
 import SwiftUI
 
 @main
-struct billihelperApp: App {
+struct CuevisionApp: App {
+    // AppDelegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CameraView()
         }
     }
 }
