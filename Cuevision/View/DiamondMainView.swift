@@ -25,6 +25,9 @@ struct DiamondMainView: View {
                         .scaledToFit()
                         .padding(.horizontal, 220)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .onAppear {
+                            print("width: \()")
+                        }
                     
                     // Boundary background
                     Rectangle()
