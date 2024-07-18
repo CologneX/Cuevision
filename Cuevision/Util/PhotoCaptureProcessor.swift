@@ -158,15 +158,8 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
             return image
         }
         
-        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
-        image.draw(in: CGRect(origin: .zero, size: image.size))
-        let adjustedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+        let adjustedImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: imageOrientation)
         
-        print("lagi ganti orientation ke: \(orientation)")
-        print(adjustedImage?.imageOrientation.rawValue ?? 0)
-
-        
-        return adjustedImage ?? image
+        return adjustedImage
     }
 }
