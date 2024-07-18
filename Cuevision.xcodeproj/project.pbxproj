@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9359152C2C419EE5004C4714 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359152B2C419EE5004C4714 /* FullScreenImageView.swift */; };
+		06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C22C490F6200974D81 /* AppDelegate.swift */; };
+		06BAC5CC2C490FC800974D81 /* DiamondMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C42C490FC700974D81 /* DiamondMainView.swift */; };
+		06BAC5CD2C490FC800974D81 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C52C490FC700974D81 /* HomeView.swift */; };
+		06BAC5CE2C490FC800974D81 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C62C490FC700974D81 /* InformationView.swift */; };
+		06BAC5CF2C490FC800974D81 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C72C490FC700974D81 /* OnboardingView.swift */; };
+		06BAC5D02C490FC800974D81 /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C82C490FC700974D81 /* PhotoLibraryView.swift */; };
+		06BAC5D12C490FC800974D81 /* AnalysisDiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C92C490FC700974D81 /* AnalysisDiamondView.swift */; };
+		06BAC5D22C490FC800974D81 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5CA2C490FC700974D81 /* CameraView.swift */; };
+		06BAC5D32C490FC800974D81 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5CB2C490FC800974D81 /* FullScreenImageView.swift */; };
+		06BAC5D62C49103B00974D81 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06BAC5D42C49103B00974D81 /* SF-Pro.ttf */; };
 		93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F3E2C4110D900153DCA /* CuevisionApp.swift */; };
-		93A69F412C4110D900153DCA /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F402C4110D900153DCA /* CameraView.swift */; };
 		93A69F432C4110DA00153DCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F422C4110DA00153DCA /* Assets.xcassets */; };
 		93A69F462C4110DA00153DCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F452C4110DA00153DCA /* Preview Assets.xcassets */; };
 		93A69F502C4110DB00153DCA /* CuevisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F4F2C4110DB00153DCA /* CuevisionTests.swift */; };
@@ -19,8 +27,6 @@
 		93A69F6B2C4148D300153DCA /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F6A2C4148D300153DCA /* CameraViewController.swift */; };
 		93C992BE2C45A231007D9B2F /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992BD2C45A231007D9B2F /* CameraViewModel.swift */; };
 		93C992C02C45AC5D007D9B2F /* PhotoLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992BF2C45AC5D007D9B2F /* PhotoLibraryViewModel.swift */; };
-		93C992C22C45AC7D007D9B2F /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992C12C45AC7D007D9B2F /* PhotoLibraryView.swift */; };
-		93C992C42C45AF84007D9B2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C992C32C45AF84007D9B2F /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,11 +47,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06BAC5C22C490F6200974D81 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		06BAC5C42C490FC700974D81 /* DiamondMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondMainView.swift; sourceTree = "<group>"; };
+		06BAC5C52C490FC700974D81 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		06BAC5C62C490FC700974D81 /* InformationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
+		06BAC5C72C490FC700974D81 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		06BAC5C82C490FC700974D81 /* PhotoLibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
+		06BAC5C92C490FC700974D81 /* AnalysisDiamondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondView.swift; sourceTree = "<group>"; };
+		06BAC5CA2C490FC700974D81 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		06BAC5CB2C490FC800974D81 /* FullScreenImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
+		06BAC5D42C49103B00974D81 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		9308DB8D2C444064007A3D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		9359152B2C419EE5004C4714 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
 		93A69F3B2C4110D900153DCA /* Cuevision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuevision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A69F3E2C4110D900153DCA /* CuevisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionApp.swift; sourceTree = "<group>"; };
-		93A69F402C4110D900153DCA /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		93A69F422C4110DA00153DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93A69F452C4110DA00153DCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93A69F4B2C4110DB00153DCA /* CuevisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuevisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,8 +71,6 @@
 		93A69F6A2C4148D300153DCA /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		93C992BD2C45A231007D9B2F /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		93C992BF2C45AC5D007D9B2F /* PhotoLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewModel.swift; sourceTree = "<group>"; };
-		93C992C12C45AC7D007D9B2F /* PhotoLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
-		93C992C32C45AF84007D9B2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06BAC5D52C49103B00974D81 /* CustomFonts */ = {
+			isa = PBXGroup;
+			children = (
+				06BAC5D42C49103B00974D81 /* SF-Pro.ttf */,
+			);
+			path = CustomFonts;
+			sourceTree = "<group>";
+		};
 		931CFB0E2C444DA1005B6487 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +117,14 @@
 		931CFB0F2C444DAD005B6487 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9359152B2C419EE5004C4714 /* FullScreenImageView.swift */,
-				93A69F402C4110D900153DCA /* CameraView.swift */,
-				93C992C12C45AC7D007D9B2F /* PhotoLibraryView.swift */,
+				06BAC5C92C490FC700974D81 /* AnalysisDiamondView.swift */,
+				06BAC5CA2C490FC700974D81 /* CameraView.swift */,
+				06BAC5C42C490FC700974D81 /* DiamondMainView.swift */,
+				06BAC5CB2C490FC800974D81 /* FullScreenImageView.swift */,
+				06BAC5C52C490FC700974D81 /* HomeView.swift */,
+				06BAC5C62C490FC700974D81 /* InformationView.swift */,
+				06BAC5C72C490FC700974D81 /* OnboardingView.swift */,
+				06BAC5C82C490FC700974D81 /* PhotoLibraryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,7 +162,8 @@
 		93A69F3D2C4110D900153DCA /* Cuevision */ = {
 			isa = PBXGroup;
 			children = (
-				93C992C32C45AF84007D9B2F /* AppDelegate.swift */,
+				06BAC5D52C49103B00974D81 /* CustomFonts */,
+				06BAC5C22C490F6200974D81 /* AppDelegate.swift */,
 				934FDCA22C45A17B001737AA /* ViewModel */,
 				931CFB0F2C444DAD005B6487 /* View */,
 				931CFB0E2C444DA1005B6487 /* Model */,
@@ -279,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93A69F462C4110DA00153DCA /* Preview Assets.xcassets in Resources */,
+				06BAC5D62C49103B00974D81 /* SF-Pro.ttf in Resources */,
 				93A69F692C41155300153DCA /* .gitignore in Resources */,
 				93A69F432C4110DA00153DCA /* Assets.xcassets in Resources */,
 			);
@@ -305,14 +332,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93C992C42C45AF84007D9B2F /* AppDelegate.swift in Sources */,
+				06BAC5D32C490FC800974D81 /* FullScreenImageView.swift in Sources */,
+				06BAC5CC2C490FC800974D81 /* DiamondMainView.swift in Sources */,
+				06BAC5CE2C490FC800974D81 /* InformationView.swift in Sources */,
+				06BAC5D12C490FC800974D81 /* AnalysisDiamondView.swift in Sources */,
+				06BAC5CD2C490FC800974D81 /* HomeView.swift in Sources */,
+				06BAC5D22C490FC800974D81 /* CameraView.swift in Sources */,
+				06BAC5CF2C490FC800974D81 /* OnboardingView.swift in Sources */,
 				93A69F6B2C4148D300153DCA /* CameraViewController.swift in Sources */,
-				9359152C2C419EE5004C4714 /* FullScreenImageView.swift in Sources */,
-				93A69F412C4110D900153DCA /* CameraView.swift in Sources */,
-				93C992C22C45AC7D007D9B2F /* PhotoLibraryView.swift in Sources */,
+				06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */,
 				93C992C02C45AC5D007D9B2F /* PhotoLibraryViewModel.swift in Sources */,
 				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
 				93C992BE2C45A231007D9B2F /* CameraViewModel.swift in Sources */,
+				06BAC5D02C490FC800974D81 /* PhotoLibraryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
