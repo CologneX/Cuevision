@@ -24,9 +24,7 @@ struct HomeView: View {
                 Spacer()
                 
                 VStack{
-                    Button(action: {
-                        
-                    }){
+                    NavigationLink(destination: CameraView()){
                         Image(systemName: "camera.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -43,9 +41,7 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        
-                    }){
+                    NavigationLink(destination: InformationView()){
                         Text("Billiard Tips")
                             .font(.title2)
                             .fontWeight(.bold)
@@ -62,6 +58,7 @@ struct HomeView: View {
             }
             .padding(70)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
