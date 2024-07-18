@@ -25,7 +25,6 @@ class PhotoCaptureProcessor: NSObject {
     
     //    The actual captured photo's data
     var photoData: Data?
-    
     //    The maximum time lapse before telling UI to show a spinner
     private var maxPhotoProcessingTime: CMTime?
     

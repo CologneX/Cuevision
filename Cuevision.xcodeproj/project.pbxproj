@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93802E0E2C4932B8007878E4 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E0D2C4932B8007878E4 /* CameraPreview.swift */; };
-		93802E122C4932C2007878E4 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E0F2C4932C2007878E4 /* CameraModel.swift */; };
-		93802E132C4932C2007878E4 /* CameraService+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E102C4932C2007878E4 /* CameraService+Enums.swift */; };
-		93802E142C4932C2007878E4 /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E112C4932C2007878E4 /* CameraService+Extensions.swift */; };
-		93802E162C4932C9007878E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E152C4932C9007878E4 /* ContentView.swift */; };
-		93802E182C4932D4007878E4 /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E172C4932D4007878E4 /* ImageResizer.swift */; };
-		93802E1A2C4932DE007878E4 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93802E192C4932DE007878E4 /* PhotoCaptureProcessor.swift */; };
-		93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F3E2C4110D900153DCA /* CuevisionApp.swift */; };
-		93A69F432C4110DA00153DCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F422C4110DA00153DCA /* Assets.xcassets */; };
-		93A69F462C4110DA00153DCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F452C4110DA00153DCA /* Preview Assets.xcassets */; };
+		93981C762C497B66008A6C7F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C752C497B66008A6C7F /* CameraView.swift */; };
+		93981C822C497BC7008A6C7F /* SwiftCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C812C497BC7008A6C7F /* SwiftCameraApp.swift */; };
+		93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C832C497C59008A6C7F /* CameraService+Extensions.swift */; };
+		93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */; };
+		93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C852C497C59008A6C7F /* ImageResizer.swift */; };
+		93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C892C497C8C008A6C7F /* CameraService+Enums.swift */; };
+		93981C8C2C497CC2008A6C7F /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8B2C497CC2008A6C7F /* CameraModel.swift */; };
+		93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8D2C497F88008A6C7F /* CameraPreview.swift */; };
+		93981C982C49811A008A6C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C972C49811A008A6C7F /* Assets.xcassets */; };
+		93981C9B2C498128008A6C7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C992C498128008A6C7F /* Preview Assets.xcassets */; };
 		93A69F502C4110DB00153DCA /* CuevisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F4F2C4110DB00153DCA /* CuevisionTests.swift */; };
 		93A69F5A2C4110DB00153DCA /* CuevisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F592C4110DB00153DCA /* CuevisionUITests.swift */; };
 		93A69F5C2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */; };
@@ -41,18 +41,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9308DB8D2C444064007A3D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		93802E0D2C4932B8007878E4 /* CameraPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraPreview.swift; path = ../../../SwiftCamera/SwiftCamera/CameraPreview.swift; sourceTree = "<group>"; };
-		93802E0F2C4932C2007878E4 /* CameraModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
-		93802E102C4932C2007878E4 /* CameraService+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Enums.swift"; sourceTree = "<group>"; };
-		93802E112C4932C2007878E4 /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
-		93802E152C4932C9007878E4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		93802E172C4932D4007878E4 /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
-		93802E192C4932DE007878E4 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
+		93981C752C497B66008A6C7F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		93981C812C497BC7008A6C7F /* SwiftCameraApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCameraApp.swift; sourceTree = "<group>"; };
+		93981C832C497C59008A6C7F /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
+		93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
+		93981C852C497C59008A6C7F /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
+		93981C892C497C8C008A6C7F /* CameraService+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Enums.swift"; sourceTree = "<group>"; };
+		93981C8B2C497CC2008A6C7F /* CameraModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		93981C8D2C497F88008A6C7F /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		93981C972C49811A008A6C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		93981C992C498128008A6C7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93A69F3B2C4110D900153DCA /* Cuevision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuevision.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A69F3E2C4110D900153DCA /* CuevisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionApp.swift; sourceTree = "<group>"; };
-		93A69F422C4110DA00153DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		93A69F452C4110DA00153DCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93A69F4B2C4110DB00153DCA /* CuevisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuevisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A69F4F2C4110DB00153DCA /* CuevisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionTests.swift; sourceTree = "<group>"; };
 		93A69F552C4110DB00153DCA /* CuevisionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuevisionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,39 +85,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		931CFB0E2C444DA1005B6487 /* Model */ = {
+		9307BD702C497A86004C4870 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				93802E102C4932C2007878E4 /* CameraService+Enums.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		931CFB0F2C444DAD005B6487 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				93802E152C4932C9007878E4 /* ContentView.swift */,
-				93802E0D2C4932B8007878E4 /* CameraPreview.swift */,
+				93981C752C497B66008A6C7F /* CameraView.swift */,
+				93981C8D2C497F88008A6C7F /* CameraPreview.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		934FDCA22C45A17B001737AA /* ViewModel */ = {
+		9307BD712C497A8D004C4870 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				93802E0F2C4932C2007878E4 /* CameraModel.swift */,
+				93981C832C497C59008A6C7F /* CameraService+Extensions.swift */,
+				93981C852C497C59008A6C7F /* ImageResizer.swift */,
+				93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		9307BD722C497A91004C4870 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				93981C8B2C497CC2008A6C7F /* CameraModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		93802E1B2C4957E3007878E4 /* Util */ = {
+		9307BD732C497A9D004C4870 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				93802E172C4932D4007878E4 /* ImageResizer.swift */,
-				93802E112C4932C2007878E4 /* CameraService+Extensions.swift */,
-				93802E192C4932DE007878E4 /* PhotoCaptureProcessor.swift */,
+				93981C892C497C8C008A6C7F /* CameraService+Enums.swift */,
 			);
-			path = Util;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		93981C9A2C498128008A6C7F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				93981C992C498128008A6C7F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		93A69F322C4110D900153DCA = {
@@ -145,24 +152,15 @@
 		93A69F3D2C4110D900153DCA /* Cuevision */ = {
 			isa = PBXGroup;
 			children = (
-				93802E1B2C4957E3007878E4 /* Util */,
-				934FDCA22C45A17B001737AA /* ViewModel */,
-				931CFB0F2C444DAD005B6487 /* View */,
-				931CFB0E2C444DA1005B6487 /* Model */,
-				9308DB8D2C444064007A3D70 /* Info.plist */,
-				93A69F3E2C4110D900153DCA /* CuevisionApp.swift */,
-				93A69F422C4110DA00153DCA /* Assets.xcassets */,
-				93A69F442C4110DA00153DCA /* Preview Content */,
+				93981C9A2C498128008A6C7F /* Preview Content */,
+				93981C972C49811A008A6C7F /* Assets.xcassets */,
+				93981C812C497BC7008A6C7F /* SwiftCameraApp.swift */,
+				9307BD732C497A9D004C4870 /* Model */,
+				9307BD722C497A91004C4870 /* ViewModel */,
+				9307BD712C497A8D004C4870 /* Util */,
+				9307BD702C497A86004C4870 /* View */,
 			);
 			path = Cuevision;
-			sourceTree = "<group>";
-		};
-		93A69F442C4110DA00153DCA /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				93A69F452C4110DA00153DCA /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		93A69F4E2C4110DB00153DCA /* CuevisonTests */ = {
@@ -252,6 +250,7 @@
 				TargetAttributes = {
 					93A69F3A2C4110D900153DCA = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
 					};
 					93A69F4A2C4110DB00153DCA = {
 						CreatedOnToolsVersion = 15.4;
@@ -290,9 +289,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A69F462C4110DA00153DCA /* Preview Assets.xcassets in Resources */,
+				93981C9B2C498128008A6C7F /* Preview Assets.xcassets in Resources */,
 				93A69F692C41155300153DCA /* .gitignore in Resources */,
-				93A69F432C4110DA00153DCA /* Assets.xcassets in Resources */,
+				93981C982C49811A008A6C7F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,14 +316,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
-				93802E132C4932C2007878E4 /* CameraService+Enums.swift in Sources */,
-				93802E182C4932D4007878E4 /* ImageResizer.swift in Sources */,
-				93802E162C4932C9007878E4 /* ContentView.swift in Sources */,
-				93802E1A2C4932DE007878E4 /* PhotoCaptureProcessor.swift in Sources */,
-				93802E0E2C4932B8007878E4 /* CameraPreview.swift in Sources */,
-				93802E122C4932C2007878E4 /* CameraModel.swift in Sources */,
-				93802E142C4932C2007878E4 /* CameraService+Extensions.swift in Sources */,
+				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
+				93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */,
+				93981C822C497BC7008A6C7F /* SwiftCameraApp.swift in Sources */,
+				93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */,
+				93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */,
+				93981C762C497B66008A6C7F /* CameraView.swift in Sources */,
+				93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */,
+				93981C8C2C497CC2008A6C7F /* CameraModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
@@ -495,7 +495,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Cuevision;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app need your camera permission";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs your permission to access library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app need your permissionn to access album";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -516,6 +516,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -526,6 +527,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
@@ -536,7 +538,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Cuevision;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app need your camera permission";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs your permission to access library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app need your permissionn to access album";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
