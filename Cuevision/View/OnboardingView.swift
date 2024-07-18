@@ -24,13 +24,13 @@ struct OnboardingView: View {
                                 .resizable()
                                 .frame(width: 200, height: 200)
                             
-                            Text("Focus, Aim, Win")
+                            Text("Focus, Aim, Win").font(Font.custom("SFPro-ExpandedBold", size: 36.0))
                                 .foregroundColor(.white)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .padding()
                             
-                            Text("Improve your aim using diamond system scanner")
+                            Text("improve your aim using diamond system scanner")
                                 .foregroundColor(.white)
                                 .fontWeight(.semibold)
                         }

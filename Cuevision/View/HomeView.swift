@@ -15,7 +15,7 @@ struct HomeView: View {
                 .edgesIgnoringSafeArea(.all)
             
             HStack{
-                Text("'Focus. Aim. Win'")
+                Text("'Focus. Aim. Win'").font(Font.custom("SFPro-ExpandedBold", size: 20.0))
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
