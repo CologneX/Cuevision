@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-
-
-		2C86ECDF2C492CDF00DEED9F /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86ECDC2C492CDF00DEED9F /* CustomFont.swift */; };
-
 		06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C22C490F6200974D81 /* AppDelegate.swift */; };
 		06BAC5CC2C490FC800974D81 /* DiamondMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C42C490FC700974D81 /* DiamondMainView.swift */; };
 		06BAC5CD2C490FC800974D81 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C52C490FC700974D81 /* HomeView.swift */; };
@@ -52,10 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-
-
-
-		2C86ECDC2C492CDF00DEED9F /* CustomFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		06BAC5C22C490F6200974D81 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06BAC5C42C490FC700974D81 /* DiamondMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondMainView.swift; sourceTree = "<group>"; };
 		06BAC5C52C490FC700974D81 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -115,14 +106,6 @@
 			path = CustomFonts;
 			sourceTree = "<group>";
 		};
-		2C86ECDD2C492CDF00DEED9F /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				2C86ECDC2C492CDF00DEED9F /* CustomFont.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		931CFB0E2C444DA1005B6487 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,9 +162,6 @@
 		93A69F3D2C4110D900153DCA /* Cuevision */ = {
 			isa = PBXGroup;
 			children = (
-
-				2C86ECDD2C492CDF00DEED9F /* Utils */,
-
 				06BAC5D52C49103B00974D81 /* CustomFonts */,
 				06BAC5C22C490F6200974D81 /* AppDelegate.swift */,
 				934FDCA22C45A17B001737AA /* ViewModel */,
@@ -360,12 +340,6 @@
 				06BAC5D22C490FC800974D81 /* CameraView.swift in Sources */,
 				06BAC5CF2C490FC800974D81 /* OnboardingView.swift in Sources */,
 				93A69F6B2C4148D300153DCA /* CameraViewController.swift in Sources */,
-
-
-
-
-				2C86ECDF2C492CDF00DEED9F /* CustomFont.swift in Sources */,
-
 				06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */,
 				93C992C02C45AC5D007D9B2F /* PhotoLibraryViewModel.swift in Sources */,
 				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
