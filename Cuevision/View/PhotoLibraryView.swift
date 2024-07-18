@@ -7,20 +7,29 @@
 
 import SwiftUI
 
-struct PhotoLibraryView: View {
-    let images: [UIImage]
-
+struct ConfirmationView: View {
+    @Binding var image: UIImage?
+    var onConfirm: () -> Void
+    var onRetake: () -> Void
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(images, id: \.self) { image in
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
+        VStack {
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            HStack {
+                Button("Retake") {
+                    onRetake()
+                }
+                Spacer()
+                Button("Use Photo") {
+                    onConfirm()
                 }
             }
+            .padding()
         }
-        .navigationTitle("Photo Library")
     }
 }

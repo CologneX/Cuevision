@@ -2,94 +2,74 @@
 //  CameraViewModel.swift
 //  Cuevision
 //
-//  Created by Kyrell Leano Siauw on 16/07/24.
+//  Created by Kyrell Leano Siauw on 18/07/24.
 //
 
-import SwiftUI
+import Combine
 import AVFoundation
+import Camera_SwiftUI
 
-class CameraViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
-    @Published var processedImage: UIImage? = nil
+final class CameraModel: ObservableObject {
+    private let service = CameraService()
     
-    var captureSession: AVCaptureSession!
-    var photoOutput: AVCapturePhotoOutput!
+    @Published var photo: Photo!
     
-    override init() {
-        super.init()
-        setupCamera()
-    }
+    @Published var showAlertError = false
     
-    func setupCamera() {
-        captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .photo
+    @Published var isFlashOn = false
+    
+    @Published var willCapturePhoto = false
+    
+    var alertError: AlertError!
+    
+    var session: AVCaptureSession
+    
+    private var subscriptions = Set<AnyCancellable>()
+    
+    init() {
+        self.session = service.session
         
-        guard let backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-              let input = try? AVCaptureDeviceInput(device: backCamera) else {
-            return
+        service.$photo.sink { [weak self] (photo) in
+            guard let pic = photo else { return }
+            self?.photo = pic
         }
+        .store(in: &self.subscriptions)
         
-        photoOutput = AVCapturePhotoOutput()
+        service.$shouldShowAlertView.sink { [weak self] (val) in
+            self?.alertError = self?.service.alertError
+            self?.showAlertError = val
+        }
+        .store(in: &self.subscriptions)
         
-        if captureSession.canAddInput(input) && captureSession.canAddOutput(photoOutput) {
-            captureSession.addInput(input)
-            captureSession.addOutput(photoOutput)
-        } else {
-            return
+        service.$flashMode.sink { [weak self] (mode) in
+            self?.isFlashOn = mode == .on
         }
-    }
-    
-    func startRunning() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.captureSession.startRunning()
-        }
-    }
-    
-    func stopRunning() {
-        captureSession.stopRunning()
-    }
-    
-    func takePhoto() {
-        let settings = AVCapturePhotoSettings()
-        photoOutput.capturePhoto(with: settings, delegate: self)
-    }
-    
-    func processImage(_ image: UIImage) -> UIImage {
-        return applyPerspectiveCorrection(to: image) ?? image
-    }
-    
-    func applyPerspectiveCorrection(to image: UIImage) -> UIImage? {
-        /// Uncomment code guard kalo mau transform imagenya
+        .store(in: &self.subscriptions)
         
-        //        guard let ciImage = CIImage(image: image) else {
-        //            print("Failed to create CIImage from UIImage.")
-        //            return nil
-        //        }
-        return image
+        service.$willCapturePhoto.sink { [weak self] (val) in
+            self?.willCapturePhoto = val
+        }
+        .store(in: &self.subscriptions)
     }
     
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        guard error == nil else {
-            return
-        }
-        
-        guard let imageData = photo.fileDataRepresentation() else {
-            return
-        }
-        
-        if let image = UIImage(data: imageData) {
-            DispatchQueue.main.async {
-                self.processedImage = self.processImage(image)
-            }
-        }
-    }
-}
-
-class CameraUIViewController: UIViewController {
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscape
+    func configure() {
+        service.checkForPermissions()
+        service.configure()
     }
     
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .landscapeRight
+    func capturePhoto() {
+        service.capturePhoto()
+    }
+    
+    func flipCamera() {
+        service.changeCamera()
+    }
+    
+    func zoom(with factor: CGFloat) {
+        service.set(zoom: factor)
+    }
+    
+    func switchFlash() {
+        service.flashMode = service.flashMode == .on ? .off : .on
     }
 }
