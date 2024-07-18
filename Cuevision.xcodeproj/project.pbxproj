@@ -21,6 +21,9 @@
 		93A69F5A2C4110DB00153DCA /* CuevisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F592C4110DB00153DCA /* CuevisionUITests.swift */; };
 		93A69F5C2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */; };
 		93A69F692C41155300153DCA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F682C41155300153DCA /* .gitignore */; };
+		93C97C0B2C499FB00047C2CF /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */; };
+		93C97C0D2C49AB3F0047C2CF /* YOLOPool.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0C2C49AB3F0047C2CF /* YOLOPool.mlpackage */; };
+		93C97C0F2C49AB640047C2CF /* GameAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,9 @@
 		93A69F592C4110DB00153DCA /* CuevisionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionUITests.swift; sourceTree = "<group>"; };
 		93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		93A69F682C41155300153DCA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
+		93C97C0C2C49AB3F0047C2CF /* YOLOPool.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = YOLOPool.mlpackage; sourceTree = "<group>"; };
+		93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnalysisView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,8 @@
 			children = (
 				93981C752C497B66008A6C7F /* CameraView.swift */,
 				93981C8D2C497F88008A6C7F /* CameraPreview.swift */,
+				93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */,
+				93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -152,6 +160,7 @@
 		93A69F3D2C4110D900153DCA /* Cuevision */ = {
 			isa = PBXGroup;
 			children = (
+				93C97C0C2C49AB3F0047C2CF /* YOLOPool.mlpackage */,
 				93981C9A2C498128008A6C7F /* Preview Content */,
 				93981C972C49811A008A6C7F /* Assets.xcassets */,
 				93981C812C497BC7008A6C7F /* Cuevision.swift */,
@@ -317,9 +326,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
+				93C97C0B2C499FB00047C2CF /* PhotoDisplayView.swift in Sources */,
 				93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */,
 				93981C822C497BC7008A6C7F /* Cuevision.swift in Sources */,
+				93C97C0D2C49AB3F0047C2CF /* YOLOPool.mlpackage in Sources */,
 				93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */,
+				93C97C0F2C49AB640047C2CF /* GameAnalysisView.swift in Sources */,
 				93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */,
 				93981C762C497B66008A6C7F /* CameraView.swift in Sources */,
 				93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */,

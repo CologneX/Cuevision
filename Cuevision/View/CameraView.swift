@@ -8,14 +8,28 @@
 import SwiftUI
 import Combine
 import AVFoundation
+import PhotosUI
+import Photos
 
 struct CameraView: View {
     @StateObject var model = CameraModel()
     
-    @State var currentZoomFactor: CGFloat = 1.0
+    @State private var selectedItem: PhotosPickerItem?
+    
+    @State private var selectedImageData: Data?
+    
+    @State private var currentZoomFactor: CGFloat = 1.0
     
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
     
+    @State private var isShowingPhotoDisplay = false
+    
+    @State private var displayedImage: UIImage?
+    
+    @State private var photoSource: PhotoSource = .camera
+    
+    @State private var mostRecentImage: UIImage?
+
     var captureButton: some View {
         Button(action: {
             model.capturePhoto()
@@ -29,25 +43,46 @@ struct CameraView: View {
                         .frame(width: 65, height: 65, alignment: .center)
                 )
         })
+        .onChange(of: model.photo) { newPhoto in
+            if let photo = newPhoto, let uiImage = photo.image {
+                displayedImage = uiImage
+                photoSource = .camera
+                isShowingPhotoDisplay = true
+            }
+        }
     }
     
-    var capturedPhotoThumbnail: some View {
-        Group {
-            if model.photo != nil {
-                Image(uiImage: model.photo.image!)
+    var photoPicker: some View {
+        PhotosPicker(selection: $selectedItem, matching: .images) {
+            if let image = mostRecentImage {
+                Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60, height: 60)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .animation(.spring())
-                
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 60, height: 60, alignment: .center)
                     .foregroundColor(.black)
             }
         }
+        .onAppear {
+            fetchMostRecentImage()
+        }
+        .onChange(of: selectedItem) { newItem in
+            Task {
+                if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                    selectedImageData = data
+                    if let uiImage = UIImage(data: data) {
+                        displayedImage = uiImage
+                        photoSource = .library
+                        isShowingPhotoDisplay = true
+                    }
+                }
+            }
+        }
     }
+    
     
     var flipCameraButton: some View {
         Button(action: {
@@ -119,10 +154,36 @@ struct CameraView: View {
                         Spacer()
                         captureButton
                         Spacer()
-                        capturedPhotoThumbnail
+                        photoPicker
                     }
                     .padding(.horizontal, 20)
                 }
+            }
+            .sheet(isPresented: $isShowingPhotoDisplay) {
+                if let image = displayedImage {
+                    NavigationView {
+                        PhotoDisplayView(photo: image, source: photoSource, retakeAction: {
+                            isShowingPhotoDisplay = false
+                        }, model: model)
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchMostRecentImage() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.fetchLimit = 1
+        
+        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        
+        if let asset = fetchResult.firstObject {
+            let manager = PHImageManager.default()
+            let option = PHImageRequestOptions()
+            option.isSynchronous = true
+            manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: option) { image, _ in
+                self.mostRecentImage = image
             }
         }
     }
