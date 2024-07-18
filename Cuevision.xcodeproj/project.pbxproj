@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		93981C762C497B66008A6C7F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C752C497B66008A6C7F /* CameraView.swift */; };
-		93981C822C497BC7008A6C7F /* SwiftCameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C812C497BC7008A6C7F /* SwiftCameraApp.swift */; };
+		93981C822C497BC7008A6C7F /* Cuevision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C812C497BC7008A6C7F /* Cuevision.swift */; };
 		93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C832C497C59008A6C7F /* CameraService+Extensions.swift */; };
 		93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */; };
 		93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C852C497C59008A6C7F /* ImageResizer.swift */; };
@@ -42,7 +42,7 @@
 
 /* Begin PBXFileReference section */
 		93981C752C497B66008A6C7F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		93981C812C497BC7008A6C7F /* SwiftCameraApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCameraApp.swift; sourceTree = "<group>"; };
+		93981C812C497BC7008A6C7F /* Cuevision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cuevision.swift; sourceTree = "<group>"; };
 		93981C832C497C59008A6C7F /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
 		93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		93981C852C497C59008A6C7F /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 			children = (
 				93981C9A2C498128008A6C7F /* Preview Content */,
 				93981C972C49811A008A6C7F /* Assets.xcassets */,
-				93981C812C497BC7008A6C7F /* SwiftCameraApp.swift */,
+				93981C812C497BC7008A6C7F /* Cuevision.swift */,
 				9307BD732C497A9D004C4870 /* Model */,
 				9307BD722C497A91004C4870 /* ViewModel */,
 				9307BD712C497A8D004C4870 /* Util */,
@@ -318,7 +318,7 @@
 			files = (
 				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
 				93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */,
-				93981C822C497BC7008A6C7F /* SwiftCameraApp.swift in Sources */,
+				93981C822C497BC7008A6C7F /* Cuevision.swift in Sources */,
 				93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */,
 				93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */,
 				93981C762C497B66008A6C7F /* CameraView.swift in Sources */,

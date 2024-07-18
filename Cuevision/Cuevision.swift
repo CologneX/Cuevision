@@ -1,14 +1,14 @@
 //
-//  SwiftCameraApp.swift
-//  SwiftCamera
+//  CameraPreview.swift
+//  Cuevision
 //
-//  Created by Rolando Rodriguez on 10/15/20.
+//  Created by Kyrell Leano Siauw on 18/07/24.
 //
 
 import SwiftUI
 
 @main
-struct SwiftCameraApp: App {
+struct CuevisionApp: App {
     var body: some Scene {
         WindowGroup {
             CameraView()
