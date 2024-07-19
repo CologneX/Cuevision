@@ -1,8 +1,8 @@
 //
 //  CameraModel.swift
-//  SwiftCamera
+//  Cuevision
 //
-//  Created by Rolando Rodriguez on 10/15/20.
+//  Created by Kyrell Leano Siauw on 18/07/24.
 //
 
 import Foundation
@@ -10,6 +10,7 @@ import Combine
 import AVFoundation
 import Photos
 import UIKit
+import Vision
 
 //  MARK: Class Camera Service, handles setup of AVFoundation needed for a basic camera app.
 public struct Photo: Identifiable, Equatable {
@@ -491,8 +492,11 @@ final class CameraModel: ObservableObject {
     @Published var willCapturePhoto = false
     
     @Published var currentOrientation: UIDeviceOrientation = .landscapeLeft
-
     
+    @Published var classificationResults: [VNClassificationObservation] = []
+    
+    private var classificationRequest: VNCoreMLRequest?
+
     var alertError: AlertError!
     
     var session: AVCaptureSession
@@ -523,6 +527,8 @@ final class CameraModel: ObservableObject {
             self?.willCapturePhoto = val
         }
         .store(in: &self.subscriptions)
+        
+        setupVision()
     }
     
     func configure() {
@@ -549,4 +555,40 @@ final class CameraModel: ObservableObject {
     func updateOrientation(_ newOrientation: UIDeviceOrientation) {
          currentOrientation = newOrientation
      }
+    
+    func setSelectedPhoto(_ data: Data) {
+        self.photo = Photo(id: UUID().uuidString, originalData: data)
+    }
+    
+    func clearPhoto() {
+        self.photo = nil
+    }
+    
+    
+    private func setupVision() {
+        guard let model = try? VNCoreMLModel(for: YOLOPool(configuration: .init()).model) else {
+            fatalError("Failed to load ML model")
+        }
+        classificationRequest = VNCoreMLRequest(model: model, completionHandler: handleClassification)
+    }
+
+    private func handleClassification(request: VNRequest, error: Error?) {
+        guard let results = request.results as? [VNClassificationObservation] else { return }
+        DispatchQueue.main.async {
+            self.classificationResults = results
+        }
+    }
+
+    func classifyImage(_ image: UIImage) {
+        guard let ciImage = CIImage(image: image),
+              let request = classificationRequest else { return }
+
+        let handler = VNImageRequestHandler(ciImage: ciImage, orientation: .right)
+        do {
+            try handler.perform([request])
+            print("Results: \(classificationResults)")
+        } catch {
+            print("Failed to perform classification: \(error)")
+        }
+    }
 }

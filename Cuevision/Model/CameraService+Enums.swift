@@ -35,3 +35,8 @@ extension CameraService {
         case movie = 1
     }
 }
+
+enum PhotoSource {
+    case library
+    case camera
+}
