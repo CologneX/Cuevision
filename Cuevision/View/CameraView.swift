@@ -12,7 +12,9 @@ import PhotosUI
 import Photos
 
 struct CameraView: View {
-    @StateObject var model = CameraModel()
+    @StateObject var cameraModel = CameraModel()
+    
+    @StateObject var ballClassificationModel = BilliardBallClassifier()
     
     @State private var selectedItem: PhotosPickerItem?
     
@@ -29,10 +31,10 @@ struct CameraView: View {
     @State private var photoSource: PhotoSource = .camera
     
     @State private var mostRecentImage: UIImage?
-
+    
     var captureButton: some View {
         Button(action: {
-            model.capturePhoto()
+            cameraModel.capturePhoto()
         }, label: {
             Circle()
                 .foregroundColor(.white)
@@ -43,7 +45,7 @@ struct CameraView: View {
                         .frame(width: 65, height: 65, alignment: .center)
                 )
         })
-        .onChange(of: model.photo) { newPhoto in
+        .onChange(of: cameraModel.photo) { newPhoto in
             if let photo = newPhoto, let uiImage = photo.image {
                 displayedImage = uiImage
                 photoSource = .camera
@@ -86,7 +88,7 @@ struct CameraView: View {
     
     var flipCameraButton: some View {
         Button(action: {
-            model.flipCamera()
+            cameraModel.flipCamera()
         }, label: {
             Circle()
                 .foregroundColor(Color.gray.opacity(0.2))
@@ -104,16 +106,16 @@ struct CameraView: View {
                 
                 HStack {
                     Button(action: {
-                        model.switchFlash()
+                        cameraModel.switchFlash()
                     }, label: {
-                        Image(systemName: model.isFlashOn ? "bolt.fill" : "bolt.slash.fill")
+                        Image(systemName: cameraModel.isFlashOn ? "bolt.fill" : "bolt.slash.fill")
                             .font(.system(size: 20, weight: .medium, design: .default))
                     })
-                    .accentColor(model.isFlashOn ? .yellow : .white)
+                    .accentColor(cameraModel.isFlashOn ? .yellow : .white)
                     
-                    CameraPreview(session: model.session, currentOrientation: $model.currentOrientation)
+                    CameraPreview(session: cameraModel.session, currentOrientation: $cameraModel.currentOrientation)
                         .onRotate { newOrientation in
-                            model.updateOrientation(newOrientation)
+                            cameraModel.updateOrientation(newOrientation)
                         }
                         .gesture(
                             DragGesture().onChanged({ (val) in
@@ -128,26 +130,26 @@ struct CameraView: View {
                                     // Store the newly calculated zoom factor
                                     currentZoomFactor = zoomFactor
                                     // Sets the zoom factor to the capture device session
-                                    model.zoom(with: zoomFactor)
+                                    cameraModel.zoom(with: zoomFactor)
                                 }
                             })
                         )
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .onAppear {
-                            model.configure()
+                            cameraModel.configure()
                         }
-                        .alert(isPresented: $model.showAlertError, content: {
-                            Alert(title: Text(model.alertError.title), message: Text(model.alertError.message), dismissButton: .default(Text(model.alertError.primaryButtonTitle), action: {
-                                model.alertError.primaryAction?()
+                        .alert(isPresented: $cameraModel.showAlertError, content: {
+                            Alert(title: Text(cameraModel.alertError.title), message: Text(cameraModel.alertError.message), dismissButton: .default(Text(cameraModel.alertError.primaryButtonTitle), action: {
+                                cameraModel.alertError.primaryAction?()
                             }))
                         })
                         .overlay(
                             Group {
-                                if model.willCapturePhoto {
+                                if cameraModel.willCapturePhoto {
                                     Color.black
                                 }
                             }
-                                .animation(.easeInOut, value: model.willCapturePhoto)
+                                .animation(.easeInOut, value: cameraModel.willCapturePhoto)
                         )
                     VStack {
                         flipCameraButton
@@ -164,7 +166,7 @@ struct CameraView: View {
                     NavigationView {
                         PhotoDisplayView(photo: image, source: photoSource, retakeAction: {
                             isShowingPhotoDisplay = false
-                        }, model: model)
+                        }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel)
                     }
                 }
             }

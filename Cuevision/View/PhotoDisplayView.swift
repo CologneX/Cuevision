@@ -15,11 +15,13 @@ struct PhotoDisplayView: View {
     
     let retakeAction: () -> Void
     
-    @ObservedObject var model: CameraModel
+    @ObservedObject var cameraModel: CameraModel
     
     @Environment(\.presentationMode) var presentationMode
     
     @State private var showGameAnalysis = false
+    
+    @ObservedObject var ballClassificationModel: BilliardBallClassifier
 
     var body: some View {
         VStack {
@@ -58,7 +60,7 @@ struct PhotoDisplayView: View {
             }
         }
         .sheet(isPresented: $showGameAnalysis) {
-            GameAnalysisView(image: photo, model: model)
+            GameAnalysisView(image: photo, model: cameraModel,ballClassificationModel: ballClassificationModel)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CameraPreview.swift
+//  CameraViewModel.swift
 //  Cuevision
 //
 //  Created by Kyrell Leano Siauw on 18/07/24.
@@ -493,10 +493,6 @@ final class CameraModel: ObservableObject {
     
     @Published var currentOrientation: UIDeviceOrientation = .landscapeLeft
     
-    @Published var classificationResults: [VNClassificationObservation] = []
-    
-    private var classificationRequest: VNCoreMLRequest?
-
     var alertError: AlertError!
     
     var session: AVCaptureSession
@@ -527,8 +523,6 @@ final class CameraModel: ObservableObject {
             self?.willCapturePhoto = val
         }
         .store(in: &self.subscriptions)
-        
-        setupVision()
     }
     
     func configure() {
@@ -562,33 +556,5 @@ final class CameraModel: ObservableObject {
     
     func clearPhoto() {
         self.photo = nil
-    }
-    
-    
-    private func setupVision() {
-        guard let model = try? VNCoreMLModel(for: YOLOPool(configuration: .init()).model) else {
-            fatalError("Failed to load ML model")
-        }
-        classificationRequest = VNCoreMLRequest(model: model, completionHandler: handleClassification)
-    }
-
-    private func handleClassification(request: VNRequest, error: Error?) {
-        guard let results = request.results as? [VNClassificationObservation] else { return }
-        DispatchQueue.main.async {
-            self.classificationResults = results
-        }
-    }
-
-    func classifyImage(_ image: UIImage) {
-        guard let ciImage = CIImage(image: image),
-              let request = classificationRequest else { return }
-
-        let handler = VNImageRequestHandler(ciImage: ciImage, orientation: .right)
-        do {
-            try handler.perform([request])
-            print("Results: \(classificationResults)")
-        } catch {
-            print("Failed to perform classification: \(error)")
-        }
     }
 }

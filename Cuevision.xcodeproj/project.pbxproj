@@ -13,7 +13,7 @@
 		93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */; };
 		93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C852C497C59008A6C7F /* ImageResizer.swift */; };
 		93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C892C497C8C008A6C7F /* CameraService+Enums.swift */; };
-		93981C8C2C497CC2008A6C7F /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8B2C497CC2008A6C7F /* CameraModel.swift */; };
+		93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8B2C497CC2008A6C7F /* CameraViewModel.swift */; };
 		93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8D2C497F88008A6C7F /* CameraPreview.swift */; };
 		93981C982C49811A008A6C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C972C49811A008A6C7F /* Assets.xcassets */; };
 		93981C9B2C498128008A6C7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C992C498128008A6C7F /* Preview Assets.xcassets */; };
@@ -24,6 +24,7 @@
 		93C97C0B2C499FB00047C2CF /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */; };
 		93C97C0D2C49AB3F0047C2CF /* YOLOPool.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0C2C49AB3F0047C2CF /* YOLOPool.mlpackage */; };
 		93C97C0F2C49AB640047C2CF /* GameAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */; };
+		93FECF512C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FECF502C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,7 @@
 		93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		93981C852C497C59008A6C7F /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		93981C892C497C8C008A6C7F /* CameraService+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Enums.swift"; sourceTree = "<group>"; };
-		93981C8B2C497CC2008A6C7F /* CameraModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		93981C8B2C497CC2008A6C7F /* CameraViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		93981C8D2C497F88008A6C7F /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		93981C972C49811A008A6C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93981C992C498128008A6C7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
 		93C97C0C2C49AB3F0047C2CF /* YOLOPool.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = YOLOPool.mlpackage; sourceTree = "<group>"; };
 		93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnalysisView.swift; sourceTree = "<group>"; };
+		93FECF502C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilliardBallClassifierViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,8 @@
 		9307BD722C497A91004C4870 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				93981C8B2C497CC2008A6C7F /* CameraModel.swift */,
+				93981C8B2C497CC2008A6C7F /* CameraViewModel.swift */,
+				93FECF502C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			files = (
 				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
 				93C97C0B2C499FB00047C2CF /* PhotoDisplayView.swift in Sources */,
+				93FECF512C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift in Sources */,
 				93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */,
 				93981C822C497BC7008A6C7F /* Cuevision.swift in Sources */,
 				93C97C0D2C49AB3F0047C2CF /* YOLOPool.mlpackage in Sources */,
@@ -335,7 +339,7 @@
 				93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */,
 				93981C762C497B66008A6C7F /* CameraView.swift in Sources */,
 				93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */,
-				93981C8C2C497CC2008A6C7F /* CameraModel.swift in Sources */,
+				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
