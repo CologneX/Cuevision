@@ -32,13 +32,18 @@ struct AnalysisDiamondView: View {
                 Text("How?").font(Font.custom("SFPro-ExpandedRegular", size: 30))
                     .fontWeight(.bold)
                     .padding(.bottom)
+                    .foregroundColor(.black)
                 
                 Text("P = C - T")
                     .fontWeight(.bold)
                     .font(.title2)
+                    .foregroundColor(.black)
                 Text("P = Pocket")
+                    .foregroundColor(.grayA2)
                 Text("C = Cueball Position")
+                    .foregroundColor(.grayA2)
                 Text("T = Target Ball")
+                    .foregroundColor(.grayA2)
                 
                 RoundedRectangle(cornerRadius: 52, style: .continuous)
                     .fill(.darkGreen)
