@@ -15,6 +15,9 @@ struct GameAnalysisView: View {
     @ObservedObject var ballClassificationModel: BilliardBallClassifier
     
     @State var detectedObjects: [DetectedObject] = []
+        
+    @Binding var isShowingPhotoDisplay: Bool
+
     
     var body: some View {
         NavigationStack {
@@ -39,6 +42,19 @@ struct GameAnalysisView: View {
         .onAppear {
             classifyImage()
         }
+        .overlay(alignment: .topLeading){
+            Button(action: {
+                isShowingPhotoDisplay = false
+            }, label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(.thinMaterial)
+                    .clipShape(Circle())
+            })
+            .padding(12)
+        }
+        
     }
     
     private func classifyImage() {

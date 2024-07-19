@@ -43,10 +43,10 @@ struct CameraPreview: UIViewRepresentable {
             view.videoPreviewLayer.connection?.videoOrientation = .landscapeRight
         case .landscapeRight:
             view.videoPreviewLayer.connection?.videoOrientation = .landscapeLeft
-        case .portrait:
-            view.videoPreviewLayer.connection?.videoOrientation = .portrait
-        case .portraitUpsideDown:
-            view.videoPreviewLayer.connection?.videoOrientation = .portraitUpsideDown
+//        case .portrait:
+//            view.videoPreviewLayer.connection?.videoOrientation = .portrait
+//        case .portraitUpsideDown:
+//            view.videoPreviewLayer.connection?.videoOrientation = .portraitUpsideDown
         default:
             view.videoPreviewLayer.connection?.videoOrientation = .landscapeRight
         }
