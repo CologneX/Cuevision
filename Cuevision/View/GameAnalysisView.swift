@@ -61,7 +61,7 @@ struct GameAnalysisView: View {
         ballClassificationModel.classify(image: image) { [self] results in
             DispatchQueue.main.async {
                 self.detectedObjects = results
-                print(results.description)
+//                print(results.description)
             }
         }
     }

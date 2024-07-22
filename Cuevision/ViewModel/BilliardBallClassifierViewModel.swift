@@ -46,6 +46,7 @@ class BilliardBallClassifier: ObservableObject {
             
             if let objectDetections = results as? [VNRecognizedObjectObservation] {
                 let detectedObjects = objectDetections.map { observation -> DetectedObject in
+                    print(objectDetections.description)
                     let bestLabel = observation.labels.first!
                     return DetectedObject(label: bestLabel.identifier, confidence: bestLabel.confidence, boundingBox: observation.boundingBox)
                 }

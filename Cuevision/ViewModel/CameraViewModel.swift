@@ -492,7 +492,7 @@ final class CameraModel: ObservableObject {
     
     @Published var currentOrientation: UIDeviceOrientation = .landscapeLeft
     
-    private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
+//    private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
     
     var alertError: AlertError!
     

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PhotoDisplayView: View {
     let photo: UIImage
-    let source: PhotoSource
+//    let source: PhotoSource
     let retakeAction: () -> Void
     @ObservedObject var cameraModel: CameraModel
     @ObservedObject var ballClassificationModel: BilliardBallClassifier
@@ -19,7 +19,7 @@ struct PhotoDisplayView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var showGameAnalysis = false
-
+    
     
     var body: some View {
         NavigationStack{
@@ -29,20 +29,20 @@ struct PhotoDisplayView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding()
                 
-                if source == .camera {
-                    HStack {
-                        Button("Retake") {
-                            retakeAction()
-                        }
-                        Button("Use Photo") {
-                            showGameAnalysis = true
-                        }
-                    }
-                } else {
+//                if source == .camera {
+//                    HStack {
+//                        Button("Retake") {
+//                            retakeAction()
+//                        }
+//                        Button("Use Photo") {
+//                            showGameAnalysis = true
+//                        }
+//                    }
+//                } else {
                     Button("Analyze Photo") {
                         showGameAnalysis = true
                     }
-                }
+//                }
             }
         }
         .navigationBarBackButtonHidden()

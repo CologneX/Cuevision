@@ -30,7 +30,7 @@ struct CameraPreview: UIViewRepresentable {
         view.videoPreviewLayer.videoGravity = .resizeAspectFill
         view.videoPreviewLayer.session = session
 //        updateOrientation(view: view)
-        var rotationCoordinator = AVCaptureDevice.RotationCoordinator(device: <#T##AVCaptureDevice#>, previewLayer: view.videoPreviewLayer)
+//        var rotationCoordinator = AVCaptureDevice.RotationCoordinator(device: <#T##AVCaptureDevice#>, previewLayer: view.videoPreviewLayer)
         return view
     }
     

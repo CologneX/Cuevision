@@ -15,14 +15,18 @@ struct CameraView: View {
     @StateObject var cameraModel = CameraModel()
     @StateObject var ballClassificationModel = BilliardBallClassifier()
     
-    @State private var selectedItem: PhotosPickerItem?
-    @State private var selectedImageData: Data?
+    @State private var selectedPhotoFromPicker: PhotosPickerItem?
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
     @State private var isShowingPhotoDisplay = false
-    @State private var displayedImage: UIImage?
     @State private var photoSource: PhotoSource = .camera
+    @State private var displayedPhoto: UIImage?
     @State private var mostRecentImage: UIImage?
+    
+    
+    private func changePhotoSource(source: PhotoSource) {
+        self.photoSource = source
+    }
     
     var captureButton: some View {
         Button(action: {
@@ -38,16 +42,14 @@ struct CameraView: View {
                 )
         })
         .onChange(of: cameraModel.photo) {
-            if let photo = cameraModel.photo, let uiImage = photo.image {
-                displayedImage = uiImage
-                photoSource = .camera
-                isShowingPhotoDisplay = true
-            }
+            //            displayedPhoto = cameraModel.photo.image
+            changePhotoSource(source: .camera)
+            isShowingPhotoDisplay = true
         }
     }
-    
+        
     var photoPicker: some View {
-        PhotosPicker(selection: $selectedItem, matching: .images) {
+        PhotosPicker(selection: $selectedPhotoFromPicker, matching: .images) {
             if let image = mostRecentImage {
                 Image(uiImage: image)
                     .resizable()
@@ -63,15 +65,16 @@ struct CameraView: View {
         .onAppear {
             fetchMostRecentImage()
         }
-        .onChange(of: selectedItem) {
+        .onChange(of: selectedPhotoFromPicker) {
             Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                    selectedImageData = data
-                    if let uiImage = UIImage(data: data) {
-                        displayedImage = uiImage
-                        photoSource = .library
-                        isShowingPhotoDisplay = true
-                    }
+                if let data = try? await selectedPhotoFromPicker?.loadTransferable(type: Data.self)
+                {
+                    cameraModel.photo = Photo(originalData: data)
+                    // transform Image to UIImage
+//                    displayedPhoto = UIImage(data: data)
+                    // self.cameraModel.photo.originalData = data
+                    changePhotoSource(source: .library)
+                    self.isShowingPhotoDisplay = true
                 }
             }
         }
@@ -154,12 +157,10 @@ struct CameraView: View {
                     }
                 }
                 .sheet(isPresented: $isShowingPhotoDisplay) {
-                    if let image = displayedImage {
-                        NavigationView {
-                            PhotoDisplayView(photo: image, source: photoSource, retakeAction: {
-                                isShowingPhotoDisplay = false
-                            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
-                        }
+                    if let photo = UIImage(data: cameraModel.photo.originalData) {
+                        PhotoDisplayView(photo: photo, /*source: photoSource,*/ retakeAction: {
+                            isShowingPhotoDisplay = false
+                        }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
                     }
                 }
             }
