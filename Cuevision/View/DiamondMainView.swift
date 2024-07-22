@@ -84,7 +84,7 @@ struct DiamondMainView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack{
                 Image(.poolBackground) // Ganti dengan nama file background yang sesuai
                     .resizable()
@@ -188,13 +188,15 @@ struct DiamondMainView: View {
                         VStack {
                             AnalysisDiamondView()
                         }
-                        .offset(x: widthPoolBoundary - 140)
+                        .position(x: widthPoolBoundary*1.15, y: heightPoolBoundary*0.75)
                         .animation(.default, value: showOverlay)
                         .edgesIgnoringSafeArea(.bottom)
                         .edgesIgnoringSafeArea(.trailing)
                     } else {
                         AnalysisDiamondView()
-                            .offset(x: widthPoolBoundary+150, y: 12)
+                            .position(x: widthPoolBoundary*1.712, y: heightPoolBoundary*0.75)
+                            .frame(maxHeight: .infinity)
+                            .ignoresSafeArea()
                         
                         HStack {
                             Spacer()
