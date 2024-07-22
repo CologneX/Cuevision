@@ -1,11 +1,14 @@
 import SwiftUI
 
 struct DiamondMainView: View {
-    @State private var offsetCueball = CGSize.zero
-    @State private var offsetTargetBall = CGSize.zero
+    @State private var offsetCueball = CGPoint(x: 0, y: 0)
+    @State private var offsetTargetBall = CGPoint(x: 100, y: 0)
     
-    @State private var startLocationCueball: CGSize = .zero
-    @State private var startLocationTargetBall: CGSize = .zero
+    @State private var startLocationCueball: CGPoint = .zero
+    @State private var startLocationTargetBall: CGPoint = CGPoint(x: 100, y: 0)
+    
+    @State private var showOverlay = false
+    @State private var isActive = false
     
     let diamondsLeft = [
         CGPoint(x: 140.0, y: 55.0), CGPoint(x: 140.0, y: 85.66665649414062),
@@ -81,70 +84,161 @@ struct DiamondMainView: View {
     }
     
     var body: some View {
-        GeometryReader { fullGeometry in
-            ZStack {
-                Image(.poolBackground)  // Ganti dengan nama file background yang sesuai
+        NavigationView {
+            ZStack{
+                Image(.poolBackground) // Ganti dengan nama file background yang sesuai
                     .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 
-                ZStack {
-                    Image(.billiardWithDiamond)  // Ganti dengan nama file meja billiard yang sesuai
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: fullGeometry.size.width, height: fullGeometry.size.height)
+                GeometryReader { geometry in
+                    let widthPoolBoundary = geometry.size.width * 0.74
+                    let heightPoolBoundary = geometry.size.height * 0.7
                     
-                    let cueballPosition = CGPoint(x: offsetCueball.width + fullGeometry.size.width / 2, y: offsetCueball.height + fullGeometry.size.height / 2)
-                    let targetBallPosition = CGPoint(x: offsetTargetBall.width + fullGeometry.size.width / 2, y: offsetTargetBall.height + fullGeometry.size.height / 2)
-                    let aimDiamond = calculateAimDiamond(cueBall: cueballPosition, targetBall: targetBallPosition)
-                    
-                    Image(.cueball)  // Ganti dengan nama file gambar bola cue yang sesuai
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .shadow(color: .black, radius: 2, x: 3, y: 4)
-                        .position(cueballPosition)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { gesture in
-                                    self.offsetCueball = CGSize(width: gesture.translation.width, height: gesture.translation.height)
-                                    print("Cueball coordinates: (\(cueballPosition.x), \(cueballPosition.y))")  // Print updated coordinates
-                                }
-                                .onEnded { gesture in
-                                    self.startLocationCueball = self.offsetCueball
-                                }
-                        )
-                    
-                    Image(.solidOne)  // Ganti dengan nama file gambar bola target yang sesuai
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .shadow(color: .black, radius: 2, x: 3, y: 4)
-                        .position(targetBallPosition)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { gesture in
-                                    self.offsetTargetBall = CGSize(width: gesture.translation.width, height: gesture.translation.height)
-                                    print("Target Ball coordinates: (\(targetBallPosition.x), \(targetBallPosition.y))")  // Print updated coordinates
-                                }
-                                .onEnded { _ in
-                                    self.startLocationTargetBall = self.offsetTargetBall
-                                }
-                        )
-                    
-                    // Drawing the path with reflection within the billiard table boundaries
-                    Path { path in
-                        path.move(to: cueballPosition)
-                        path.addLine(to: aimDiamond)
-                        path.addLine(to: targetBallPosition)
+                    ZStack {
+                        Image(.billiardWithDiamond)  // Ganti dengan nama file meja billiard yang sesuai
+                            .resizable()
+                            .scaledToFill()
+                            .padding(.horizontal, 30)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        
+                        // Boundary background
+                        Rectangle()
+                            .stroke(Color.blue, lineWidth: 5)
+                            .frame(width: widthPoolBoundary, height: heightPoolBoundary)
+                            .background(Color.red.opacity(0.2))
+                            .scaledToFit()
+                        
+                        let cueballPosition = CGPoint(x: offsetCueball.x + geometry.size.width / 2, y: offsetCueball.y + geometry.size.height / 2)
+                        let targetBallPosition = CGPoint(x: offsetTargetBall.x + geometry.size.width / 2, y: offsetTargetBall.y + geometry.size.height / 2)
+                        let aimDiamond = calculateAimDiamond(cueBall: cueballPosition, targetBall: targetBallPosition)
+                        
+                        Image(.cueball)  // Ganti dengan nama file gambar bola cue yang sesuai
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .shadow(color: .black, radius: 2, x: 3, y: 4)
+                            .offset(x: offsetCueball.x, y: offsetCueball.y)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        let newOffset = CGPoint(x: self.startLocationCueball.x + gesture.translation.width, y: self.startLocationCueball.y + gesture.translation.height)
+                                        
+                                        // Constrain the offset within the container
+                                        if newOffset.x >= -(widthPoolBoundary/2) && newOffset.x <= widthPoolBoundary/2 &&
+                                            newOffset.y >= -(heightPoolBoundary/2) && newOffset.y <= heightPoolBoundary/2 {
+                                            self.offsetCueball = newOffset
+                                        }
+                                        
+                                    }
+                                    .onEnded { gesture in
+                                        self.startLocationCueball = self.offsetCueball
+                                        
+                                        print("Cueball coordinates: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
+                                    }
+                            )
+                        
+                        Image(.solidOne)  // Ganti dengan nama file gambar bola target yang sesuai
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .shadow(color: .black, radius: 2, x: 3, y: 4)
+                            .offset(x: offsetTargetBall.x, y: offsetTargetBall.y)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        let newOffset = CGPoint(x: self.startLocationTargetBall.x + gesture.translation.width, y: self.startLocationTargetBall.y + gesture.translation.height)
+                                        
+                                        // Constrain the offset within the container
+                                        if newOffset.x >= -(widthPoolBoundary/2) && newOffset.x <= widthPoolBoundary/2 &&
+                                            newOffset.y >= -(heightPoolBoundary/2) && newOffset.y <= heightPoolBoundary/2 {
+                                            self.offsetTargetBall = newOffset
+                                        }
+                                        
+                                    }
+                                    .onEnded { _ in
+                                        self.startLocationTargetBall = self.offsetTargetBall
+                                        
+                                        print("Target Ball coordinates: (\(self.offsetTargetBall.x), \(self.offsetTargetBall.y)) -- \(self.startLocationTargetBall)")
+                                    }
+                            )
+                        // Drawing the path with reflection within the billiard table boundaries
+                        Path { path in
+                            path.move(to: cueballPosition)
+                            path.addLine(to: aimDiamond)
+                            path.addLine(to: targetBallPosition)
+                        }
+                        .stroke(Color.green, lineWidth: 3)
+                        
+                        // Add a circle to mark the aim diamond point
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 10, height: 10)
+                            .position(aimDiamond)
                     }
-                    .stroke(Color.green, lineWidth: 3)
+                    .padding(.top, 12)
                     
-                    // Add a circle to mark the aim diamond point
-                    Circle()
-                        .fill(Color.red)
-                        .frame(width: 10, height: 10)
-                        .position(aimDiamond)
+                    // Overlay view
+                    if showOverlay {
+                        Color.black.opacity(0.4)
+                            .edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                withAnimation(.default) {
+                                    showOverlay.toggle()
+                                }
+                            }
+                        
+                        VStack {
+                            AnalysisDiamondView()
+                        }
+                        .offset(x: widthPoolBoundary - 140)
+                        .animation(.default, value: showOverlay)
+                        .edgesIgnoringSafeArea(.bottom)
+                        .edgesIgnoringSafeArea(.trailing)
+                    } else {
+                        AnalysisDiamondView()
+                            .offset(x: widthPoolBoundary+150, y: 12)
+                        
+                        HStack {
+                            Spacer()
+                            Button {
+                                //                                    withAnimation(.bouncy) {
+                                //                                        showOverlay.toggle()
+                                //                                    }
+                                self.isActive = true
+                            } label: {
+                                Text("Done")
+                                    .fontWeight(.bold)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
+                            .tint(.white)
+                            .foregroundColor(.darkGreen)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                            .offset(x: 16, y: -12)
+                            
+                            NavigationLink(destination: HomeView(), isActive: $isActive) {
+                                EmptyView()
+                            }
+                            .background(.red)
+                        }
+                        
+                    }
+                    
                 }
             }
+            .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
+                .onEnded { value in
+                    print(value.translation)
+                    switch(value.translation.width, value.translation.height) {
+                    case (...0, -30...30):
+                        print("left swipe")
+                        showOverlay.toggle()
+                    case (0..., -30...30):  print("right swipe")
+                    case (-100...100, ...0):  print("up swipe")
+                    case (-100...100, 0...):  print("down swipe")
+                    default:  print("no clue")
+                    }
+                }
+            )
+            .animation(.default, value: showOverlay)
         }
     }
 }
