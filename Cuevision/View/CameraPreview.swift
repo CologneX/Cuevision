@@ -29,7 +29,8 @@ struct CameraPreview: UIViewRepresentable {
         view.videoPreviewLayer.cornerRadius = 0
         view.videoPreviewLayer.videoGravity = .resizeAspectFill
         view.videoPreviewLayer.session = session
-        updateOrientation(view: view)
+//        updateOrientation(view: view)
+        var rotationCoordinator = AVCaptureDevice.RotationCoordinator(device: <#T##AVCaptureDevice#>, previewLayer: view.videoPreviewLayer)
         return view
     }
     
@@ -40,15 +41,11 @@ struct CameraPreview: UIViewRepresentable {
     private func updateOrientation(view: VideoPreviewView) {
         switch currentOrientation {
         case .landscapeLeft:
-            view.videoPreviewLayer.connection?.videoOrientation = .landscapeRight
+            view.videoPreviewLayer.connection?.videoRotationAngle = 0
         case .landscapeRight:
-            view.videoPreviewLayer.connection?.videoOrientation = .landscapeLeft
-//        case .portrait:
-//            view.videoPreviewLayer.connection?.videoOrientation = .portrait
-//        case .portraitUpsideDown:
-//            view.videoPreviewLayer.connection?.videoOrientation = .portraitUpsideDown
+            view.videoPreviewLayer.connection?.videoRotationAngle = 180
         default:
-            view.videoPreviewLayer.connection?.videoOrientation = .landscapeRight
+            view.videoPreviewLayer.connection?.videoRotationAngle = 0
         }
     }
 }

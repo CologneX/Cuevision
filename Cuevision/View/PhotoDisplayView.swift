@@ -46,17 +46,6 @@ struct PhotoDisplayView: View {
             }
         }
         .navigationBarBackButtonHidden()
-//        .overlay(alignment: .topLeading) {
-//            Button(action: {
-//                presentationMode.wrappedValue.dismiss()
-//            }) {
-//                Image(systemName: "chevron.left")
-//                    .background(.thinMaterial)
-//                    .clipShape(Circle())
-//            }
-//            .padding(16)
-//
-//        }
         .overlay(alignment: .topLeading){
             Button(action: {
                 dismiss()

@@ -37,8 +37,8 @@ struct CameraView: View {
                         .frame(width: 65, height: 65, alignment: .center)
                 )
         })
-        .onChange(of: cameraModel.photo) { newPhoto in
-            if let photo = newPhoto, let uiImage = photo.image {
+        .onChange(of: cameraModel.photo) {
+            if let photo = cameraModel.photo, let uiImage = photo.image {
                 displayedImage = uiImage
                 photoSource = .camera
                 isShowingPhotoDisplay = true
@@ -63,9 +63,9 @@ struct CameraView: View {
         .onAppear {
             fetchMostRecentImage()
         }
-        .onChange(of: selectedItem) { newItem in
+        .onChange(of: selectedItem) {
             Task {
-                if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
                     selectedImageData = data
                     if let uiImage = UIImage(data: data) {
                         displayedImage = uiImage
@@ -196,8 +196,3 @@ struct DeviceRotationViewModifier: ViewModifier {
     }
 }
 
-extension View {
-    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
-        self.modifier(DeviceRotationViewModifier(action: action))
-    }
-}
