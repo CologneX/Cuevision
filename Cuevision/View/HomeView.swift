@@ -21,8 +21,9 @@ struct HomeView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.leading, 20)
+                        .padding(.trailing, 100)
                     
-                    Spacer()
+//                    Spacer()
                     
                     VStack{
                         NavigationLink(destination: CameraView()){
@@ -40,7 +41,7 @@ struct HomeView: View {
                         .shadow(radius: 10, x: 0, y: 4)
                         //                    .padding(.trailing, 20)
                         
-                        Spacer()
+//                        Spacer()
                         
                         NavigationLink(destination: InformationView()){
                             Text("Billiard Tips")
