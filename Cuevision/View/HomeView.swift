@@ -24,8 +24,7 @@ struct HomeView: View {
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                    
-//                    Spacer()
+                        .padding(.trailing, 48)
                     
                     VStack{
                         Button {
@@ -63,8 +62,14 @@ struct HomeView: View {
             .navigationDestination(for: String.self, destination: { path in
                 if path == "Billiard Tips" {
                     InformationView(navigationVM: navigationVM)
-                } else {
+                } else if path == "Camera View" {
                     CameraView()
+                } else if path == "Cue Ball Effect" {
+                    CueBallEffectView()
+                } else if path == "Hand Form" {
+                    HandFormView()
+                } else {
+                    DiamondSystemView()
                 }
             })
         }

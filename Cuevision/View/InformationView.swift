@@ -33,7 +33,19 @@ struct InformationView: View {
                 LazyVStack(alignment:.center, spacing: 24) {
                     ForEach(dataBilliardTips, id: \.self) { data in
                         Button {
-                            print("item clicked: \(data)")
+                            switch(data.title) {
+                            case "Cue Ball Effect":
+                                navigationVM.goToNextPage(screenName: "Cue Ball Effect")
+                                break
+                            case "Hand Form":
+                                navigationVM.goToNextPage(screenName: "Hand Form")
+                                break
+                            case "Diamond System":
+                                navigationVM.goToNextPage(screenName: "Diamond System")
+                                break
+                            default:
+                                return
+                            }
                         } label: {
                             HStack {
                                 Image("\(data.image)")
@@ -58,12 +70,11 @@ struct InformationView: View {
                 }
             }
             .padding(.all, -60)
+            
         }
-        
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .scrollIndicators(.hidden)
-        
         .overlay(alignment: .top, content: {
             Button {
                 navigationVM.backToPreviousPage()

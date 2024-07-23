@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HandFormView: View {
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack{
