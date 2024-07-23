@@ -24,10 +24,10 @@ struct DiamondSystemView: View {
                 Text("Diamond System").font(Font.custom("SFPro-ExpandedBold", size: 40.0))
                     .foregroundColor(.white)
                 Spacer()
-                Image("InfoHandForm")
+                Image("InfoDiamondSystem")
             }
-            .padding(.leading, 200)
-            .padding(.vertical, 40)
+            .padding(.vertical, 30)
+            .padding(.leading, 300)
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
