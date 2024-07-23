@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var navigationVM = NavigationViewModel()
+    
     var body: some View {
-        NavigationStack{
+        NavigationStack(path: $navigationVM.path) {
             ZStack{
                 Image("HomeBG")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
                 
                 HStack{
-                    Text("'Focus. Aim. Win'").font(Font.custom("SFPro-ExpandedBold", size: 20.0))
+                    Text("\"Learn How To Aim Better Using Diamond System\"")
+                        .font(Font.custom("SFPro-ExpandedBold", size: 20.0))
                         .font(.largeTitle)
+                        .multilineTextAlignment(.center)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.leading, 20)
                     
                     Spacer()
                     
                     VStack{
-                        NavigationLink(destination: CameraView()){
+                        Button {
+                            navigationVM.goToNextPage(screenName: "Camera View")
+                        } label: {
                             Image(systemName: "camera.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -37,12 +42,10 @@ struct HomeView: View {
                                 .background(Color.white)
                                 .cornerRadius(50)
                         }
-                        .shadow(radius: 10, x: 0, y: 4)
-                        //                    .padding(.trailing, 20)
                         
-                        Spacer()
-                        
-                        NavigationLink(destination: InformationView()){
+                        Button {
+                            navigationVM.goToNextPage(screenName: "Billiard Tips")
+                        } label: {
                             Text("Billiard Tips")
                                 .font(.title2)
                                 .fontWeight(.bold)
@@ -52,13 +55,18 @@ struct HomeView: View {
                                 .foregroundColor(Color(hex: 0x428365))
                                 .cornerRadius(30)
                         }
-                        .shadow(radius: 10, x: 0, y: 4)
-                        //                    .padding(.trailing, 20)
                     }
-                    .padding(30)
+                    .padding(.horizontal, 24)
                 }
-                .padding(70)
+                .padding(.horizontal, 48)
             }
+            .navigationDestination(for: String.self, destination: { path in
+                if path == "Billiard Tips" {
+                    InformationView(navigationVM: navigationVM)
+                } else {
+                    CameraView()
+                }
+            })
         }
     }
 }

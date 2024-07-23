@@ -10,6 +10,7 @@ import SwiftUI
 struct InformationView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Bindable var navigationVM : NavigationViewModel
     
     struct BilliardTips: Hashable {
         var image: String
@@ -62,26 +63,28 @@ struct InformationView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .scrollIndicators(.hidden)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading){
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }){
-                    Image("back")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                }
-                .padding(.top, 48)
-                .padding(.leading, -48)
+        
+        .overlay(alignment: .top, content: {
+            Button {
+                navigationVM.backToPreviousPage()
+            } label: {
+                Image("back")
+                    .resizable()
+                    .frame(width: 30, height: 30)
             }
-        }
+            .frame(width: 30, height: 30)
+            .padding(.top, 36)
+            .padding(.leading, -366)
+        })
+        
         .toolbarBackground(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    NavigationView {
-        InformationView()
+    @State var nav = NavigationViewModel()
+    return NavigationView {
+        InformationView( navigationVM: nav)
     }
 }
