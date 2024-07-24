@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct PhotoDisplayView: View {
-    let photo: UIImage
-//    let source: PhotoSource
+    @Binding var photo: UIImage?
+    @Binding var source: PhotoSource?
     let retakeAction: () -> Void
     @ObservedObject var cameraModel: CameraModel
     @ObservedObject var ballClassificationModel: BilliardBallClassifier
@@ -24,25 +24,25 @@ struct PhotoDisplayView: View {
     var body: some View {
         NavigationStack{
             VStack {
-                Image(uiImage: photo)
+                Image(uiImage: photo!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .padding()
                 
-//                if source == .camera {
-//                    HStack {
-//                        Button("Retake") {
-//                            retakeAction()
-//                        }
-//                        Button("Use Photo") {
-//                            showGameAnalysis = true
-//                        }
-//                    }
-//                } else {
+                if source == .camera {
+                    HStack {
+                        Button("Retake") {
+                            retakeAction()
+                        }
+                        Button("Use Photo") {
+                            showGameAnalysis = true
+                        }
+                    }
+                } else {
                     Button("Analyze Photo") {
                         showGameAnalysis = true
                     }
-//                }
+                }
             }
         }
         .navigationBarBackButtonHidden()
@@ -59,7 +59,7 @@ struct PhotoDisplayView: View {
             .padding(12)
         }
         .sheet(isPresented: $showGameAnalysis) {
-            GameAnalysisView(image: photo, model: cameraModel,ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+            GameAnalysisView(image: photo!, model: cameraModel,ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
         }
     }
 }

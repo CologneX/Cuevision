@@ -5,9 +5,7 @@
 //  Created by Kyrell Leano Siauw on 19/07/24.
 //
 
-import Foundation
 import Vision
-import Photos
 import UIKit
 
 struct DetectedObject {
@@ -20,7 +18,7 @@ class BilliardBallClassifier: ObservableObject {
     private var model: VNCoreMLModel
     
     init() {
-        guard let model = try? VNCoreMLModel(for: YOLOPool().model) else {
+        guard let model = try? VNCoreMLModel(for: v8m().model) else {
             fatalError("Failed to create VNCoreMLModel")
         }
         self.model = model
@@ -38,30 +36,28 @@ class BilliardBallClassifier: ObservableObject {
                 return
             }
             
-            guard let results = request.results else {
+            guard let results = request.results as? [VNRecognizedObjectObservation] else {
                 print("No results found")
                 completion([])
                 return
             }
             
-            if let objectDetections = results as? [VNRecognizedObjectObservation] {
-                let detectedObjects = objectDetections.map { observation -> DetectedObject in
-                    print(objectDetections.description)
-                    let bestLabel = observation.labels.first!
-                    return DetectedObject(label: bestLabel.identifier, confidence: bestLabel.confidence, boundingBox: observation.boundingBox)
-                }
-                completion(detectedObjects)
-            } else {
-                fatalError("Unexpected result type from VNCoreMLRequest")
+            let detectedObjects = results.map { observation -> DetectedObject in
+                let bestLabel = observation.labels.first!
+                return DetectedObject(label: bestLabel.identifier,
+                                      confidence: bestLabel.confidence,
+                                      boundingBox: observation.boundingBox)
             }
+            completion(detectedObjects)
         }
         
-        let handler = VNImageRequestHandler(ciImage: ciImage)
+        let handler = VNImageRequestHandler(ciImage: ciImage, orientation: .downMirrored)
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try handler.perform([request])
             } catch {
                 print("Failed to perform classification: \(error.localizedDescription)")
+                completion([])
             }
         }
     }

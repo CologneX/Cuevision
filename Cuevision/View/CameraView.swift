@@ -19,15 +19,11 @@ struct CameraView: View {
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
     @State private var isShowingPhotoDisplay = false
-    @State private var photoSource: PhotoSource = .camera
+    @State private var photoSource: PhotoSource?
     @State private var displayedPhoto: UIImage?
     @State private var mostRecentImage: UIImage?
     
-    
-    private func changePhotoSource(source: PhotoSource) {
-        self.photoSource = source
-    }
-    
+
     var captureButton: some View {
         Button(action: {
             cameraModel.capturePhoto()
@@ -42,12 +38,12 @@ struct CameraView: View {
                 )
         })
         .onChange(of: cameraModel.photo) {
-            //            displayedPhoto = cameraModel.photo.image
-            changePhotoSource(source: .camera)
+            displayedPhoto = cameraModel.photo.image
+            photoSource = .camera
             isShowingPhotoDisplay = true
         }
     }
-        
+    
     var photoPicker: some View {
         PhotosPicker(selection: $selectedPhotoFromPicker, matching: .images) {
             if let image = mostRecentImage {
@@ -69,12 +65,9 @@ struct CameraView: View {
             Task {
                 if let data = try? await selectedPhotoFromPicker?.loadTransferable(type: Data.self)
                 {
-                    cameraModel.photo = Photo(originalData: data)
-                    // transform Image to UIImage
-//                    displayedPhoto = UIImage(data: data)
-                    // self.cameraModel.photo.originalData = data
-                    changePhotoSource(source: .library)
-                    self.isShowingPhotoDisplay = true
+                    displayedPhoto = UIImage(data: data)
+                    photoSource = .library
+                    isShowingPhotoDisplay = true
                 }
             }
         }
@@ -157,11 +150,10 @@ struct CameraView: View {
                     }
                 }
                 .sheet(isPresented: $isShowingPhotoDisplay) {
-                    if let photo = UIImage(data: cameraModel.photo.originalData) {
-                        PhotoDisplayView(photo: photo, /*source: photoSource,*/ retakeAction: {
-                            isShowingPhotoDisplay = false
-                        }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
-                    }
+                    PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
+                        isShowingPhotoDisplay = false
+                    }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+                    
                 }
             }
         }
