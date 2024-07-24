@@ -10,6 +10,10 @@ struct DiamondMainView: View {
     @State private var showOverlay = false
     @State private var isActive = false
     
+    @State private var analysisDiamondVM = AnalysisDiamondViewModel()
+    @State private var widthPoolBoundary2: CGFloat = 0.0
+    @State private var heightPoolBoundary2: CGFloat = 0.0
+    
     let diamondsLeft = [
         CGPoint(x: 140.0, y: 55.0), CGPoint(x: 140.0, y: 85.66665649414062),
         CGPoint(x: 140.0, y: 121.33332824707031), CGPoint(x: 140.0, y: 151.33334350585938),
@@ -80,7 +84,11 @@ struct DiamondMainView: View {
         let aimX = max(min(aimDiamond.x, tableEdges.topRight.x), tableEdges.topLeft.x)
         let aimY = max(min(aimDiamond.y, tableEdges.bottomLeft.y), tableEdges.topLeft.y)
         
-        return CGPoint(x: aimX, y: aimY)
+        // cara makek func findPointTranslation
+        let resultPointTranslation = analysisDiamondVM.findPointTranslation(from: CGPoint(x: aimX, y: aimY), widthPoolBoundary: widthPoolBoundary2, heightPoolBoundary: heightPoolBoundary2)
+        
+        
+        return CGPoint(x: resultPointTranslation.x, y: resultPointTranslation.y)
     }
     
     var body: some View {
@@ -172,6 +180,10 @@ struct DiamondMainView: View {
                             .fill(Color.red)
                             .frame(width: 10, height: 10)
                             .position(aimDiamond)
+                    }
+                    .onAppear {
+                        widthPoolBoundary2 = geometry.size.width * 0.74
+                        heightPoolBoundary2 = geometry.size.height * 0.7
                     }
                     .padding(.top, 12)
                     

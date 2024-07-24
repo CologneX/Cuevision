@@ -8,57 +8,74 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var navigationVM = NavigationViewModel()
+    
     var body: some View {
-        ZStack{
-            Image("HomeBG")
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
-            
-            HStack{
-                Text("'Focus. Aim. Win'").font(Font.custom("SFPro-ExpandedBold", size: 20.0))
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.leading, 20)
+        NavigationStack(path: $navigationVM.path) {
+            ZStack{
+                Image("HomeBG")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
                 
-                Spacer()
-                
-                VStack{
-                    NavigationLink(destination: CameraView()){
-                        Image(systemName: "camera.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(Color(hex: 0x428365))
-                            .fontWeight(.semibold)
-                            .padding(.horizontal, 60)
-                            .padding(.vertical, 20)
-                            .background(Color.white)
-                            .cornerRadius(50)
-                    }
-                    .shadow(radius: 10, x: 0, y: 4)
-                    //                    .padding(.trailing, 20)
+                HStack{
+                    Text("\"Learn How To Aim Better Using Diamond System\"")
+                        .font(Font.custom("SFPro-ExpandedBold", size: 20.0))
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.trailing, 48)
                     
-                    Spacer()
-                    
-                    NavigationLink(destination: InformationView()){
-                        Text("Billiard Tips")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 15)
-                            .background(Color.white)
-                            .foregroundColor(Color(hex: 0x428365))
-                            .cornerRadius(30)
+                    VStack{
+                        Button {
+//                            navigationVM.goToNextPage(screenName: "Camera View")
+                            navigationVM.goToNextPage(screenName: "Diamond View")
+                        } label: {
+                            Image(systemName: "camera.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 60, height: 60)
+                                .foregroundColor(Color(hex: 0x428365))
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 60)
+                                .padding(.vertical, 20)
+                                .background(Color.white)
+                                .cornerRadius(50)
+                        }
+                        
+                        Button {
+                            navigationVM.goToNextPage(screenName: "Billiard Tips")
+                        } label: {
+                            Text("Billiard Tips")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .padding(.horizontal, 30)
+                                .padding(.vertical, 15)
+                                .background(Color.white)
+                                .foregroundColor(Color(hex: 0x428365))
+                                .cornerRadius(30)
+                        }
                     }
-                    .shadow(radius: 10, x: 0, y: 4)
-                    //                    .padding(.trailing, 20)
+                    .padding(.horizontal, 24)
                 }
-                .padding(30)
+                .padding(.horizontal, 48)
             }
-            .padding(70)
+            .navigationDestination(for: String.self, destination: { path in
+                if path == "Billiard Tips" {
+                    InformationView(navigationVM: navigationVM)
+                } else if path == "Camera View" {
+                    CameraView()
+                } else if path == "Cue Ball Effect" {
+                    CueBallEffectView()
+                } else if path == "Hand Form" {
+                    HandFormView()
+                } else if path == "Diamond View" {
+                    DiamondMainView()
+                } else {
+                    DiamondSystemView()
+                }
+            })
         }
-        .navigationBarBackButtonHidden(true)
     }
 }
 

@@ -16,6 +16,11 @@
 		2C45C8D52C4990340033C258 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45C8CD2C4990340033C258 /* HomeView.swift */; };
 		2C45C8D62C4990340033C258 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45C8CE2C4990340033C258 /* InformationView.swift */; };
 		2C45C8D72C4990340033C258 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45C8CF2C4990340033C258 /* OnboardingView.swift */; };
+		2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */; };
+		2C4A1E752C4FAA5B00DBF1F8 /* CueBallEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E712C4FAA5B00DBF1F8 /* CueBallEffectView.swift */; };
+		2C4A1E762C4FAA5B00DBF1F8 /* DiamondSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E722C4FAA5B00DBF1F8 /* DiamondSystemView.swift */; };
+		2C4A1E772C4FAA5B00DBF1F8 /* HandFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E732C4FAA5B00DBF1F8 /* HandFormView.swift */; };
+		2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */; };
 		2C75898D2C49FDBB00777CFE /* GameAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C75898B2C49FDBA00777CFE /* GameAnalysisView.swift */; };
 		2C75898E2C49FDBB00777CFE /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C75898C2C49FDBA00777CFE /* PhotoDisplayView.swift */; };
 		2C7589922C49FFC000777CFE /* YOLOPool.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 2C7589912C49FFC000777CFE /* YOLOPool.mlpackage */; };
@@ -60,6 +65,11 @@
 		2C45C8CD2C4990340033C258 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2C45C8CE2C4990340033C258 /* InformationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		2C45C8CF2C4990340033C258 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
+		2C4A1E712C4FAA5B00DBF1F8 /* CueBallEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CueBallEffectView.swift; sourceTree = "<group>"; };
+		2C4A1E722C4FAA5B00DBF1F8 /* DiamondSystemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondSystemView.swift; sourceTree = "<group>"; };
+		2C4A1E732C4FAA5B00DBF1F8 /* HandFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandFormView.swift; sourceTree = "<group>"; };
+		2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondViewModel.swift; sourceTree = "<group>"; };
 		2C75898B2C49FDBA00777CFE /* GameAnalysisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnalysisView.swift; sourceTree = "<group>"; };
 		2C75898C2C49FDBA00777CFE /* PhotoDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
 		2C7589912C49FFC000777CFE /* YOLOPool.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = YOLOPool.mlpackage; sourceTree = "<group>"; };
@@ -117,6 +127,7 @@
 		2C45C8D02C4990340033C258 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C4A1E742C4FAA5B00DBF1F8 /* Information Detail */,
 				2C75898B2C49FDBA00777CFE /* GameAnalysisView.swift */,
 				2C75898C2C49FDBA00777CFE /* PhotoDisplayView.swift */,
 				2C45C8C92C4990340033C258 /* AnalysisDiamondView.swift */,
@@ -128,6 +139,16 @@
 				2C45C8CF2C4990340033C258 /* OnboardingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2C4A1E742C4FAA5B00DBF1F8 /* Information Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2C4A1E712C4FAA5B00DBF1F8 /* CueBallEffectView.swift */,
+				2C4A1E722C4FAA5B00DBF1F8 /* DiamondSystemView.swift */,
+				2C4A1E732C4FAA5B00DBF1F8 /* HandFormView.swift */,
+			);
+			path = "Information Detail";
 			sourceTree = "<group>";
 		};
 		9307BD712C497A8D004C4870 /* Util */ = {
@@ -144,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				93981C8B2C497CC2008A6C7F /* CameraModel.swift */,
+				2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */,
+				2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -357,10 +380,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4A1E752C4FAA5B00DBF1F8 /* CueBallEffectView.swift in Sources */,
+				2C4A1E772C4FAA5B00DBF1F8 /* HandFormView.swift in Sources */,
+				2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */,
+				2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */,
 				2C45C8D22C4990340033C258 /* CameraPreview.swift in Sources */,
 				2C7589922C49FFC000777CFE /* YOLOPool.mlpackage in Sources */,
 				2C45C8D32C4990340033C258 /* CameraView.swift in Sources */,
 				2C45C8D12C4990340033C258 /* AnalysisDiamondView.swift in Sources */,
+				2C4A1E762C4FAA5B00DBF1F8 /* DiamondSystemView.swift in Sources */,
 				06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */,
 				2C45C8D72C4990340033C258 /* OnboardingView.swift in Sources */,
 				2C75898D2C49FDBB00777CFE /* GameAnalysisView.swift in Sources */,

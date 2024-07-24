@@ -34,11 +34,11 @@ struct AnalysisDiamondView: View {
                     .padding(.bottom)
                     .foregroundColor(.black)
                 
-                Text("P = C - T")
+                Text("A = (T - C)/2 + C")
                     .fontWeight(.bold)
                     .font(.title2)
                     .foregroundColor(.black)
-                Text("P = Pocket")
+                Text("A = Aim")
                     .foregroundColor(.grayA2)
                 Text("C = Cueball Position")
                     .foregroundColor(.grayA2)
