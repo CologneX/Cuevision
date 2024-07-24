@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "InfoBall22x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "InfoBall23x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
