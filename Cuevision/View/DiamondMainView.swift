@@ -10,6 +10,10 @@ struct DiamondMainView: View {
     @State private var showOverlay = false
     @State private var isActive = false
     
+    @State private var analysisDiamondVM = AnalysisDiamondViewModel()
+    @State private var widthPoolBoundary2: CGFloat = 0.0
+    @State private var heightPoolBoundary2: CGFloat = 0.0
+    
     let diamondsLeft = [
         CGPoint(x: 140.0, y: 55.0), CGPoint(x: 140.0, y: 85.66665649414062),
         CGPoint(x: 140.0, y: 121.33332824707031), CGPoint(x: 140.0, y: 151.33334350585938),
@@ -103,7 +107,7 @@ struct DiamondMainView: View {
                         
                         // Boundary background
                         Rectangle()
-                            .stroke(Color.blue, lineWidth: 5)
+                            .stroke(Color.blue, lineWidth: 0.1)
                             .frame(width: widthPoolBoundary, height: heightPoolBoundary)
                             .background(Color.red.opacity(0.2))
                             .scaledToFit()
@@ -132,8 +136,15 @@ struct DiamondMainView: View {
                                     .onEnded { gesture in
                                         self.startLocationCueball = self.offsetCueball
                                         
-                                        print("Cueball coordinates: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
+                                        let cueballCoordinateAfterTranslation = analysisDiamondVM.findPointTranslation(from: self.offsetCueball, widthPoolBoundary: widthPoolBoundary2, heightPoolBoundary: heightPoolBoundary2, sizeBall: 25)
+                                        
+//                                        print("Cueball coordinates 1: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
+//                                        
+//                                        print("width: \(widthPoolBoundary2) -- height: \(heightPoolBoundary2)")
+                                        
+                                        print("Cueball coordinates 2: (\(cueballCoordinateAfterTranslation.x), \(cueballCoordinateAfterTranslation.y))")
                                     }
+                                
                             )
                         
                         Image(.solidOne)  // Ganti dengan nama file gambar bola target yang sesuai
@@ -172,6 +183,10 @@ struct DiamondMainView: View {
                             .fill(Color.red)
                             .frame(width: 10, height: 10)
                             .position(aimDiamond)
+                    }
+                    .onAppear {
+                        widthPoolBoundary2 = geometry.size.width * 0.74
+                        heightPoolBoundary2 = geometry.size.height * 0.7
                     }
                     .padding(.top, 12)
                     
