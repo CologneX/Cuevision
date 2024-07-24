@@ -19,9 +19,10 @@ class AnalysisDiamondViewModel {
         return ((targetBallCoordinate - cueBallCoordinate)/2) + cueBallCoordinate
     }
     
-    func findPointTranslation(from point: CGPoint, widthPoolBoundary: CGFloat, heightPoolBoundary: CGFloat) -> CGPoint {
+    func findPointTranslation(from point: CGPoint, widthPoolBoundary: CGFloat, heightPoolBoundary: CGFloat, sizeBall: CGFloat) -> CGPoint {
+        let halfBallSize = sizeBall/2
         let xTranslation = point.x + (widthPoolBoundary/2)
-        let yTranslation = point.y + (heightPoolBoundary/2)
+        let yTranslation = abs(point.y - (heightPoolBoundary/2) - halfBallSize)
         return CGPoint(x: xTranslation, y: yTranslation)
     }
 }

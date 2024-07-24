@@ -84,11 +84,7 @@ struct DiamondMainView: View {
         let aimX = max(min(aimDiamond.x, tableEdges.topRight.x), tableEdges.topLeft.x)
         let aimY = max(min(aimDiamond.y, tableEdges.bottomLeft.y), tableEdges.topLeft.y)
         
-        // cara makek func findPointTranslation
-        let resultPointTranslation = analysisDiamondVM.findPointTranslation(from: CGPoint(x: aimX, y: aimY), widthPoolBoundary: widthPoolBoundary2, heightPoolBoundary: heightPoolBoundary2)
-        
-        
-        return CGPoint(x: resultPointTranslation.x, y: resultPointTranslation.y)
+        return CGPoint(x: aimX, y: aimY)
     }
     
     var body: some View {
@@ -111,7 +107,7 @@ struct DiamondMainView: View {
                         
                         // Boundary background
                         Rectangle()
-                            .stroke(Color.blue, lineWidth: 5)
+                            .stroke(Color.blue, lineWidth: 0.1)
                             .frame(width: widthPoolBoundary, height: heightPoolBoundary)
                             .background(Color.red.opacity(0.2))
                             .scaledToFit()
@@ -140,8 +136,15 @@ struct DiamondMainView: View {
                                     .onEnded { gesture in
                                         self.startLocationCueball = self.offsetCueball
                                         
-                                        print("Cueball coordinates: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
+                                        let cueballCoordinateAfterTranslation = analysisDiamondVM.findPointTranslation(from: self.offsetCueball, widthPoolBoundary: widthPoolBoundary2, heightPoolBoundary: heightPoolBoundary2, sizeBall: 25)
+                                        
+//                                        print("Cueball coordinates 1: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
+//                                        
+//                                        print("width: \(widthPoolBoundary2) -- height: \(heightPoolBoundary2)")
+                                        
+                                        print("Cueball coordinates 2: (\(cueballCoordinateAfterTranslation.x), \(cueballCoordinateAfterTranslation.y))")
                                     }
+                                
                             )
                         
                         Image(.solidOne)  // Ganti dengan nama file gambar bola target yang sesuai
