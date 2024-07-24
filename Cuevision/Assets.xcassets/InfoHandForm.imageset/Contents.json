@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "InfoHandForm2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "InfoHandForm3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
