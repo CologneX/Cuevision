@@ -28,7 +28,8 @@ struct HomeView: View {
                     
                     VStack{
                         Button {
-                            navigationVM.goToNextPage(screenName: "Camera View")
+//                            navigationVM.goToNextPage(screenName: "Camera View")
+                            navigationVM.goToNextPage(screenName: "Diamond View")
                         } label: {
                             Image(systemName: "camera.fill")
                                 .resizable()
@@ -68,6 +69,8 @@ struct HomeView: View {
                     CueBallEffectView()
                 } else if path == "Hand Form" {
                     HandFormView()
+                } else if path == "Diamond View" {
+                    DiamondMainView()
                 } else {
                     DiamondSystemView()
                 }
