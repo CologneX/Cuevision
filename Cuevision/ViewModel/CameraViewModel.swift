@@ -223,7 +223,6 @@ public class CameraService {
             session.addOutput(photoOutput)
             photoOutput.maxPhotoDimensions = CMVideoDimensions(width: 4032, height: 3024)
             photoOutput.maxPhotoQualityPrioritization = .quality
-            
         } else {
             print("Could not add photo output to the session")
             setupResult = .configurationFailed

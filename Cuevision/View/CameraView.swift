@@ -18,9 +18,10 @@ struct CameraView: View {
     @State private var selectedPhotoFromPicker: PhotosPickerItem?
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
-    @State private var isShowingPhotoDisplay = false
     @State private var photoSource: PhotoSource?
     @State private var displayedPhoto: UIImage?
+    /// isShowingPhotoDisplay should be onChange
+    @State private var isShowingPhotoDisplay = false
     @State private var mostRecentImage: UIImage?
     
 
@@ -40,7 +41,7 @@ struct CameraView: View {
         .onChange(of: cameraModel.photo) {
             displayedPhoto = cameraModel.photo.image
             photoSource = .camera
-            isShowingPhotoDisplay = true
+//            cameraModel.photo = nil
         }
     }
     
@@ -67,7 +68,7 @@ struct CameraView: View {
                 {
                     displayedPhoto = UIImage(data: data)
                     photoSource = .library
-                    isShowingPhotoDisplay = true
+                    selectedPhotoFromPicker = nil
                 }
             }
         }
@@ -85,13 +86,11 @@ struct CameraView: View {
                         .foregroundColor(.white))
         })
     }
-    
     var body: some View {
         NavigationStack {
             GeometryReader { reader in
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
-                    
                     HStack {
                         Button(action: {
                             cameraModel.switchFlash()
@@ -122,7 +121,6 @@ struct CameraView: View {
                                     }
                                 })
                             )
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .onAppear {
                                 cameraModel.configure()
                             }
@@ -149,12 +147,18 @@ struct CameraView: View {
                         .padding(.horizontal, 20)
                     }
                 }
-                .sheet(isPresented: $isShowingPhotoDisplay) {
-                    PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
-                        isShowingPhotoDisplay = false
-                    }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
-                    
-                }
+            }
+        }
+        .padding(.top)
+        .sheet(isPresented: $isShowingPhotoDisplay) {
+            PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
+                isShowingPhotoDisplay = false
+            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+            
+        }
+        .onChange(of: displayedPhoto) {
+            if displayedPhoto != nil {
+                isShowingPhotoDisplay = true
             }
         }
     }
