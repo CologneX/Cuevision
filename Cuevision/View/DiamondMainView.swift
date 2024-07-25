@@ -97,9 +97,21 @@ struct DiamondMainView: View {
                 ZStack {
                     Image(.billiardWithDiamond)  // Ganti dengan nama file meja billiard yang sesuai
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
                         .padding(.horizontal, 30)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .frame(height: geometry.size.height)
+                        .overlay{
+                            GeometryReader{ gg in
+                                Text("")
+                                    .onAppear{
+                                        print ("dalam,", gg.size)
+                                        analysisDiamondVM.heightPoolBoundary = gg.size.height *  0.7
+                                        
+                                        analysisDiamondVM.widthPoolBoundary = gg.size.width *  0.74
+                                    }
+                            }
+                        }
                     
                     // Boundary background
                     Rectangle()
@@ -139,8 +151,8 @@ struct DiamondMainView: View {
                                     
                                     let cueballCoordinateAfterTranslation = analysisDiamondVM.findPointTranslation(from: self.startLocationCueball, widthPoolBoundary: analysisDiamondVM.widthPoolBoundary, heightPoolBoundary: analysisDiamondVM.heightPoolBoundary, sizeBall: 25)
                                     
-                                    //                                        print("Cueball coordinates 1: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
-                                    //
+                                    //                                    print("Cueball coordinates 1: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(cueballPosition)")
+                                    
                                     //                                        print("width: \(widthPoolBoundary2) -- height: \(heightPoolBoundary2)")
                                     
                                     analysisDiamondVM.cueBallCoordinate = cueballCoordinateAfterTranslation
@@ -193,10 +205,6 @@ struct DiamondMainView: View {
                         .frame(width: 10, height: 10)
                         .position(aimDiamond)
                 }
-                .onAppear {
-                    analysisDiamondVM.widthPoolBoundary = geometry.size.width * 0.74
-                    analysisDiamondVM.heightPoolBoundary = geometry.size.height * 0.7
-                }
                 .padding(.top, 12)
                 
                 // Overlay view
@@ -212,14 +220,13 @@ struct DiamondMainView: View {
                     VStack {
                         AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
                     }
-                    .offset(x: analysisDiamondVM.widthPoolBoundary - 330)
+                    .offset(x: 1 * (geometry.size.width / 2) )
                     .animation(.default, value: showOverlay)
-                    .edgesIgnoringSafeArea(.bottom)
-                    .edgesIgnoringSafeArea(.trailing)
+                    .ignoresSafeArea()
                 } else {
                     // posisi default
                     AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
-                        .offset(x: analysisDiamondVM.widthPoolBoundary + 122)
+                        .offset(x: 2 * (geometry.size.width / 2) + 20)
                         .ignoresSafeArea()
                     
                     HStack {
