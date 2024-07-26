@@ -20,6 +20,48 @@ class AnalysisDiamondViewModel {
         return ((targetBallCoordinate.x - cueBallCoordinate.x)/2) + cueBallCoordinate.x
     }
     
+    
+    func calculateReflectionPoint2(cueBall: CGPoint, targetBall: CGPoint) -> CGPoint {
+        let reflectionX = ((targetBall.x - cueBall.x) / 2) + cueBall.x
+        let reflectionY: CGFloat
+
+//        print("j cue", cueBall)
+//        print("j yarget", targetBall)
+//        print("X Reflect", reflectionX)
+//        print("height:", heightPoolBoundary)
+        let rX = reflectionX - (widthPoolBoundary/2)
+        let rY:CGFloat
+        
+        let y1: CGFloat = heightPoolBoundary
+        let y2: CGFloat = 0 /*heightPoolBoundary / 2*/
+        
+        // Tentukan titik pantul berdasarkan kedekatan dengan y1 atau y2
+//        if abs(cueBall.y - y2) < abs(cueBall.y - y1) && abs(targetBall.y - y2) < abs(targetBall.y - y1) {
+//            reflectionY = y1
+//            rY =  (reflectionY + (heightPoolBoundary/2))
+//        } else {
+//            reflectionY = y2
+//            rY = (reflectionY + (heightPoolBoundary/2))
+//        }
+        
+        if abs(cueBall.y - y2) < abs(cueBall.y - y1) && abs(targetBall.y - y2) < abs(targetBall.y - y1) /*(cueBall.y > 0 && cueBall.y < y2) && (targetBall.y > 0 && targetBall.y < y2)*/ { //
+            print("masuk if")
+            reflectionY = y2 //
+            rY = (reflectionY - (heightPoolBoundary/2))
+            
+
+        } else {
+            print("masuk else")
+            reflectionY = y1 //
+            rY = (reflectionY - (heightPoolBoundary/2))
+        }
+        
+        print("Y Reflect", reflectionY)
+        print("rY", rY)
+        
+        return CGPoint(x: rX, y: rY)
+    }
+    
     func calculateReflectionPoint(cueBall: CGPoint, targetBall: CGPoint) -> CGPoint {
         let reflectionX = ((targetBall.x - cueBall.x) / 2) + cueBall.x
         let reflectionY: CGFloat

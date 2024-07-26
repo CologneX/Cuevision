@@ -105,7 +105,7 @@ struct DiamondMainView: View {
                             GeometryReader{ gg in
                                 Text("")
                                     .onAppear{
-                                        print ("dalam,", gg.size)
+//                                        print ("dalam,", gg.size)
                                         analysisDiamondVM.heightPoolBoundary = gg.size.height *  0.7
                                         
                                         analysisDiamondVM.widthPoolBoundary = gg.size.width *  0.74
@@ -123,9 +123,18 @@ struct DiamondMainView: View {
                     //                    let cueballPosition = CGPoint(x: offsetCueball.x + geometry.size.width / 2, y: offsetCueball.y + geometry.size.height / 2)
                     //                    let targetBallPosition = CGPoint(x: offsetTargetBall.x + geometry.size.width / 2, y: offsetTargetBall.y + geometry.size.height / 2)
                     
-                    let cueballPosition = CGPoint(x: offsetCueball.x + geometry.size.width / 2, y: offsetCueball.y + geometry.size.height / 2)
-                    let targetBallPosition = CGPoint(x: offsetTargetBall.x + geometry.size.width / 2, y: offsetTargetBall.y + geometry.size.height / 2)
-                    let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
+
+                    
+                    
+                    let cueballPosition = CGPoint(x: offsetCueball.x + analysisDiamondVM.widthPoolBoundary / 2, y: abs(offsetCueball.y - analysisDiamondVM.heightPoolBoundary / 2))
+                    
+                    let targetBallPosition = CGPoint(x: offsetTargetBall.x + analysisDiamondVM.widthPoolBoundary / 2, y: abs(offsetTargetBall.y - analysisDiamondVM.heightPoolBoundary / 2))
+                    
+                    
+                    let aimDiamond = analysisDiamondVM.calculateReflectionPoint2(cueBall: cueballPosition, targetBall: targetBallPosition)
+                    
+                    
+                    
                     
                     let aimDiamondAfterTranslation = analysisDiamondVM.findPointTranslation(from: aimDiamond, widthPoolBoundary: analysisDiamondVM.widthPoolBoundary, heightPoolBoundary: analysisDiamondVM.heightPoolBoundary, sizeBall: 25)
                     
@@ -192,18 +201,19 @@ struct DiamondMainView: View {
                                 }
                         )
                     // Drawing the path with reflection within the billiard table boundaries
+                    // titik anchor berada di kiri atas
                     Path { path in
-                        path.move(to: cueballPosition)
-                        path.addLine(to: aimDiamond)
-                        path.addLine(to: targetBallPosition)
+                        path.move(to:CGPoint(x: offsetCueball.x + geometry.size.width / 2, y: offsetCueball.y + geometry.size.height / 2))
+                        path.addLine(to: CGPoint(x: aimDiamond.x + geometry.size.width / 2,  y: aimDiamond.y + geometry.size.height / 2))
+                        path.addLine(to: CGPoint(x: offsetTargetBall.x + geometry.size.width / 2, y: offsetTargetBall.y + geometry.size.height / 2))
                     }
-                    .stroke(Color.green, lineWidth: 3)
-                    
+                    .stroke(Color.blue, lineWidth: 3)
+                
                     // Add a circle to mark the aim diamond point
                     Circle()
                         .fill(Color.red)
                         .frame(width: 10, height: 10)
-                        .position(aimDiamond)
+                        .position(CGPoint(x: aimDiamond.x + geometry.size.width / 2,  y: aimDiamond.y + geometry.size.height / 2))
                 }
                 .padding(.top, 12)
                 
@@ -253,7 +263,7 @@ struct DiamondMainView: View {
             .onEnded { value in
                 switch(value.translation.width, value.translation.height) {
                 case (...0, -30...30):
-                    print("left swipe")
+                    //print("left swipe")
                     showOverlay.toggle()
                 case (0..., -30...30):  print("right swipe")
                 case (-100...100, ...0):  print("up swipe")
