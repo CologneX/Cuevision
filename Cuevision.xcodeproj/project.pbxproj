@@ -245,8 +245,9 @@
 				9307BD732C497A9D004C4870 /* Model */,
 				9307BD722C497A91004C4870 /* ViewModel */,
 				9307BD712C497A8D004C4870 /* Util */,
-				9307BD702C497A86004C4870 /* View */,
 				939FAC152C52AE6100B8EE61 /* v8m.mlpackage */,
+				93981C9A2C498128008A6C7F /* Preview Content */,
+				93981C972C49811A008A6C7F /* Assets.xcassets */,
 			);
 			path = Cuevision;
 			sourceTree = "<group>";
@@ -430,8 +431,11 @@
 				93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */,
 				939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */,
 				9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */,
-				2C45C8D52C4990340033C258 /* HomeView.swift in Sources */,
 				2C45C8D42C4990340033C258 /* DiamondMainView.swift in Sources */,
+				939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */,
+				9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */,
+				2C75898E2C49FDBB00777CFE /* PhotoDisplayView.swift in Sources */,
+				2C45C8D52C4990340033C258 /* HomeView.swift in Sources */,
 				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

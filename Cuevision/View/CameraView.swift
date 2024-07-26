@@ -16,6 +16,10 @@ struct CameraView: View {
     @StateObject var ballClassificationModel = BilliardBallClassifier()
     
     @State private var selectedPhotoFromPicker: PhotosPickerItem?
+    @State private private var selectedItem: PhotosPickerItem?
+    
+    @State private var selectedImageData: Data?
+    
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
     @State private var photoSource: PhotoSource?
