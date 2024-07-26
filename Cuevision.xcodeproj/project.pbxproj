@@ -23,19 +23,24 @@
 		2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */; };
 		2C75898D2C49FDBB00777CFE /* GameAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C75898B2C49FDBA00777CFE /* GameAnalysisView.swift */; };
 		2C75898E2C49FDBB00777CFE /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C75898C2C49FDBA00777CFE /* PhotoDisplayView.swift */; };
-		2C7589922C49FFC000777CFE /* YOLOPool.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 2C7589912C49FFC000777CFE /* YOLOPool.mlpackage */; };
 		93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C832C497C59008A6C7F /* CameraService+Extensions.swift */; };
 		93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */; };
 		93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C852C497C59008A6C7F /* ImageResizer.swift */; };
 		93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C892C497C8C008A6C7F /* CameraService+Enums.swift */; };
 		93981C8C2C497CC2008A6C7F /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8B2C497CC2008A6C7F /* CameraModel.swift */; };
+		93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8B2C497CC2008A6C7F /* CameraViewModel.swift */; };
+		93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C8D2C497F88008A6C7F /* CameraPreview.swift */; };
 		93981C982C49811A008A6C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C972C49811A008A6C7F /* Assets.xcassets */; };
 		93981C9B2C498128008A6C7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C992C498128008A6C7F /* Preview Assets.xcassets */; };
-		93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F3E2C4110D900153DCA /* CuevisionApp.swift */; };
+		939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939FABF52C5234FE00B8EE61 /* Color+Extensions.swift */; };
+		939FAC162C52AE6100B8EE61 /* v8m.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 939FAC152C52AE6100B8EE61 /* v8m.mlpackage */; };
 		93A69F502C4110DB00153DCA /* CuevisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F4F2C4110DB00153DCA /* CuevisionTests.swift */; };
 		93A69F5A2C4110DB00153DCA /* CuevisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F592C4110DB00153DCA /* CuevisionUITests.swift */; };
 		93A69F5C2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */; };
 		93A69F692C41155300153DCA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 93A69F682C41155300153DCA /* .gitignore */; };
+		93C97C0B2C499FB00047C2CF /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */; };
+		93C97C0F2C49AB640047C2CF /* GameAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */; };
+		93FECF512C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FECF502C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,31 +61,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06BAC5C22C490F6200974D81 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C45C8C62C498FF80033C258 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
-		2C45C8C92C4990340033C258 /* AnalysisDiamondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondView.swift; sourceTree = "<group>"; };
-		2C45C8CA2C4990340033C258 /* CameraPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
-		2C45C8CB2C4990340033C258 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		2C45C8CC2C4990340033C258 /* DiamondMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondMainView.swift; sourceTree = "<group>"; };
-		2C45C8CD2C4990340033C258 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2C45C8CE2C4990340033C258 /* InformationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
-		2C45C8CF2C4990340033C258 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
-		2C4A1E712C4FAA5B00DBF1F8 /* CueBallEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CueBallEffectView.swift; sourceTree = "<group>"; };
-		2C4A1E722C4FAA5B00DBF1F8 /* DiamondSystemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondSystemView.swift; sourceTree = "<group>"; };
-		2C4A1E732C4FAA5B00DBF1F8 /* HandFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandFormView.swift; sourceTree = "<group>"; };
-		2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondViewModel.swift; sourceTree = "<group>"; };
-		2C75898B2C49FDBA00777CFE /* GameAnalysisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnalysisView.swift; sourceTree = "<group>"; };
-		2C75898C2C49FDBA00777CFE /* PhotoDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
-		2C7589912C49FFC000777CFE /* YOLOPool.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = YOLOPool.mlpackage; sourceTree = "<group>"; };
-		9308DB8D2C444064007A3D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9308A4A42C4E2B44003DE4C3 /* CameraView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraView+Extensions.swift"; sourceTree = "<group>"; };
+		93981C752C497B66008A6C7F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		93981C812C497BC7008A6C7F /* Cuevision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cuevision.swift; sourceTree = "<group>"; };
 		93981C832C497C59008A6C7F /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
 		93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		93981C852C497C59008A6C7F /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		93981C892C497C8C008A6C7F /* CameraService+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Enums.swift"; sourceTree = "<group>"; };
-		93981C8B2C497CC2008A6C7F /* CameraModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		93981C8B2C497CC2008A6C7F /* CameraViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		93981C8D2C497F88008A6C7F /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		93981C972C49811A008A6C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93981C992C498128008A6C7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		939FABF52C5234FE00B8EE61 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		939FAC152C52AE6100B8EE61 /* v8m.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = v8m.mlpackage; sourceTree = "<group>"; };
 		93A69F3B2C4110D900153DCA /* Cuevision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuevision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A69F3E2C4110D900153DCA /* CuevisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionApp.swift; sourceTree = "<group>"; };
 		93A69F4B2C4110DB00153DCA /* CuevisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuevisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +82,9 @@
 		93A69F592C4110DB00153DCA /* CuevisionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionUITests.swift; sourceTree = "<group>"; };
 		93A69F5B2C4110DB00153DCA /* CuevisionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		93A69F682C41155300153DCA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
+		93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnalysisView.swift; sourceTree = "<group>"; };
+		93FECF502C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilliardBallClassifierViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +128,8 @@
 				2C75898C2C49FDBA00777CFE /* PhotoDisplayView.swift */,
 				2C45C8C92C4990340033C258 /* AnalysisDiamondView.swift */,
 				2C45C8CA2C4990340033C258 /* CameraPreview.swift */,
+				93C97C0A2C499FB00047C2CF /* PhotoDisplayView.swift */,
+				93C97C0E2C49AB640047C2CF /* GameAnalysisView.swift */,
 				2C45C8CB2C4990340033C258 /* CameraView.swift */,
 				2C45C8CC2C4990340033C258 /* DiamondMainView.swift */,
 				2C45C8CD2C4990340033C258 /* HomeView.swift */,
@@ -155,8 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				93981C832C497C59008A6C7F /* CameraService+Extensions.swift */,
+				9308A4A42C4E2B44003DE4C3 /* CameraView+Extensions.swift */,
 				93981C852C497C59008A6C7F /* ImageResizer.swift */,
 				93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */,
+				939FABF52C5234FE00B8EE61 /* Color+Extensions.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -164,7 +164,8 @@
 		9307BD722C497A91004C4870 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				93981C8B2C497CC2008A6C7F /* CameraModel.swift */,
+				93981C8B2C497CC2008A6C7F /* CameraViewModel.swift */,
+				93FECF502C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift */,
 				2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */,
 				2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */,
 			);
@@ -177,6 +178,13 @@
 				93981C892C497C8C008A6C7F /* CameraService+Enums.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9308A4A62C4E2B7B003DE4C3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		93981C9A2C498128008A6C7F /* Preview Content */ = {
@@ -211,17 +219,14 @@
 		93A69F3D2C4110D900153DCA /* Cuevision */ = {
 			isa = PBXGroup;
 			children = (
-				2C7589912C49FFC000777CFE /* YOLOPool.mlpackage */,
-				2C45C8D02C4990340033C258 /* View */,
-				2C45C8C72C498FF80033C258 /* CustomFonts */,
-				06BAC5C22C490F6200974D81 /* AppDelegate.swift */,
-				9308DB8D2C444064007A3D70 /* Info.plist */,
-				93A69F3E2C4110D900153DCA /* CuevisionApp.swift */,
-				93981C9A2C498128008A6C7F /* Preview Content */,
-				93981C972C49811A008A6C7F /* Assets.xcassets */,
+				9308A4A62C4E2B7B003DE4C3 /* Components */,
 				9307BD732C497A9D004C4870 /* Model */,
 				9307BD722C497A91004C4870 /* ViewModel */,
 				9307BD712C497A8D004C4870 /* Util */,
+				939FAC152C52AE6100B8EE61 /* v8m.mlpackage */,
+				93981C9A2C498128008A6C7F /* Preview Content */,
+				93981C972C49811A008A6C7F /* Assets.xcassets */,
+				93981C812C497BC7008A6C7F /* Cuevision.swift */,
 			);
 			path = Cuevision;
 			sourceTree = "<group>";
@@ -394,14 +399,22 @@
 				2C75898D2C49FDBB00777CFE /* GameAnalysisView.swift in Sources */,
 				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
 				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
+				93C97C0B2C499FB00047C2CF /* PhotoDisplayView.swift in Sources */,
+				939FAC162C52AE6100B8EE61 /* v8m.mlpackage in Sources */,
+				93FECF512C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift in Sources */,
+				93981C8E2C497F88008A6C7F /* CameraPreview.swift in Sources */,
+				93981C822C497BC7008A6C7F /* Cuevision.swift in Sources */,
 				93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */,
+				93C97C0F2C49AB640047C2CF /* GameAnalysisView.swift in Sources */,
 				93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */,
 				2C45C8D62C4990340033C258 /* InformationView.swift in Sources */,
 				93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */,
+				939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */,
+				9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */,
 				2C75898E2C49FDBB00777CFE /* PhotoDisplayView.swift in Sources */,
 				2C45C8D52C4990340033C258 /* HomeView.swift in Sources */,
 				2C45C8D42C4990340033C258 /* DiamondMainView.swift in Sources */,
-				93981C8C2C497CC2008A6C7F /* CameraModel.swift in Sources */,
+				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
