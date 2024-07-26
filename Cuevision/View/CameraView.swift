@@ -16,10 +16,6 @@ struct CameraView: View {
     @StateObject var ballClassificationModel = BilliardBallClassifier()
     
     @State private var selectedPhotoFromPicker: PhotosPickerItem?
-    @State private private var selectedItem: PhotosPickerItem?
-    
-    @State private var selectedImageData: Data?
-    
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
     @State private var photoSource: PhotoSource?
@@ -181,32 +177,6 @@ struct CameraView: View {
             manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: option) { image, _ in
                 self.mostRecentImage = image
             }
-            .sheet(isPresented: $isShowingPhotoDisplay) {
-                if let image = displayedImage {
-                    NavigationView {
-                        PhotoDisplayView(photo: image, source: photoSource, retakeAction: {
-                            isShowingPhotoDisplay = false
-                        }, model: model)
-                    }
-                }
-            }
-        }
-    }
-    
-    func fetchMostRecentImage() {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        fetchOptions.fetchLimit = 1
-        
-        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        
-        if let asset = fetchResult.firstObject {
-            let manager = PHImageManager.default()
-            let option = PHImageRequestOptions()
-            option.isSynchronous = true
-            manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: option) { image, _ in
-                self.mostRecentImage = image
-            }
         }
     }
 }
@@ -222,4 +192,3 @@ struct DeviceRotationViewModifier: ViewModifier {
             }
     }
 }
-
