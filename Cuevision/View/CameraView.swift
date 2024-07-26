@@ -1,5 +1,5 @@
 //
-//  CameraView.swift
+//  CameraPreview.swift
 //  Cuevision
 //
 //  Created by Kyrell Leano Siauw on 18/07/24.
@@ -12,27 +12,22 @@ import PhotosUI
 import Photos
 
 struct CameraView: View {
-    @StateObject var model = CameraModel()
+    @StateObject var cameraModel = CameraModel()
+    @StateObject var ballClassificationModel = BilliardBallClassifier()
     
-    @State private var selectedItem: PhotosPickerItem?
-    
-    @State private var selectedImageData: Data?
-    
+    @State private var selectedPhotoFromPicker: PhotosPickerItem?
     @State private var currentZoomFactor: CGFloat = 1.0
-    
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
-    
+    @State private var photoSource: PhotoSource?
+    @State private var displayedPhoto: UIImage?
+    /// isShowingPhotoDisplay should be onChange
     @State private var isShowingPhotoDisplay = false
-    
-    @State private var displayedImage: UIImage?
-    
-    @State private var photoSource: PhotoSource = .camera
-    
     @State private var mostRecentImage: UIImage?
+    
 
     var captureButton: some View {
         Button(action: {
-            model.capturePhoto()
+            cameraModel.capturePhoto()
         }, label: {
             Circle()
                 .foregroundColor(.white)
@@ -43,17 +38,15 @@ struct CameraView: View {
                         .frame(width: 65, height: 65, alignment: .center)
                 )
         })
-        .onChange(of: model.photo) { newPhoto in
-            if let photo = newPhoto, let uiImage = photo.image {
-                displayedImage = uiImage
-                photoSource = .camera
-                isShowingPhotoDisplay = true
-            }
+        .onChange(of: cameraModel.photo) {
+            displayedPhoto = cameraModel.photo.image
+            photoSource = .camera
+//            cameraModel.photo = nil
         }
     }
     
     var photoPicker: some View {
-        PhotosPicker(selection: $selectedItem, matching: .images) {
+        PhotosPicker(selection: $selectedPhotoFromPicker, matching: .images) {
             if let image = mostRecentImage {
                 Image(uiImage: image)
                     .resizable()
@@ -69,24 +62,21 @@ struct CameraView: View {
         .onAppear {
             fetchMostRecentImage()
         }
-        .onChange(of: selectedItem) { newItem in
+        .onChange(of: selectedPhotoFromPicker) {
             Task {
-                if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                    selectedImageData = data
-                    if let uiImage = UIImage(data: data) {
-                        displayedImage = uiImage
-                        photoSource = .library
-                        isShowingPhotoDisplay = true
-                    }
+                if let data = try? await selectedPhotoFromPicker?.loadTransferable(type: Data.self)
+                {
+                    displayedPhoto = UIImage(data: data)
+                    photoSource = .library
+                    selectedPhotoFromPicker = nil
                 }
             }
         }
     }
     
-    
     var flipCameraButton: some View {
         Button(action: {
-            model.flipCamera()
+            cameraModel.flipCamera()
         }, label: {
             Circle()
                 .foregroundColor(Color.gray.opacity(0.2))
@@ -96,68 +86,96 @@ struct CameraView: View {
                         .foregroundColor(.white))
         })
     }
-    
     var body: some View {
-        GeometryReader { reader in
-            ZStack {
-                Color.black.edgesIgnoringSafeArea(.all)
-                
-                HStack {
-                    Button(action: {
-                        model.switchFlash()
-                    }, label: {
-                        Image(systemName: model.isFlashOn ? "bolt.fill" : "bolt.slash.fill")
-                            .font(.system(size: 20, weight: .medium, design: .default))
-                    })
-                    .accentColor(model.isFlashOn ? .yellow : .white)
-                    
-                    CameraPreview(session: model.session, currentOrientation: $model.currentOrientation)
-                        .onRotate { newOrientation in
-                            model.updateOrientation(newOrientation)
-                        }
-                        .gesture(
-                            DragGesture().onChanged({ (val) in
-                                // Only accept vertical drag
-                                if abs(val.translation.height) > abs(val.translation.width) {
-                                    // Get the percentage of vertical screen space covered by drag
-                                    let percentage: CGFloat = -(val.translation.height / reader.size.height)
-                                    // Calculate new zoom factor
-                                    let calc = currentZoomFactor + percentage
-                                    // Limit zoom factor to a maximum of 5x and a minimum of 1x
-                                    let zoomFactor: CGFloat = min(max(calc, 1), 5)
-                                    // Store the newly calculated zoom factor
-                                    currentZoomFactor = zoomFactor
-                                    // Sets the zoom factor to the capture device session
-                                    model.zoom(with: zoomFactor)
-                                }
-                            })
-                        )
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .onAppear {
-                            model.configure()
-                        }
-                        .alert(isPresented: $model.showAlertError, content: {
-                            Alert(title: Text(model.alertError.title), message: Text(model.alertError.message), dismissButton: .default(Text(model.alertError.primaryButtonTitle), action: {
-                                model.alertError.primaryAction?()
-                            }))
+        NavigationStack {
+            GeometryReader { reader in
+                ZStack {
+                    Color.black.edgesIgnoringSafeArea(.all)
+                    HStack {
+                        Button(action: {
+                            cameraModel.switchFlash()
+                        }, label: {
+                            Image(systemName: cameraModel.isFlashOn ? "bolt.fill" : "bolt.slash.fill")
+                                .font(.system(size: 20, weight: .medium, design: .default))
                         })
-                        .overlay(
-                            Group {
-                                if model.willCapturePhoto {
-                                    Color.black
-                                }
+                        .accentColor(cameraModel.isFlashOn ? .yellow : .white)
+                        
+                        CameraPreview(session: cameraModel.session, currentOrientation: $cameraModel.currentOrientation)
+                            .onRotate { newOrientation in
+                                cameraModel.updateOrientation(newOrientation)
                             }
-                                .animation(.easeInOut, value: model.willCapturePhoto)
-                        )
-                    VStack {
-                        flipCameraButton
-                        Spacer()
-                        captureButton
-                        Spacer()
-                        photoPicker
+                            .gesture(
+                                DragGesture().onChanged({ (val) in
+                                    // Only accept vertical drag
+                                    if abs(val.translation.height) > abs(val.translation.width) {
+                                        // Get the percentage of vertical screen space covered by drag
+                                        let percentage: CGFloat = -(val.translation.height / reader.size.height)
+                                        // Calculate new zoom factor
+                                        let calc = currentZoomFactor + percentage
+                                        // Limit zoom factor to a maximum of 5x and a minimum of 1x
+                                        let zoomFactor: CGFloat = min(max(calc, 1), 5)
+                                        // Store the newly calculated zoom factor
+                                        currentZoomFactor = zoomFactor
+                                        // Sets the zoom factor to the capture device session
+                                        cameraModel.zoom(with: zoomFactor)
+                                    }
+                                })
+                            )
+                            .onAppear {
+                                cameraModel.configure()
+                            }
+                            .alert(isPresented: $cameraModel.showAlertError, content: {
+                                Alert(title: Text(cameraModel.alertError.title), message: Text(cameraModel.alertError.message), dismissButton: .default(Text(cameraModel.alertError.primaryButtonTitle), action: {
+                                    cameraModel.alertError.primaryAction?()
+                                }))
+                            })
+                            .overlay(
+                                Group {
+                                    if cameraModel.willCapturePhoto {
+                                        Color.black
+                                    }
+                                }
+                                    .animation(.easeInOut, value: cameraModel.willCapturePhoto)
+                            )
+                        VStack {
+                            flipCameraButton
+                            Spacer()
+                            captureButton
+                            Spacer()
+                            photoPicker
+                        }
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, 20)
                 }
+            }
+        }
+        .padding(.top)
+        .sheet(isPresented: $isShowingPhotoDisplay) {
+            PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
+                isShowingPhotoDisplay = false
+            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+            
+        }
+        .onChange(of: displayedPhoto) {
+            if displayedPhoto != nil {
+                isShowingPhotoDisplay = true
+            }
+        }
+    }
+    
+    func fetchMostRecentImage() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.fetchLimit = 1
+        
+        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        
+        if let asset = fetchResult.firstObject {
+            let manager = PHImageManager.default()
+            let option = PHImageRequestOptions()
+            option.isSynchronous = true
+            manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: option) { image, _ in
+                self.mostRecentImage = image
             }
             .sheet(isPresented: $isShowingPhotoDisplay) {
                 if let image = displayedImage {
@@ -201,8 +219,3 @@ struct DeviceRotationViewModifier: ViewModifier {
     }
 }
 
-extension View {
-    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
-        self.modifier(DeviceRotationViewModifier(action: action))
-    }
-}
