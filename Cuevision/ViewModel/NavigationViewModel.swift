@@ -7,12 +7,19 @@
 
 import Foundation
 
-@Observable
-class NavigationViewModel {
-    var path: [String] = []
+enum NavigationPaths: String, Hashable {
+    case CameraView
+    case CueBallView
+    case HandFormView
+    case DiamondView
+    case InformationView
+}
+
+class NavigationViewModel: ObservableObject {
+    @Published var path: [NavigationPaths] = []
     
-    func goToNextPage(screenName: String) {
-        path.append(screenName)
+    func goToNextPage(_ view: NavigationPaths) {
+        path.append(view)
     }
     
     func goToFirstScreen(){

@@ -123,6 +123,7 @@ public class CameraService {
          take a long time. Dispatch session setup to the sessionQueue, so
          that the main queue isn't blocked, which keeps the UI responsive.
          */
+        checkForPermissions()
         sessionQueue.async {
             self.configureSession()
         }
@@ -366,14 +367,12 @@ public class CameraService {
                 case .success:
                     self.session.startRunning()
                     self.isSessionRunning = self.session.isRunning
-                    
                     if self.session.isRunning {
                         DispatchQueue.main.async {
                             self.isCameraButtonDisabled = false
                             self.isCameraUnavailable = false
                         }
                     }
-                    
                 case .configurationFailed, .notAuthorized:
                     print("Application not authorized to use camera")
                     
@@ -491,7 +490,9 @@ final class CameraModel: ObservableObject {
     
     @Published var currentOrientation: UIDeviceOrientation = .landscapeLeft
     
-//    private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
+    @Published var isSessionRunning = false
+    
+    //    private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
     
     var alertError: AlertError!
     
@@ -527,11 +528,6 @@ final class CameraModel: ObservableObject {
         .store(in: &self.subscriptions)
     }
     
-    func configure() {
-        service.checkForPermissions()
-        service.configure()
-    }
-    
     func capturePhoto() {
         service.capturePhoto(orientation: currentOrientation)
     }
@@ -560,12 +556,18 @@ final class CameraModel: ObservableObject {
         self.photo = nil
     }
     
-    func stopSession() {
-        self.session.stopRunning()
+    func configure() {
+        service.checkForPermissions()
+        service.configure()
     }
     
-    func startSession(){
-        self.session.startRunning()
+    func startCameraSession() {
+        service.start()
+        isSessionRunning = true
     }
     
+    func stopCameraSession() {
+        service.stop()
+        isSessionRunning = false
+    }
 }

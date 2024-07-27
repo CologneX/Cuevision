@@ -10,7 +10,7 @@ import SwiftUI
 struct InformationView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var navigationVM : NavigationViewModel
+    @StateObject var navigationVM : NavigationViewModel
     
     struct BilliardTips: Hashable {
         var image: String
@@ -35,13 +35,13 @@ struct InformationView: View {
                         Button {
                             switch(data.title) {
                             case "Cue Ball Effect":
-                                navigationVM.goToNextPage(screenName: "Cue Ball Effect")
+                                navigationVM.goToNextPage(.CueBallView)
                                 break
                             case "Hand Form":
-                                navigationVM.goToNextPage(screenName: "Hand Form")
+                                navigationVM.goToNextPage(.HandFormView)
                                 break
                             case "Diamond System":
-                                navigationVM.goToNextPage(screenName: "Diamond System")
+                                navigationVM.goToNextPage(.DiamondView)
                                 break
                             default:
                                 return
@@ -90,12 +90,5 @@ struct InformationView: View {
         
         .toolbarBackground(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden(true)
-    }
-}
-
-#Preview {
-    @State var nav = NavigationViewModel()
-    return NavigationView {
-        InformationView( navigationVM: nav)
     }
 }

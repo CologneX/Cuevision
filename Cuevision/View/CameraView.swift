@@ -12,19 +12,19 @@ import PhotosUI
 import Photos
 
 struct CameraView: View {
-    @StateObject var cameraModel = CameraModel()
-    @StateObject var ballClassificationModel = BilliardBallClassifier()
+    @StateObject var cameraModel: CameraModel
+    @StateObject var ballClassificationModel: BilliardBallClassifier
     
-    @State private var selectedPhotoFromPicker: PhotosPickerItem?
+    @State private var selectedPhotoFromPicker: PhotosPickerItem? = nil
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
-    @State private var photoSource: PhotoSource?
-    @State private var displayedPhoto: UIImage?
+    @State private var photoSource: PhotoSource? = nil
+    @State private var displayedPhoto: UIImage? = nil
     /// isShowingPhotoDisplay should be onChange
     @State private var isShowingPhotoDisplay = false
-    @State private var mostRecentImage: UIImage?
+    @State private var mostRecentImage: UIImage? = nil
     
-
+    @Environment(\.dismiss) private var dismiss
     var captureButton: some View {
         Button(action: {
             cameraModel.capturePhoto()
@@ -87,7 +87,7 @@ struct CameraView: View {
         })
     }
     var body: some View {
-        NavigationStack {
+        ZStack {
             GeometryReader { reader in
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
@@ -149,6 +149,13 @@ struct CameraView: View {
                 }
             }
         }
+//        .onAppear {
+//            cameraModel.configure()
+//            cameraModel.startCameraSession()
+//        }
+//        .onDisappear {
+//            cameraModel.stopCameraSession()
+//        }
         .padding(.top)
         .sheet(isPresented: $isShowingPhotoDisplay) {
             PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
@@ -161,6 +168,22 @@ struct CameraView: View {
                 isShowingPhotoDisplay = true
             }
         }
+        .navigationBarBackButtonHidden()
+        .overlay(alignment: .topLeading) {
+            Button(action: {
+                dismiss()
+            }, label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(.thinMaterial)
+                    .clipShape(Circle())
+            })
+            .padding(.top,16)
+            .offset(x: -32)
+        }
+//        .border(.red)
+//        .ignoresSafeArea()
     }
     
     func fetchMostRecentImage() {

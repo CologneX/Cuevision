@@ -161,13 +161,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9308A4A62C4E2B7B003DE4C3 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		93981C9A2C498128008A6C7F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				93BA20152C53920A00B5D217 /* View */,
-				9308A4A62C4E2B7B003DE4C3 /* Components */,
 				2C45C8C72C498FF80033C258 /* CustomFonts */,
 				06BAC5C22C490F6200974D81 /* AppDelegate.swift */,
 				9308DB8D2C444064007A3D70 /* Info.plist */,

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var navigationVM = NavigationViewModel()
-    
+    @StateObject private var navigationVM = NavigationViewModel()
+    @StateObject var cameraModel = CameraModel()
+    @StateObject var ballClassificationModel = BilliardBallClassifier()
     var body: some View {
         NavigationStack(path: $navigationVM.path) {
             ZStack{
@@ -28,8 +29,7 @@ struct HomeView: View {
                     
                     VStack{
                         Button {
-//                            navigationVM.goToNextPage(screenName: "Camera View")
-                            navigationVM.goToNextPage(screenName: "Diamond View")
+                            navigationVM.goToNextPage(.CameraView)
                         } label: {
                             Image(systemName: "camera.fill")
                                 .resizable()
@@ -44,7 +44,7 @@ struct HomeView: View {
                         }
                         
                         Button {
-                            navigationVM.goToNextPage(screenName: "Billiard Tips")
+                            navigationVM.goToNextPage(.InformationView)
                         } label: {
                             Text("Billiard Tips")
                                 .font(.title2)
@@ -60,21 +60,20 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 48)
             }
-            .navigationDestination(for: String.self, destination: { path in
-                if path == "Billiard Tips" {
+            .navigationDestination(for: NavigationPaths.self, destination: { path in
+                switch path {
+                case .InformationView:
                     InformationView(navigationVM: navigationVM)
-                } else if path == "Camera View" {
-                    CameraView()
-                } else if path == "Cue Ball Effect" {
+                case .CameraView:
+                    CameraView(cameraModel: cameraModel, ballClassificationModel: ballClassificationModel)
+                case .CueBallView:
                     CueBallEffectView()
-                } else if path == "Hand Form" {
+                case .HandFormView:
                     HandFormView()
-                } else if path == "Diamond View" {
+                case .DiamondView:
                     DiamondMainView()
-                } else {
-                    DiamondSystemView()
-                }
-            })
+
+                }})
         }
     }
 }
