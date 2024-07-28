@@ -22,6 +22,7 @@ struct DiamondMainView: View {
     }
     
     // MARK: Standalone Functions and Variables
+    //    @State private var poolBallPosition =
     @State private var offsetCueball = CGPoint(x: 0, y: 0)
     @State private var offsetTargetBall = CGPoint(x: 100, y: 0)
     
@@ -111,6 +112,26 @@ struct DiamondMainView: View {
         return CGPoint(x: resultPointTranslation.x, y: resultPointTranslation.y)
     }
     
+    private func ballImageName(_ number: String) -> ImageResource {
+        switch number {
+            case "1": return .one
+            case "2": return .two
+            case "3": return .three
+            case "4": return .four
+            case "5": return .five
+            case "6": return .six
+            case "7": return .seven
+            case "8": return .eight
+            case "9": return .nine
+            case "10": return .ten
+            case "11": return .eleven
+            case "12": return .twelve
+            case "13": return .thirteen
+            case "14": return .fourteen
+            case "15": return .fifteen
+            default : return .white
+        }
+    }
     var body: some View {
         NavigationStack {
             ZStack{
@@ -163,6 +184,49 @@ struct DiamondMainView: View {
                                         print("Cueball coordinates: (\(self.offsetCueball.x), \(self.offsetCueball.y)) -- \(self.startLocationCueball)")
                                     }
                             )
+                        ForEach(detectedObjects, id: \.label) { poolBalls in
+                            let boundingBox = CGRect(
+                                x: poolBalls.boundingBox.minX * geometry.size.width,
+                                y: poolBalls.boundingBox.minY * geometry.size.height,
+                                width: poolBalls.boundingBox.width * geometry.size.width,
+                                height: poolBalls.boundingBox.height * geometry.size.height
+                            )
+                            
+                            Image(ballImageName(poolBalls.label))
+                                .resizable()
+                                .frame(width: boundingBox.width, height: 25)
+                                .position(x: boundingBox.midX, y: boundingBox.midY)
+                                .shadow(color: .black, radius: 2, x: 3, y: 4)
+                            
+//                            // Draw the bounding box
+//                            Rectangle()
+//                                .path(in: boundingBox)
+//                                .stroke(Color.red, lineWidth: 2.0)
+//                            
+//                            // Display the label
+//                            Text("\(poolBalls.label) (\(String(format: "%.2f", poolBalls.confidence)))")
+//                                .font(.caption)
+//                                .padding(2)
+//                                .background(Color.red)
+//                                .foregroundColor(.white)
+//                                .cornerRadius(3)
+//                                .position(x: boundingBox.midX, y: boundingBox.minY - 10) // Above the bounding box
+                            
+                            // Display the coordinates
+                            //                            let xCoordinate = boundingBox.minX + (boundingBox.width / 2)
+                            //                            let yCoordinate = boundingBox.minY + (boundingBox.height / 2)
+                            //                            VStack{
+                            //                                Text("X: \(String(format: "%.2f", xCoordinate))")
+                            //                                    .font(.caption2)
+                            //
+                            //                                Text("Y: \(String(format: "%.2f", yCoordinate))")
+                            //                                    .font(.caption2)
+                            //                            }
+                            //                            .padding(4)
+                            //                            .background(.ultraThinMaterial)
+                            //                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            //                            .position(x: xCoordinate, y: yCoordinate + 15)
+                        }
                         
                         Image(.one)  // Ganti dengan nama file gambar bola target yang sesuai
                             .resizable()
@@ -251,10 +315,10 @@ struct DiamondMainView: View {
                             .foregroundColor(.darkGreen)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                             .offset(x: 16, y: -12)
-//                            NavigationLink(destination: HomeView(), isActive: $isActive) {
-//                                EmptyView()
-//                            }
-//                            .background(.red)
+                            //                            NavigationLink(destination: HomeView(), isActive: $isActive) {
+                            //                                EmptyView()
+                            //                            }
+                            //                            .background(.red)
                         }
                         
                     }
