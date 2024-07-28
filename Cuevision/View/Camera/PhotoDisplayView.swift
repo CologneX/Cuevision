@@ -89,31 +89,26 @@ struct PhotoDisplayView: View {
                                 }
                             }
                         )
-                        .padding(.vertical)
+                        .padding(.top )
                 }
             }
         }
-        .ignoresSafeArea()
+//        .ignoresSafeArea()
     }
     
     var body: some View {
         NavigationStack{
             imagePoint
-                .ignoresSafeArea()
-                .border(.blue)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .border(.red)
                 .onAppear {
                     isProcessingImage = true
                     processImage()
                 }
-                .navigationBarBackButtonHidden()
                 .onChange(of: warpedImage){
                     if warpedImage != nil {
                         showGameAnalysis = true
                     }
                 }
-
                 .navigationDestination(isPresented: $showGameAnalysis) {
                     DiamondMainView(image: $warpedImage, model: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
                 }
@@ -131,7 +126,6 @@ struct PhotoDisplayView: View {
                             }
                         }
                     }
-                    
                     .padding(16)
                 }
                 .overlay(alignment: .topLeading){
@@ -146,7 +140,9 @@ struct PhotoDisplayView: View {
                     })
                     .padding(16)
                 }
+                .ignoresSafeArea(.all, edges: [.horizontal])
         }
+        .navigationBarBackButtonHidden()
     }
     
     private func applyWarpPerspective() {
