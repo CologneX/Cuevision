@@ -18,7 +18,7 @@ struct InformationView: View {
         var subtitle: String
     }
     
-    let dataBilliardTips = [
+    var dataBilliardTips = [
         BilliardTips(image: .one, title: "Cue Ball Effect", subtitle: "Get to know Cue ball hit effect points"),
         BilliardTips(image: .two, title: "Hand Form", subtitle: "Stabilize cue stick handling with different hand form"),
         BilliardTips(image: .three, title: "Diamond System", subtitle: "Learn to aim accurately using the Diamond System")
@@ -35,13 +35,8 @@ struct InformationView: View {
                             switch(data.title) {
                             case "Cue Ball Effect":
                                 navigationVM.goToNextPage(.CueBallView)
-                                break
                             case "Hand Form":
                                 navigationVM.goToNextPage(.HandFormView)
-                                break
-                            case "Diamond System":
-                                navigationVM.goToNextPage(.DiamondView)
-                                break
                             default:
                                 return
                             }

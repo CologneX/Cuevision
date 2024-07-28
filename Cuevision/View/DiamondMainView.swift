@@ -1,6 +1,18 @@
 import SwiftUI
 
 struct DiamondMainView: View {
+    // MARK: Camera Functions and Variables
+    @Binding var image: UIImage?
+    
+    @ObservedObject var model: CameraModel
+    
+    @ObservedObject var ballClassificationModel: BilliardBallClassifier
+    
+    @State var detectedObjects: [DetectedObject] = []
+    
+    @Binding var isShowingPhotoDisplay: Bool
+    
+    // MARK: Standalone Functions and Variables
     @State private var offsetCueball = CGPoint(x: 0, y: 0)
     @State private var offsetTargetBall = CGPoint(x: 100, y: 0)
     
@@ -92,7 +104,7 @@ struct DiamondMainView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack{
                 Image(.poolBackground) // Ganti dengan nama file background yang sesuai
                     .resizable()
@@ -252,11 +264,10 @@ struct DiamondMainView: View {
             )
             .animation(.default, value: showOverlay)
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
-struct DiamondMainView_Previews: PreviewProvider {
-    static var previews: some View {
-        DiamondMainView()
-    }
-}
+//#Preview{
+//    DiamondMainView()
+//}

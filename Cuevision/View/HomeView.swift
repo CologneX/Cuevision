@@ -70,9 +70,6 @@ struct HomeView: View {
                     CueBallEffectView()
                 case .HandFormView:
                     HandFormView()
-                case .DiamondView:
-                    DiamondMainView()
-
                 }})
         }
     }

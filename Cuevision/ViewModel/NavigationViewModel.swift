@@ -11,7 +11,7 @@ enum NavigationPaths: String, Hashable {
     case CameraView
     case CueBallView
     case HandFormView
-    case DiamondView
+//    case DiamondView
     case InformationView
 }
 

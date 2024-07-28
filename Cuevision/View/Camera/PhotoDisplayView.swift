@@ -99,53 +99,55 @@ struct PhotoDisplayView: View {
     var body: some View {
         NavigationStack{
             imagePoint
-        }
-        .onAppear {
-            isProcessingImage = true
-            processImage()
-        }
-        .navigationBarBackButtonHidden()
-        .overlay(alignment: .topTrailing){
-            ZStack{
-                if source == .camera {
-                    HStack {
-                        Button("Use Photo") {
-                            applyWarpPerspective()
-                        }
-                    }
-                } else {
-                    Button("Analyze Photo") {
-                        applyWarpPerspective()
+                .ignoresSafeArea()
+                .border(.blue)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .border(.red)
+                .onAppear {
+                    isProcessingImage = true
+                    processImage()
+                }
+                .navigationBarBackButtonHidden()
+                .onChange(of: warpedImage){
+                    if warpedImage != nil {
+                        showGameAnalysis = true
                     }
                 }
-            }
-            
-            .padding(16)
+
+                .navigationDestination(isPresented: $showGameAnalysis) {
+                    DiamondMainView(image: $warpedImage, model: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+                }
+                .overlay(alignment: .topTrailing){
+                    ZStack{
+                        if source == .camera {
+                            HStack {
+                                Button("Use Photo") {
+                                    applyWarpPerspective()
+                                }
+                            }
+                        } else {
+                            Button("Analyze Photo") {
+                                applyWarpPerspective()
+                            }
+                        }
+                    }
+                    
+                    .padding(16)
+                }
+                .overlay(alignment: .topLeading){
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.thinMaterial)
+                            .clipShape(Circle())
+                    })
+                    .padding(16)
+                }
         }
-        .overlay(alignment: .topLeading){
-            Button(action: {
-                dismiss()
-            }, label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(.thinMaterial)
-                    .clipShape(Circle())
-            })
-            .padding(16)
-        }
-        .sheet(isPresented: $showGameAnalysis) {
-            GameAnalysisView(image: warpedImage!, model: cameraModel,ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
-        }
-        .onChange(of: warpedImage){
-            if warpedImage != nil {
-                showGameAnalysis = true
-            }
-        }
-        .ignoresSafeArea()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
     
     private func applyWarpPerspective() {
         guard let inputImage = photo,
