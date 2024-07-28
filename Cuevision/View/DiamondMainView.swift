@@ -4,13 +4,22 @@ struct DiamondMainView: View {
     // MARK: Camera Functions and Variables
     @Binding var image: UIImage?
     
-    @ObservedObject var model: CameraModel
+    @ObservedObject var cameraModel: CameraModel
     
     @ObservedObject var ballClassificationModel: BilliardBallClassifier
     
     @State var detectedObjects: [DetectedObject] = []
     
     @Binding var isShowingPhotoDisplay: Bool
+    
+    private func classifyImage() {
+        ballClassificationModel.classify(image: image!) { [self] results in
+            DispatchQueue.main.async {
+                self.detectedObjects = results
+                print(results.debugDescription)
+            }
+        }
+    }
     
     // MARK: Standalone Functions and Variables
     @State private var offsetCueball = CGPoint(x: 0, y: 0)
@@ -20,7 +29,6 @@ struct DiamondMainView: View {
     @State private var startLocationTargetBall: CGPoint = CGPoint(x: 100, y: 0)
     
     @State private var showOverlay = false
-    @State private var isActive = false
     
     @State private var analysisDiamondVM = AnalysisDiamondViewModel()
     @State private var widthPoolBoundary2: CGFloat = 0.0
@@ -194,6 +202,10 @@ struct DiamondMainView: View {
                             .position(aimDiamond)
                     }
                     .onAppear {
+                        classifyImage()
+                        print("Frame Width: \(geometry.size.width), Height: \(geometry.size.height), Image: \(image!.size.width), \(image!.size.height)")
+                    }
+                    .onAppear {
                         widthPoolBoundary2 = geometry.size.width * 0.74
                         heightPoolBoundary2 = geometry.size.height * 0.7
                     }
@@ -226,7 +238,9 @@ struct DiamondMainView: View {
                                 //                                    withAnimation(.bouncy) {
                                 //                                        showOverlay.toggle()
                                 //                                    }
-                                self.isActive = true
+                                withAnimation {
+                                    isShowingPhotoDisplay = false
+                                }
                             } label: {
                                 Text("Done")
                                     .fontWeight(.bold)
@@ -237,11 +251,10 @@ struct DiamondMainView: View {
                             .foregroundColor(.darkGreen)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                             .offset(x: 16, y: -12)
-                            
-                            NavigationLink(destination: HomeView(), isActive: $isActive) {
-                                EmptyView()
-                            }
-                            .background(.red)
+//                            NavigationLink(destination: HomeView(), isActive: $isActive) {
+//                                EmptyView()
+//                            }
+//                            .background(.red)
                         }
                         
                     }

@@ -89,7 +89,7 @@ struct PhotoDisplayView: View {
                                 }
                             }
                         )
-                        .padding(.top )
+                        .padding(.top)
                 }
             }
         }
@@ -110,7 +110,7 @@ struct PhotoDisplayView: View {
                     }
                 }
                 .navigationDestination(isPresented: $showGameAnalysis) {
-                    DiamondMainView(image: $warpedImage, model: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+                    DiamondMainView(image: $warpedImage, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
                 }
                 .overlay(alignment: .topTrailing){
                     ZStack{
