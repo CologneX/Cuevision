@@ -13,15 +13,15 @@ struct InformationView: View {
     @StateObject var navigationVM : NavigationViewModel
     
     struct BilliardTips: Hashable {
-        var image: String
+        var image: ImageResource
         var title: String
         var subtitle: String
     }
     
     let dataBilliardTips = [
-        BilliardTips(image: "solid_one", title: "Cue Ball Effect", subtitle: "knowing cue ball hit point effect"),
-        BilliardTips(image: "solid_two", title: "Hand Form", subtitle: "stabilize your cue stick using different hand form"),
-        BilliardTips(image: "solid_three", title: "Diamond System", subtitle: "learn how to aim more accurately using diamond system")
+        BilliardTips(image: .one, title: "Cue Ball Effect", subtitle: "Get to know Cue ball hit effect points"),
+        BilliardTips(image: .two, title: "Hand Form", subtitle: "Stabilize cue stick handling with different hand form"),
+        BilliardTips(image: .three, title: "Diamond System", subtitle: "Learn to aim accurately using the Diamond System")
     ]
     
     var body: some View {
@@ -29,7 +29,6 @@ struct InformationView: View {
             ZStack {
                 Image(.infoBG)
                     .scaledToFit()
-                
                 LazyVStack(alignment:.center, spacing: 24) {
                     ForEach(dataBilliardTips, id: \.self) { data in
                         Button {
@@ -48,7 +47,7 @@ struct InformationView: View {
                             }
                         } label: {
                             HStack {
-                                Image("\(data.image)")
+                                Image(data.image)
                                     .resizable()
                                     .frame(width: 250, height: 250)
                                     .padding(.trailing, 24)
@@ -70,7 +69,6 @@ struct InformationView: View {
                 }
             }
             .padding(.all, -60)
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()

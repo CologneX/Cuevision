@@ -120,7 +120,7 @@ struct DiamondMainView: View {
                         let targetBallPosition = CGPoint(x: offsetTargetBall.x + geometry.size.width / 2, y: offsetTargetBall.y + geometry.size.height / 2)
                         let aimDiamond = calculateAimDiamond(cueBall: cueballPosition, targetBall: targetBallPosition)
                         
-                        Image(.cueball)  // Ganti dengan nama file gambar bola cue yang sesuai
+                        Image(.white)  // Ganti dengan nama file gambar bola cue yang sesuai
                             .resizable()
                             .frame(width: 25, height: 25)
                             .shadow(color: .black, radius: 2, x: 3, y: 4)
@@ -144,7 +144,7 @@ struct DiamondMainView: View {
                                     }
                             )
                         
-                        Image(.solidOne)  // Ganti dengan nama file gambar bola target yang sesuai
+                        Image(.one)  // Ganti dengan nama file gambar bola target yang sesuai
                             .resizable()
                             .frame(width: 25, height: 25)
                             .shadow(color: .black, radius: 2, x: 3, y: 4)
