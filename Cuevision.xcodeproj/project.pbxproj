@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAC5C22C490F6200974D81 /* AppDelegate.swift */; };
 		2C45C8C82C498FF80033C258 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C45C8C62C498FF80033C258 /* SF-Pro.ttf */; };
 		2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */; };
 		2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */; };
@@ -59,7 +58,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06BAC5C22C490F6200974D81 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C45C8C62C498FF80033C258 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondViewModel.swift; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 			children = (
 				93BA20152C53920A00B5D217 /* View */,
 				2C45C8C72C498FF80033C258 /* CustomFonts */,
-				06BAC5C22C490F6200974D81 /* AppDelegate.swift */,
 				9308DB8D2C444064007A3D70 /* Info.plist */,
 				93A69F3E2C4110D900153DCA /* CuevisionApp.swift */,
 				9307BD732C497A9D004C4870 /* Model */,
@@ -397,7 +394,6 @@
 				2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */,
 				93BA201E2C53920A00B5D217 /* HomeView.swift in Sources */,
 				93BA20202C53920A00B5D217 /* OnboardingView.swift in Sources */,
-				06BAC5C32C490F6200974D81 /* AppDelegate.swift in Sources */,
 				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
 				93BA20172C53920A00B5D217 /* DiamondSystemView.swift in Sources */,
 				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
