@@ -12,69 +12,76 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack(path: $navigationVM.path) {
-            ZStack{
+            ZStack {
                 Image("HomeBG")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
                 
-                HStack{
-                    Text("\"Learn How To Aim Better Using Diamond System\"")
-                        .font(Font.custom("SFPro-ExpandedBold", size: 20.0))
-                        .font(.largeTitle)
-                        .multilineTextAlignment(.center)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 48)
-                    
-                    VStack{
-                        Button {
-//                            navigationVM.goToNextPage(screenName: "Camera View")
-                            navigationVM.goToNextPage(screenName: "Diamond View")
-                        } label: {
-                            Image(systemName: "camera.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 60, height: 60)
-                                .foregroundColor(Color(hex: 0x428365))
-                                .fontWeight(.semibold)
-                                .padding(.horizontal, 60)
-                                .padding(.vertical, 20)
-                                .background(Color.white)
-                                .cornerRadius(50)
-                        }
-                        
-                        Button {
-                            navigationVM.goToNextPage(screenName: "Billiard Tips")
-                        } label: {
-                            Text("Billiard Tips")
-                                .font(.title2)
+                VStack {
+                    GeometryReader { geometry in
+                        HStack {
+                            Text("\"Learn How To Aim Better Using Diamond System\"")
+                                .font(Font.custom("SFPro-ExpandedBold", fixedSize: 20.0))
                                 .fontWeight(.bold)
-                                .padding(.horizontal, 30)
-                                .padding(.vertical, 15)
-                                .background(Color.white)
-                                .foregroundColor(Color(hex: 0x428365))
-                                .cornerRadius(30)
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .minimumScaleFactor(0.5)
+                                .allowsTightening(true)
+                                .frame(maxWidth: geometry.size.width * 0.8)
+                                .padding(.bottom, 20)
+                            
+                            VStack(spacing: 20) {
+                                Button {
+                                    navigationVM.goToNextPage(screenName: "Diamond View")
+                                } label: {
+                                    Image(systemName: "camera.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 60, height: 60)
+                                        .foregroundColor(Color(hex: 0x428365))
+                                        .fontWeight(.semibold)
+                                        .padding(.horizontal, 60)
+                                        .padding(.vertical, 20)
+                                        .background(Color.white)
+                                        .cornerRadius(50)
+                                }
+                                
+                                Button {
+                                    navigationVM.goToNextPage(screenName: "Billiard Tips")
+                                } label: {
+                                    Text("Billiard Tips")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .padding(.horizontal, 30)
+                                        .padding(.vertical, 15)
+                                        .background(Color.white)
+                                        .foregroundColor(Color(hex: 0x428365))
+                                        .cornerRadius(30)
+                                }
+                            }
                         }
+                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                     }
-                    .padding(.horizontal, 24)
                 }
                 .padding(.horizontal, 48)
             }
-            .navigationDestination(for: String.self, destination: { path in
-                if path == "Billiard Tips" {
+            .navigationDestination(for: String.self) { path in
+                switch path {
+                case "Billiard Tips":
                     InformationView(navigationVM: navigationVM)
-                } else if path == "Camera View" {
+                case "Camera View":
                     CameraView()
-                } else if path == "Cue Ball Effect" {
+                case "Cue Ball Effect":
                     CueBallEffectView()
-                } else if path == "Hand Form" {
+                case "Hand Form":
                     HandFormView()
-                } else if path == "Diamond View" {
+                case "Diamond View":
                     DiamondMainView()
-                } else {
+                default:
                     DiamondSystemView()
                 }
-            })
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct InformationView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var navigationVM : NavigationViewModel
+    @Bindable var navigationVM: NavigationViewModel
     
     struct BilliardTips: Hashable {
         var image: String
@@ -25,39 +25,38 @@ struct InformationView: View {
     ]
     
     var body: some View {
-        ScrollView {
-            ZStack {
-                Image(.infoBG)
-                    .scaledToFit()
-                
-                LazyVStack(alignment:.center, spacing: 24) {
+        ZStack {
+            Image(.infoBG)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            ScrollView {
+                LazyVStack(alignment:.center, spacing: 30) {
                     ForEach(dataBilliardTips, id: \.self) { data in
                         Button {
                             switch(data.title) {
                             case "Cue Ball Effect":
                                 navigationVM.goToNextPage(screenName: "Cue Ball Effect")
-                                break
                             case "Hand Form":
                                 navigationVM.goToNextPage(screenName: "Hand Form")
-                                break
                             case "Diamond System":
                                 navigationVM.goToNextPage(screenName: "Diamond System")
-                                break
                             default:
                                 return
                             }
                         } label: {
                             HStack {
-                                Image("\(data.image)")
+                                Image(data.image)
                                     .resizable()
                                     .frame(width: 250, height: 250)
                                     .padding(.trailing, 24)
                                 VStack {
-                                    Text("\(data.title)")
+                                    Text(data.title)
                                         .font(Font.custom("SFPro-ExpandedBold", size: 40.0))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
-                                    Text("\(data.subtitle)")
+                                    Text(data.subtitle)
                                         .font(.callout)
                                         .foregroundStyle(.white)
                                         .padding(.top, -20)
@@ -68,26 +67,23 @@ struct InformationView: View {
                         }
                     }
                 }
+                .padding(.all, 50)
             }
-            .padding(.all, -60)
-            
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+            .scrollIndicators(.hidden)
+            .overlay(alignment: .topLeading) {
+                Button {
+                    navigationVM.backToPreviousPage()
+                } label: {
+                    Image("back")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                }
+                .padding(.top, 36)
+                .padding(.leading, 16)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
-        .scrollIndicators(.hidden)
-        .overlay(alignment: .top, content: {
-            Button {
-                navigationVM.backToPreviousPage()
-            } label: {
-                Image("back")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-            }
-            .frame(width: 30, height: 30)
-            .padding(.top, 36)
-            .padding(.leading, -366)
-        })
-        
         .toolbarBackground(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden(true)
     }
@@ -96,6 +92,6 @@ struct InformationView: View {
 #Preview {
     @State var nav = NavigationViewModel()
     return NavigationView {
-        InformationView( navigationVM: nav)
+        InformationView(navigationVM: nav)
     }
 }

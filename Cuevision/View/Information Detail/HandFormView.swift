@@ -24,7 +24,7 @@ struct HandFormView: View {
             })
             
             VStack{
-                Text("Hand Form").font(Font.custom("SFPro-ExpandedBold", size: 40.0))
+                Text("Hand Form").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
                     .foregroundColor(.white)
                 Spacer()
                 Image("InfoHandForm")

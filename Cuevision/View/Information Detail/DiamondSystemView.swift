@@ -24,7 +24,7 @@ struct DiamondSystemView: View {
             })
             
             VStack(alignment: .center){
-                Text("Diamond System").font(Font.custom("SFPro-ExpandedBold", size: 40.0))
+                Text("Diamond System").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
                     .foregroundColor(.white)
                 Image("InfoDiamondSystem")
             }
