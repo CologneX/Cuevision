@@ -47,12 +47,10 @@ struct AnalysisDiamondView: View {
                 RoundedRectangle(cornerRadius: 52, style: .continuous)
                     .fill(.darkGreen)
                     .frame(maxHeight: 70)
-//                    .frame(maxWidth: 300)
                     .overlay {
                         let result = analysisDiamondVM.calculateAimCoordinate()
                         Text("\(result.formatterDouble()) = (\(analysisDiamondVM.targetBallCoordinate.x.formatterDouble()) - \(analysisDiamondVM.cueBallCoordinate.x.formatterDouble()))/2 + \(analysisDiamondVM.cueBallCoordinate.x.formatterDouble())")
                             .foregroundStyle(.white)
-//                            .multilineTextAlignment(.leading)
                             .fontWeight(.medium)
                             .font(.title2)
                             .padding()
@@ -69,8 +67,6 @@ struct AnalysisDiamondView: View {
             .clipShape(RoundedRectangle(cornerRadius: 24))
             .ignoresSafeArea()
         }
-//        .padding(.trailing, 48)
-//        .background(.red)
     }
 }
 
