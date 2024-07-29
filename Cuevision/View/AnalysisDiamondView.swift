@@ -48,8 +48,11 @@ struct AnalysisDiamondView: View {
                     .fill(.darkGreen)
                     .frame(maxHeight: 70)
                     .overlay {
-                        let result = analysisDiamondVM.calculateAimCoordinate()
-                        Text("\(result.formatterDouble()) = (\(analysisDiamondVM.targetBallCoordinate.x.formatterDouble()) - \(analysisDiamondVM.cueBallCoordinate.x.formatterDouble()))/2 + \(analysisDiamondVM.cueBallCoordinate.x.formatterDouble())")
+                        let rawCueball = analysisDiamondVM.cueBallCoordinate
+                        let rawTargetball = analysisDiamondVM.targetBallCoordinate
+                        let resultDiamond = analysisDiamondVM.convertToDiamondNumber(cueball: rawCueball, targetball: rawTargetball)
+                        
+                        Text("\(resultDiamond.aim.formatterDouble()) = (\(resultDiamond.targetball.formatterDouble()) - \(resultDiamond.cueball.formatterDouble()))/2 + \(resultDiamond.cueball.formatterDouble())")
                             .foregroundStyle(.white)
                             .fontWeight(.medium)
                             .font(.title2)
@@ -72,6 +75,5 @@ struct AnalysisDiamondView: View {
 
 #Preview {
     @State var analysisDiamondVM = AnalysisDiamondViewModel()
-    
     return AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
 }
