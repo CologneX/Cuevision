@@ -32,6 +32,7 @@ struct DiamondMainView: View {
     @State private var analysisDiamondVM = AnalysisDiamondViewModel()
     
     @Environment(\.presentationMode) var presentationMode
+    @StateObject var navigationVM : NavigationViewModel
     
     private func ballImageName(_ number: String) -> ImageResource {
         switch number {
@@ -207,18 +208,34 @@ struct DiamondMainView: View {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
-                                Text("Done")
-                                    .fontWeight(.bold)
+                                
+                                Image(systemName: "camera.fill")
+                                    .font(.title2)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 12)
+                                    .padding()
                             }
                             .buttonStyle(.borderedProminent)
-                            .buttonBorderShape(.capsule)
+                            .buttonBorderShape(.circle)
                             .tint(.white)
                             .foregroundColor(.darkGreen)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                            .offset(x: 16, y: -12)
+                            .offset(x: 48, y: -12)
                         }
                     }
                 }
+                .overlay(alignment: .topLeading, content: {
+                    Button(action: {
+                        navigationVM.goToFirstScreen()
+                    }) {
+                        Image("BackCross")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                    }
+                    .padding(.top, 24)
+                    .padding(.leading, -24)
+                })
             }
             .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
                 .onEnded { value in

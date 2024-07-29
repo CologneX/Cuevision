@@ -65,7 +65,7 @@ struct HomeView: View {
                 case .InformationView:
                     InformationView(navigationVM: navigationVM)
                 case .CameraView:
-                    CameraView(cameraModel: cameraModel, ballClassificationModel: ballClassificationModel)
+                    CameraView(cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, navigationVM: navigationVM)
                 case .CueBallView:
                     CueBallEffectView()
                 case .HandFormView:

@@ -31,6 +31,8 @@ struct PhotoDisplayView: View {
         CGPoint(x: 0, y: 0),
         CGPoint(x: 0, y: 0)
     ]
+    @StateObject var navigationVM : NavigationViewModel
+    
     var imagePoint: some View {
         ZStack {
             if isProcessingImage {
@@ -110,7 +112,7 @@ struct PhotoDisplayView: View {
                     }
                 }
                 .navigationDestination(isPresented: $showGameAnalysis) {
-                    DiamondMainView(image: $warpedImage, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+                    DiamondMainView(image: $warpedImage, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay, navigationVM: navigationVM)
                 }
                 .overlay(alignment: .topTrailing){
                     ZStack{

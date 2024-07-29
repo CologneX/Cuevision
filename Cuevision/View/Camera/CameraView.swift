@@ -25,6 +25,7 @@ struct CameraView: View {
     @State private var mostRecentImage: UIImage? = nil
     
     @Environment(\.dismiss) private var dismiss
+    @StateObject var navigationVM : NavigationViewModel
     var captureButton: some View {
         Button(action: {
             cameraModel.capturePhoto()
@@ -160,7 +161,7 @@ struct CameraView: View {
         .sheet(isPresented: $isShowingPhotoDisplay) {
             PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
                 isShowingPhotoDisplay = false
-            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay, navigationVM: navigationVM)
             
         }
         .onChange(of: displayedPhoto) {
