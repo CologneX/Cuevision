@@ -10,7 +10,7 @@ import SwiftUI
 struct InformationView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var navigationVM : NavigationViewModel
+    @ObservedObject var navigationVM : NavigationViewModel
     
     struct BilliardTips: Hashable {
         var image: ImageResource

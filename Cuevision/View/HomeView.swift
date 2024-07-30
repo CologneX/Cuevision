@@ -67,15 +67,15 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 48)
             }
-            .navigationDestination(for: String.self) { path in
+            .navigationDestination(for: NavigationPaths.self) { path in
                 switch path {
-                case "Billiard Tips":
+                case .InformationView:
                     InformationView(navigationVM: navigationVM)
-                case "Camera View":
+                case .CameraView:
                     CameraView(cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, navigationVM: navigationVM)
-                case "Cue Ball Effect":
+                case .CueBallView:
                     CueBallEffectView()
-                case "Hand Form":
+                case .HandFormView:
                     HandFormView()
 //                case "Diamond View":
 //                    DiamondMainView()
