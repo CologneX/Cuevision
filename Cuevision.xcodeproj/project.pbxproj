@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C2923C02C590C92000E25D5 /* CameraGuidelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2923BF2C590C92000E25D5 /* CameraGuidelineView.swift */; };
 		2C45C8C82C498FF80033C258 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C45C8C62C498FF80033C258 /* SF-Pro.ttf */; };
 		2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */; };
 		2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C2923BF2C590C92000E25D5 /* CameraGuidelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidelineView.swift; sourceTree = "<group>"; };
 		2C45C8C62C498FF80033C258 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondViewModel.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				93BA20142C53920A00B5D217 /* PhotoDisplayView.swift */,
 				93BA200D2C53920A00B5D217 /* CameraPreview.swift */,
 				93BA200E2C53920A00B5D217 /* CameraView.swift */,
+				2C2923BF2C590C92000E25D5 /* CameraGuidelineView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				93BA201F2C53920A00B5D217 /* InformationView.swift in Sources */,
 				93BA20192C53920A00B5D217 /* AnalysisDiamondView.swift in Sources */,
 				2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */,
+				2C2923C02C590C92000E25D5 /* CameraGuidelineView.swift in Sources */,
 				93BA201D2C53920A00B5D217 /* GameAnalysisView.swift in Sources */,
 				2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */,
 				93BA201E2C53920A00B5D217 /* HomeView.swift in Sources */,

@@ -23,6 +23,7 @@ struct CameraView: View {
     /// isShowingPhotoDisplay should be onChange
     @State private var isShowingPhotoDisplay = false
     @State private var mostRecentImage: UIImage? = nil
+    @State private var isShowingCameraGuideline = false
     
     @Environment(\.dismiss) private var dismiss
     @StateObject var navigationVM : NavigationViewModel
@@ -42,7 +43,7 @@ struct CameraView: View {
         .onChange(of: cameraModel.photo) {
             displayedPhoto = cameraModel.photo.image
             photoSource = .camera
-//            cameraModel.photo = nil
+            //            cameraModel.photo = nil
         }
     }
     
@@ -150,13 +151,13 @@ struct CameraView: View {
                 }
             }
         }
-//        .onAppear {
-//            cameraModel.configure()
-//            cameraModel.startCameraSession()
-//        }
-//        .onDisappear {
-//            cameraModel.stopCameraSession()
-//        }
+        //        .onAppear {
+        //            cameraModel.configure()
+        //            cameraModel.startCameraSession()
+        //        }
+        //        .onDisappear {
+        //            cameraModel.stopCameraSession()
+        //        }
         .padding(.top)
         .sheet(isPresented: $isShowingPhotoDisplay) {
             PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
@@ -183,8 +184,30 @@ struct CameraView: View {
             .padding(.top,16)
             .offset(x: -32)
         }
-//        .border(.red)
-//        .ignoresSafeArea()
+        
+        .overlay(alignment: .bottomLeading) {
+            Button(action: {
+                isShowingCameraGuideline.toggle()
+            }, label: {
+                Image(systemName: "info.circle.fill")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(.thinMaterial)
+                    .clipShape(Circle())
+            })
+            .padding(.top,16)
+            .offset(x: -32)
+        }
+        .sheet(isPresented: $isShowingCameraGuideline) {
+            CameraGuidelineView()
+        }
+        .onAppear {
+            if !isShowingCameraGuideline {
+                isShowingCameraGuideline.toggle()
+            }
+        }
+        //        .border(.red)
+        //        .ignoresSafeArea()
     }
     
     func fetchMostRecentImage() {
