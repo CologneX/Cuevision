@@ -40,6 +40,8 @@ struct InformationView: View {
                                 navigationVM.goToNextPage(.CueBallView)
                             case "Hand Form":
                                 navigationVM.goToNextPage(.HandFormView)
+                            case "Diamond System":
+                                navigationVM.goToNextPage(.DiamondSystemView)
                             default:
                                 return
                             }
