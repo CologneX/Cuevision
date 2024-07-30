@@ -53,85 +53,90 @@ struct DiamondMainView: View {
     }
     var body: some View {
         GeometryReader { geo in
-            Image(.poolBackground)
-                .resizable()
-                .ignoresSafeArea()
-            Image(.billiardWithDiamond)
-                .resizable()
-                .scaledToFit()
-                .aspectRatio(contentMode: .fit)
-                .padding(.vertical, 16)
-                .overlay {
-                    GeometryReader { gg in
-                        ZStack {
-                            ForEach(Array(detectedObjects.enumerated()), id: \.offset) { index, poolBall in
-                                Image(ballImageName(poolBall.label))
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .shadow(color: .black, radius: 2, x: 3, y: 4)
-                                    .position(poolBall.position)
-                                    .gesture(
-                                        DragGesture()
-                                            .onChanged { gesture in
-                                                let minX = (gg.size.width * 0.20) / 2 + 12.5
-                                                let minY = (gg.size.height * 0.37) / 2 + 12.5
-                                                let maxX = analysisDiamondVM.widthPoolBoundary + minX - 25
-                                                let maxY = analysisDiamondVM.heightPoolBoundary + minY - 25
-                                                let newPosition = CGPoint(
-                                                    x: min(max(gesture.location.x, minX), maxX),
-                                                    y: min(max(gesture.location.y, minY), maxY)
-                                                )
-                                                if let index = detectedObjects.firstIndex(where: { $0.id == poolBall.id }) {
-                                                    detectedObjects[index].position = newPosition
-                                                    if poolBall.label == "white" {
-                                                        analysisDiamondVM.cueBallCoordinate = newPosition
-                                                    } else {
-                                                        analysisDiamondVM.targetBallCoordinate = newPosition
+            ZStack {
+                Image(.poolBackground)
+                    .resizable()
+                    .ignoresSafeArea()
+                Image(.billiardWithDiamond)
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.vertical, 16)
+                    .overlay {
+                        GeometryReader { gg in
+                            ZStack {
+                                ForEach(Array(detectedObjects.enumerated()), id: \.offset) { index, poolBall in
+                                    Image(ballImageName(poolBall.label))
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .shadow(color: .black, radius: 2, x: 3, y: 4)
+                                        .position(poolBall.position)
+                                        .gesture(
+                                            DragGesture()
+                                                .onChanged { gesture in
+                                                    let minX = (gg.size.width * 0.20) / 2 + 12.5
+                                                    let minY = (gg.size.height * 0.37) / 2 + 12.5
+                                                    let maxX = analysisDiamondVM.widthPoolBoundary + minX - 25
+                                                    let maxY = analysisDiamondVM.heightPoolBoundary + minY - 25
+                                                    let newPosition = CGPoint(
+                                                        x: min(max(gesture.location.x, minX), maxX),
+                                                        y: min(max(gesture.location.y, minY), maxY)
+                                                    )
+                                                    if let index = detectedObjects.firstIndex(where: { $0.id == poolBall.id }) {
+                                                        detectedObjects[index].position = newPosition
+                                                        if poolBall.label == "white" {
+                                                            analysisDiamondVM.cueBallCoordinate = newPosition
+                                                        } else {
+                                                            analysisDiamondVM.targetBallCoordinate = newPosition
+                                                        }
                                                     }
                                                 }
-                                            }
                                         )
-                            }
-                            // Line that connects the cue ball and target ball
-                            if analysisDiamondVM.cueBallCoordinate != .zero && analysisDiamondVM.targetBallCoordinate != .zero {
-                                let cueballPosition = CGPoint(x: analysisDiamondVM.cueBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.cueBallCoordinate.y - boundaryOrigin.y)
-                                let targetBallPosition = CGPoint(x: analysisDiamondVM.targetBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.targetBallCoordinate.y - boundaryOrigin.y)
-                                let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
-                                Path { path in
-                                    path.move(to: analysisDiamondVM.cueBallCoordinate)
-                                    path.addLine(to: CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
-                                    path.addLine(to: analysisDiamondVM.targetBallCoordinate)
                                 }
-                                .stroke(Color.white, style: .init(lineWidth: 2, dash: [5]))
-                                Circle()
-                                    .fill(Color.red)
-                                    .frame(width: 10, height: 10)
-                                    .position(CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
+                                // Line that connects the cue ball and target ball
+                                if analysisDiamondVM.cueBallCoordinate != .zero && analysisDiamondVM.targetBallCoordinate != .zero {
+                                    let cueballPosition = CGPoint(x: analysisDiamondVM.cueBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.cueBallCoordinate.y - boundaryOrigin.y)
+                                    let targetBallPosition = CGPoint(x: analysisDiamondVM.targetBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.targetBallCoordinate.y - boundaryOrigin.y)
+                                    let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
+                                    Path { path in
+                                        path.move(to: analysisDiamondVM.cueBallCoordinate)
+                                        path.addLine(to: CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
+                                        path.addLine(to: analysisDiamondVM.targetBallCoordinate)
+                                    }
+                                    .stroke(Color.white, style: .init(lineWidth: 2, dash: [5]))
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 10, height: 10)
+                                        .position(CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
+                                }
                             }
-                        }
-                        .onAppear {
-                            //                            scale = image!.size.width /  gg.size.width
-                            analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
-                            analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.80
-                            boundaryOrigin = CGPoint(x: ((gg.size.width - analysisDiamondVM.widthPoolBoundary) / 2 + 12.5),
-                                                     y: ((gg.size.height - analysisDiamondVM.heightPoolBoundary) / 2 + 12.5))
-                            classifyImage(gg)
+                            .onAppear {
+                                //                            scale = image!.size.width /  gg.size.width
+                                analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
+                                analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.80
+                                boundaryOrigin = CGPoint(x: ((gg.size.width - analysisDiamondVM.widthPoolBoundary) / 2 + 12.5),
+                                                         y: ((gg.size.height - analysisDiamondVM.heightPoolBoundary) / 2 + 12.5))
+                                classifyImage(gg)
+                            }
                         }
                     }
-                    .overlay(alignment: .topLeading, content: {
-                        Button(action: {
-                            navigationVM.goToFirstScreen()
-                        }) {
-                            Image("BackCross")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                        }
-                        .padding(.top, 24)
-                        .padding(.leading, -24)
-                    })
+            }
+            .overlay(alignment: .topLeading, content: {
+                Button(action: {
+                    navigationVM.goToFirstScreen()
+                }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.thinMaterial)
+                        .clipShape(Circle())
+//                        .frame(width: 54, height: 54)
                 }
-                .ignoresSafeArea(.all, edges: .vertical)
+                .padding(.top, 24)
+                .padding(.leading, -36)
+            })
+            .ignoresSafeArea(.all, edges: .vertical)
+            
             if showOverlay {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
