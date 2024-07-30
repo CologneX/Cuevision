@@ -9,11 +9,8 @@ import SwiftUI
 
 @main
 struct CuevisionApp: App {
-    // AppDelegate
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-//            CueBallEffectView()
             HomeView()
         }
     }

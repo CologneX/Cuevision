@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var navigationVM = NavigationViewModel()
-    
+    @StateObject private var navigationVM = NavigationViewModel()
+    @StateObject var cameraModel = CameraModel()
+    @StateObject var ballClassificationModel = BilliardBallClassifier()
     var body: some View {
         NavigationStack(path: $navigationVM.path) {
             ZStack {
@@ -33,7 +34,7 @@ struct HomeView: View {
                             
                             VStack(spacing: 20) {
                                 Button {
-                                    navigationVM.goToNextPage(screenName: "Diamond View")
+                                    navigationVM.goToNextPage(.CameraView)
                                 } label: {
                                     Image(systemName: "camera.fill")
                                         .resizable()
@@ -48,7 +49,7 @@ struct HomeView: View {
                                 }
                                 
                                 Button {
-                                    navigationVM.goToNextPage(screenName: "Billiard Tips")
+                                    navigationVM.goToNextPage(.InformationView)
                                 } label: {
                                     Text("Billiard Tips")
                                         .font(.title2)
@@ -71,33 +72,17 @@ struct HomeView: View {
                 case "Billiard Tips":
                     InformationView(navigationVM: navigationVM)
                 case "Camera View":
-                    CameraView()
+                    CameraView(cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, navigationVM: navigationVM)
                 case "Cue Ball Effect":
                     CueBallEffectView()
                 case "Hand Form":
                     HandFormView()
-                case "Diamond View":
-                    DiamondMainView()
+//                case "Diamond View":
+//                    DiamondMainView()
                 default:
                     DiamondSystemView()
                 }
             }
         }
     }
-}
-
-extension Color {
-    init(hex: UInt, alpha: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xFF) / 255,
-            green: Double((hex >> 8) & 0xFF) / 255,
-            blue: Double(hex & 0xFF) / 255,
-            opacity: alpha
-        )
-    }
-}
-
-#Preview {
-    HomeView()
 }

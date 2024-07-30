@@ -10,38 +10,36 @@ import SwiftUI
 struct InformationView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var navigationVM: NavigationViewModel
+    @StateObject var navigationVM : NavigationViewModel
     
     struct BilliardTips: Hashable {
-        var image: String
+        var image: ImageResource
         var title: String
         var subtitle: String
     }
     
-    let dataBilliardTips = [
-        BilliardTips(image: "solid_one", title: "Cue Ball Effect", subtitle: "knowing cue ball hit point effect"),
-        BilliardTips(image: "solid_two", title: "Hand Form", subtitle: "stabilize your cue stick using different hand form"),
-        BilliardTips(image: "solid_three", title: "Diamond System", subtitle: "learn how to aim more accurately using diamond system")
+    var dataBilliardTips = [
+        BilliardTips(image: .one, title: "Cue Ball Effect", subtitle: "Get to know Cue ball hit effect points"),
+        BilliardTips(image: .two, title: "Hand Form", subtitle: "Stabilize cue stick handling with different hand form"),
+        BilliardTips(image: .three, title: "Diamond System", subtitle: "Learn to aim accurately using the Diamond System")
     ]
     
     var body: some View {
-        ZStack {
+        ZStack{
             Image(.infoBG)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
             
             ScrollView {
-                LazyVStack(alignment:.center, spacing: 30) {
+                LazyVStack(alignment:.center, spacing: 24) {
                     ForEach(dataBilliardTips, id: \.self) { data in
                         Button {
                             switch(data.title) {
                             case "Cue Ball Effect":
-                                navigationVM.goToNextPage(screenName: "Cue Ball Effect")
+                                navigationVM.goToNextPage(.CueBallView)
                             case "Hand Form":
-                                navigationVM.goToNextPage(screenName: "Hand Form")
-                            case "Diamond System":
-                                navigationVM.goToNextPage(screenName: "Diamond System")
+                                navigationVM.goToNextPage(.HandFormView)
                             default:
                                 return
                             }
@@ -90,8 +88,5 @@ struct InformationView: View {
 }
 
 #Preview {
-    @State var nav = NavigationViewModel()
-    return NavigationView {
-        InformationView(navigationVM: nav)
-    }
+    InformationView(navigationVM: NavigationViewModel())
 }

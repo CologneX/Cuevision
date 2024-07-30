@@ -70,7 +70,6 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
     
     /// - Tag: DidFinishProcessingPhoto
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        
         DispatchQueue.main.async {
             self.photoProcessingHandler(false)
         }
@@ -83,7 +82,9 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
             // Adjust image orientation
             if let photo = photo, let image = UIImage(data: photo) {
                 let adjustedImage = self.adjustedImage(image, for: self.orientation)
-                self.photoData = adjustedImage.jpegData(compressionQuality: 1.0)
+                let resizedImage = self.resizeImage(image: adjustedImage, targetSize: CGSize(width: 1920, height: 1440))
+                let croppedImage = self.cropImage(resizedImage, toRect: CGRect(x: 0, y: 0, width: 1920, height: 1080), viewWidth: 1920, viewHeight: 1080)
+                self.photoData = croppedImage?.jpegData(compressionQuality: 1.0)
             }
         }
     }
@@ -160,5 +161,58 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
         let adjustedImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: imageOrientation)
         
         return adjustedImage
+    }
+    
+    func cropImage(_ inputImage: UIImage, toRect cropRect: CGRect, viewWidth: CGFloat, viewHeight: CGFloat) -> UIImage?
+    {
+        let imageViewScale = max(inputImage.size.width / viewWidth,
+                                 inputImage.size.height / viewHeight)
+        
+        
+        // Scale cropRect to handle images larger than shown-on-screen size
+        //        let cropZone = CGRect(x:cropRect.origin.x * imageViewScale,
+        //                              y:cropRect.origin.y * imageViewScale,
+        //                              width:cropRect.size.width * imageViewScale,
+        //                              height:cropRect.size.height * imageViewScale)
+        
+        
+        // Perform cropping in Core Graphics
+        
+        let cropZone = CGRect(x:0, y:180 ,width:1920,height:1080)
+        guard let cutImageRef: CGImage = inputImage.cgImage?.cropping(to:cropZone)
+        else {
+            return nil
+        }
+        
+        
+        // Return image to UIImage
+        let croppedImage: UIImage = UIImage(cgImage: cutImageRef)
+        return croppedImage
+    }
+    
+    private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
 }

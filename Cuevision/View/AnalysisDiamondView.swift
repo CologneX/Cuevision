@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct AnalysisDiamondView: View {
-    @State private var aim = 0.0
-    @State private var cueballPosition = 0.0
-    @State private var targetBallPosition = 0.0
+    @Binding var analysisDiamondVM: AnalysisDiamondViewModel
     
     var body: some View {
         HStack(spacing: 0) {
@@ -40,6 +38,7 @@ struct AnalysisDiamondView: View {
                     .foregroundColor(.black)
                 Text("A = Aim")
                     .foregroundColor(.grayA2)
+                    .padding(.top, 2)
                 Text("C = Cueball Position")
                     .foregroundColor(.grayA2)
                 Text("T = Target Ball")
@@ -47,34 +46,34 @@ struct AnalysisDiamondView: View {
                 
                 RoundedRectangle(cornerRadius: 52, style: .continuous)
                     .fill(.darkGreen)
-                    .frame(maxWidth: 200, maxHeight: 70)
+                    .frame(maxHeight: 70)
                     .overlay {
-                        let finalAim = cueballPosition - targetBallPosition
-                        Text("\(numberFormatter.string(for: finalAim) ?? "0") = \(numberFormatter.string(for: cueballPosition) ?? "0") - \(numberFormatter.string(for: targetBallPosition) ?? "0")")
+                        let rawCueball = analysisDiamondVM.cueBallCoordinate
+                        let rawTargetball = analysisDiamondVM.targetBallCoordinate
+                        let resultDiamond = analysisDiamondVM.convertToDiamondNumber(cueball: rawCueball, targetball: rawTargetball)
+                        
+                        Text("\(resultDiamond.aim.formatterDouble()) = (\(resultDiamond.targetball.formatterDouble()) - \(resultDiamond.cueball.formatterDouble()))/2 + \(resultDiamond.cueball.formatterDouble())")
                             .foregroundStyle(.white)
                             .fontWeight(.medium)
                             .font(.title2)
+                            .padding()
                     }
+                
                     .padding(.top, 48)
                 
                 Spacer()
             }
-            .padding(.horizontal, 48)
+            .frame(maxHeight: .infinity)
+            .frame(maxWidth: 350)
+            .padding(.horizontal, 24)
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 24))
             .ignoresSafeArea()
         }
     }
-    
-    let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 1
-        formatter.minimumFractionDigits = 1
-        return formatter
-    }()
 }
 
 #Preview {
-    AnalysisDiamondView()
+    @State var analysisDiamondVM = AnalysisDiamondViewModel()
+    return AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
 }
