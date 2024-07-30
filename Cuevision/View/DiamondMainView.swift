@@ -28,7 +28,8 @@ struct DiamondMainView: View {
     @StateObject var navigationVM : NavigationViewModel
     @State private var showOverlay = false
     @State private var analysisDiamondVM = AnalysisDiamondViewModel()
-    @State private var scale: CGFloat = 1.0
+    //    @State private var scale: CGFloat = 1.0
+    @State private var boundaryOrigin: CGPoint = .zero
     
     private func ballImageName(_ number: String) -> ImageResource {
         switch number {
@@ -72,7 +73,7 @@ struct DiamondMainView: View {
                                     .gesture(
                                         DragGesture()
                                             .onChanged { gesture in
-                                                let minX = (gg.size.width * 0.2) / 2 + 12.5
+                                                let minX = (gg.size.width * 0.20) / 2 + 12.5
                                                 let minY = (gg.size.height * 0.37) / 2 + 12.5
                                                 let maxX = analysisDiamondVM.widthPoolBoundary + minX - 25
                                                 let maxY = analysisDiamondVM.heightPoolBoundary + minY - 25
@@ -89,11 +90,13 @@ struct DiamondMainView: View {
                                                     }
                                                 }
                                             }
-                                    )
+                                        )
                             }
                             // Line that connects the cue ball and target ball
                             if analysisDiamondVM.cueBallCoordinate != .zero && analysisDiamondVM.targetBallCoordinate != .zero {
-                                let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: analysisDiamondVM.cueBallCoordinate, targetBall: analysisDiamondVM.targetBallCoordinate)
+                                let cueballPosition = CGPoint(x: analysisDiamondVM.cueBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.cueBallCoordinate.y - boundaryOrigin.y)
+                                let targetBallPosition = CGPoint(x: analysisDiamondVM.targetBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.targetBallCoordinate.y - boundaryOrigin.y)
+                                let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
                                 Path { path in
                                     path.move(to: analysisDiamondVM.cueBallCoordinate)
                                     path.addLine(to: CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
@@ -107,9 +110,11 @@ struct DiamondMainView: View {
                             }
                         }
                         .onAppear {
-                            scale = image!.size.width /  gg.size.width
+                            //                            scale = image!.size.width /  gg.size.width
                             analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
-                            analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.8
+                            analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.80
+                            boundaryOrigin = CGPoint(x: ((gg.size.width - analysisDiamondVM.widthPoolBoundary) / 2 + 12.5),
+                                                     y: ((gg.size.height - analysisDiamondVM.heightPoolBoundary) / 2 + 12.5))
                             classifyImage(gg)
                         }
                     }
