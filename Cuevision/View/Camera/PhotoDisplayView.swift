@@ -10,8 +10,8 @@ import SwiftUI
 import CoreImage.CIFilterBuiltins
 
 struct PhotoDisplayView: View {
+    @StateObject var navigationVM : NavigationViewModel
     @Binding var photo: UIImage?
-    
     @Binding var source: PhotoSource?
     let retakeAction: () -> Void
     @ObservedObject var cameraModel: CameraModel
@@ -110,7 +110,7 @@ struct PhotoDisplayView: View {
                     }
                 }
                 .navigationDestination(isPresented: $showGameAnalysis) {
-                    DiamondMainView(image: $warpedImage, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
+                    DiamondMainView(image: $warpedImage, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay, navigationVM: navigationVM)
                 }
                 .overlay(alignment: .topTrailing){
                     ZStack{

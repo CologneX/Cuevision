@@ -14,7 +14,7 @@ import Photos
 struct CameraView: View {
     @StateObject var cameraModel: CameraModel
     @StateObject var ballClassificationModel: BilliardBallClassifier
-    
+    @StateObject var navigationVM : NavigationViewModel
     @State private var selectedPhotoFromPicker: PhotosPickerItem? = nil
     @State private var currentZoomFactor: CGFloat = 1.0
     @State private var deviceOrientation: UIDeviceOrientation = .unknown
@@ -158,7 +158,7 @@ struct CameraView: View {
 //        }
         .padding(.top)
         .sheet(isPresented: $isShowingPhotoDisplay) {
-            PhotoDisplayView(photo: $displayedPhoto, source: $photoSource, retakeAction: {
+            PhotoDisplayView(navigationVM: navigationVM, photo: $displayedPhoto, source: $photoSource, retakeAction: {
                 isShowingPhotoDisplay = false
             }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
             
