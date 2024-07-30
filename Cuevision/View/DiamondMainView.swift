@@ -59,7 +59,6 @@ struct DiamondMainView: View {
                 .resizable()
                 .scaledToFit()
                 .aspectRatio(contentMode: .fit)
-//                .aspectRatio(16/9, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .padding(.vertical, 16)
                 .overlay {
                     GeometryReader { gg in
@@ -73,9 +72,13 @@ struct DiamondMainView: View {
                                     .gesture(
                                         DragGesture()
                                             .onChanged { gesture in
+                                                let minX = (gg.size.width * 0.2) / 2 + 12.5
+                                                let minY = (gg.size.height * 0.37) / 2 + 12.5
+                                                let maxX = analysisDiamondVM.widthPoolBoundary + minX - 25
+                                                let maxY = analysisDiamondVM.heightPoolBoundary + minY - 25
                                                 let newPosition = CGPoint(
-                                                    x : min(max(gesture.location.x, gg.size.width - analysisDiamondVM.widthPoolBoundary), analysisDiamondVM.widthPoolBoundary),
-                                                    y : min(max(gesture.location.y, gg.size.height - analysisDiamondVM.heightPoolBoundary), analysisDiamondVM.heightPoolBoundary)
+                                                    x: min(max(gesture.location.x, minX), maxX),
+                                                    y: min(max(gesture.location.y, minY), maxY)
                                                 )
                                                 if let index = detectedObjects.firstIndex(where: { $0.id == poolBall.id }) {
                                                     detectedObjects[index].position = newPosition
@@ -97,11 +100,6 @@ struct DiamondMainView: View {
                                     path.addLine(to: analysisDiamondVM.targetBallCoordinate)
                                 }
                                 .stroke(Color.white, style: .init(lineWidth: 2, dash: [5]))
-//                                Circle()
-//                                    .fill(Color.red)
-//                                    .frame(width: 10, height: 10)
-//                                //                                    .position(CGPoint(x: ((aimDiamond.x + (gg.size.width + (gg.size.width * 0.215))) / 2),  y: ((aimDiamond.y + (gg.size.height + (gg.size.height * 0.118))) / 2)))
-//                                    .position(CGPoint(x: (aimDiamond.x + gg.size.width  / 2),  y: ((aimDiamond.y + gg.size.height) / 2)))
                                 Circle()
                                     .fill(Color.red)
                                     .frame(width: 10, height: 10)
@@ -110,8 +108,8 @@ struct DiamondMainView: View {
                         }
                         .onAppear {
                             scale = image!.size.width /  gg.size.width
-                            analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.785
-                            analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.882
+                            analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
+                            analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.8
                             classifyImage(gg)
                         }
                     }
