@@ -15,6 +15,9 @@ struct DiamondMainView: View {
                 self.detectedObjects.indices.forEach { i in
                     detectedObjects[i].position = scalePosition(detectedObjects[i].position, geometry: geometry)
                 }
+                // Assign the cue ball (white ball) and target ball position (first one in the array without label white)
+                self.analysisDiamondVM.cueBallCoordinate = detectedObjects.first(where: { $0.label == "white" })?.position ?? .zero
+                self.analysisDiamondVM.targetBallCoordinate = detectedObjects.first(where: { $0.label != "white" })?.position ?? .zero
             }
         }
     }
@@ -25,12 +28,6 @@ struct DiamondMainView: View {
     }
     
     // MARK: Standalone Functions and Variables
-    @State private var offsetCueball = CGPoint(x: 0, y: 0)
-    @State private var offsetTargetBall = CGPoint(x: 100, y: 0)
-    
-    @State private var startLocationCueball: CGPoint = .zero
-    @State private var startLocationTargetBall: CGPoint = CGPoint(x: 100, y: 0)
-    
     @Environment(\.presentationMode) var presentationMode
     @StateObject var navigationVM : NavigationViewModel
     @State private var showOverlay = false
@@ -57,6 +54,16 @@ struct DiamondMainView: View {
         default : return .white
         }
     }
+    private var transformedCueBallPosition: CGPoint {
+        let translatedX = analysisDiamondVM.cueBallCoordinate.x - boundaryOrigin.x
+        let translatedY = analysisDiamondVM.cueBallCoordinate.y  - boundaryOrigin.y
+        return CGPoint(x: translatedX, y: analysisDiamondVM.heightPoolBoundary - translatedY - 17.5)
+    }
+    private var transformedTargetBallPosition: CGPoint {
+        let translatedX = analysisDiamondVM.targetBallCoordinate.x - boundaryOrigin.x
+        let translatedY = analysisDiamondVM.targetBallCoordinate.y - boundaryOrigin.y
+        return CGPoint(x: translatedX, y: analysisDiamondVM.heightPoolBoundary - translatedY - 17.5)
+    }
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -67,7 +74,6 @@ struct DiamondMainView: View {
                     .resizable()
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
-                    .padding(.vertical, 16)
                     .overlay {
                         GeometryReader { gg in
                             ZStack {
@@ -81,9 +87,9 @@ struct DiamondMainView: View {
                                             DragGesture()
                                                 .onChanged { gesture in
                                                     let minX = (gg.size.width * 0.20) / 2 + 12.5
-                                                    let minY = (gg.size.height * 0.37) / 2 + 12.5
+                                                    let minY = (gg.size.height * 0.38) / 2
                                                     let maxX = analysisDiamondVM.widthPoolBoundary + minX - 25
-                                                    let maxY = analysisDiamondVM.heightPoolBoundary + minY - 25
+                                                    let maxY = analysisDiamondVM.heightPoolBoundary + minY - 5
                                                     let newPosition = CGPoint(
                                                         x: min(max(gesture.location.x, minX), maxX),
                                                         y: min(max(gesture.location.y, minY), maxY)
@@ -101,9 +107,7 @@ struct DiamondMainView: View {
                                 }
                                 // Line that connects the cue ball and target ball
                                 if analysisDiamondVM.cueBallCoordinate != .zero && analysisDiamondVM.targetBallCoordinate != .zero {
-                                    let cueballPosition = CGPoint(x: analysisDiamondVM.cueBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.cueBallCoordinate.y - boundaryOrigin.y)
-                                    let targetBallPosition = CGPoint(x: analysisDiamondVM.targetBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.targetBallCoordinate.y - boundaryOrigin.y)
-                                    let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
+                                    let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: transformedCueBallPosition, targetBall: transformedTargetBallPosition)
                                     Path { path in
                                         path.move(to: analysisDiamondVM.cueBallCoordinate)
                                         path.addLine(to: CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
@@ -117,24 +121,28 @@ struct DiamondMainView: View {
                                 }
                             }
                             .onAppear {
-                                analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
+                                analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.62
                                 analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.80
                                 boundaryOrigin = CGPoint(x: ((gg.size.width - analysisDiamondVM.widthPoolBoundary) / 2 + 12.5),
                                                          y: ((gg.size.height - analysisDiamondVM.heightPoolBoundary) / 2 + 12.5))
+                                print(boundaryOrigin)
                                 classifyImage(gg)
                             }
                         }
                     }
+                    .padding(.vertical, 16)
+                
             }
             .overlay(alignment: .topLeading, content: {
                 Button(action: {
                     navigationVM.goToFirstScreen()
-                }) {
-                    Image("BackCross")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                }
+                }, label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.thinMaterial)
+                        .clipShape(Circle())
+                })
                 .padding(.top, 24)
                 .padding(.leading, -36)
             })

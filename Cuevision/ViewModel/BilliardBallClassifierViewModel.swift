@@ -20,7 +20,7 @@ class BilliardBallClassifier: ObservableObject {
     private var model: VNCoreMLModel
     
     init() {
-        guard let model = try? VNCoreMLModel(for: v8m2().model) else {
+        guard let model = try? VNCoreMLModel(for: v8m().model) else {
             fatalError("Failed to create VNCoreMLModel")
         }
         self.model = model
