@@ -12,6 +12,7 @@
 		2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */; };
 		2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */; };
 		9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9308A4A42C4E2B44003DE4C3 /* CameraView+Extensions.swift */; };
+		934510152C5825D800310E03 /* v8m2.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 934510142C5825D800310E03 /* v8m2.mlpackage */; };
 		93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C832C497C59008A6C7F /* CameraService+Extensions.swift */; };
 		93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */; };
 		93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C852C497C59008A6C7F /* ImageResizer.swift */; };
@@ -65,6 +66,7 @@
 		2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondViewModel.swift; sourceTree = "<group>"; };
 		9308A4A42C4E2B44003DE4C3 /* CameraView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraView+Extensions.swift"; sourceTree = "<group>"; };
 		9308DB8D2C444064007A3D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		934510142C5825D800310E03 /* v8m2.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = v8m2.mlpackage; sourceTree = "<group>"; };
 		93981C832C497C59008A6C7F /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
 		93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		93981C852C497C59008A6C7F /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				9307BD722C497A91004C4870 /* ViewModel */,
 				9307BD712C497A8D004C4870 /* Util */,
 				939FAC152C52AE6100B8EE61 /* v8m.mlpackage */,
+				934510142C5825D800310E03 /* v8m2.mlpackage */,
 				93981C9A2C498128008A6C7F /* Preview Content */,
 				93981C972C49811A008A6C7F /* Assets.xcassets */,
 			);
@@ -420,6 +423,7 @@
 				939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */,
 				9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */,
 				93BA201A2C53920A00B5D217 /* CameraPreview.swift in Sources */,
+				934510152C5825D800310E03 /* v8m2.mlpackage in Sources */,
 				93BA20182C53920A00B5D217 /* HandFormView.swift in Sources */,
 				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,
 				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,

@@ -72,8 +72,3 @@ struct AnalysisDiamondView: View {
         }
     }
 }
-
-#Preview {
-    @State var analysisDiamondVM = AnalysisDiamondViewModel()
-    return AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
-}

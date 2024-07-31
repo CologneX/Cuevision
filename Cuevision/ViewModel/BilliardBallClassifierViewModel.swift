@@ -8,17 +8,19 @@
 import Vision
 import UIKit
 
-struct DetectedObject {
+struct DetectedObject: Identifiable {
+    let id = UUID()
     let label: String
     let confidence: Float
-    let boundingBox: CGRect
+    var boundingBox: CGRect
+    var position: CGPoint
 }
 
 class BilliardBallClassifier: ObservableObject {
     private var model: VNCoreMLModel
     
     init() {
-        guard let model = try? VNCoreMLModel(for: v8m().model) else {
+        guard let model = try? VNCoreMLModel(for: v8m2().model) else {
             fatalError("Failed to create VNCoreMLModel")
         }
         self.model = model
@@ -44,10 +46,13 @@ class BilliardBallClassifier: ObservableObject {
             
             let detectedObjects = results.map { observation -> DetectedObject in
                 let bestLabel = observation.labels.first!
+                let position = CGPoint(x: observation.boundingBox.midX, y: observation.boundingBox.midY)
                 return DetectedObject(label: bestLabel.identifier,
                                       confidence: bestLabel.confidence,
-                                      boundingBox: observation.boundingBox)
+                                      boundingBox: observation.boundingBox,
+                                      position: position)
             }
+            
             completion(detectedObjects)
         }
         

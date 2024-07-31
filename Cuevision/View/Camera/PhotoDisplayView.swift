@@ -10,8 +10,8 @@ import SwiftUI
 import CoreImage.CIFilterBuiltins
 
 struct PhotoDisplayView: View {
+    @StateObject var navigationVM : NavigationViewModel
     @Binding var photo: UIImage?
-    
     @Binding var source: PhotoSource?
     let retakeAction: () -> Void
     @ObservedObject var cameraModel: CameraModel

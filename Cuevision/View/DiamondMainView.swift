@@ -3,22 +3,25 @@ import SwiftUI
 struct DiamondMainView: View {
     // MARK: Camera Functions and Variables
     @Binding var image: UIImage?
-    
     @ObservedObject var cameraModel: CameraModel
-    
     @ObservedObject var ballClassificationModel: BilliardBallClassifier
-    
     @State var detectedObjects: [DetectedObject] = []
-    
     @Binding var isShowingPhotoDisplay: Bool
     
-    private func classifyImage() {
+    private func classifyImage(_ geometry: GeometryProxy) {
         ballClassificationModel.classify(image: image!) { [self] results in
             DispatchQueue.main.async {
                 self.detectedObjects = results
-                print(results.debugDescription)
+                self.detectedObjects.indices.forEach { i in
+                    detectedObjects[i].position = scalePosition(detectedObjects[i].position, geometry: geometry)
+                }
             }
         }
+    }
+    private func scalePosition(_ position: CGPoint, geometry: GeometryProxy) -> CGPoint {
+        let x = (position.x * geometry.size.width) /*/ scale*/
+        let y = (position.y * geometry.size.height) /*/ scale*/
+        return CGPoint(x: x, y: y)
     }
     
     // MARK: Standalone Functions and Variables
@@ -28,11 +31,11 @@ struct DiamondMainView: View {
     @State private var startLocationCueball: CGPoint = .zero
     @State private var startLocationTargetBall: CGPoint = CGPoint(x: 100, y: 0)
     
-    @State private var showOverlay = false
-    @State private var analysisDiamondVM = AnalysisDiamondViewModel()
-    
     @Environment(\.presentationMode) var presentationMode
     @StateObject var navigationVM : NavigationViewModel
+    @State private var showOverlay = false
+    @State private var analysisDiamondVM = AnalysisDiamondViewModel()
+    @State private var boundaryOrigin: CGPoint = .zero
     
     private func ballImageName(_ number: String) -> ImageResource {
         switch number {
@@ -55,202 +58,147 @@ struct DiamondMainView: View {
         }
     }
     var body: some View {
-        NavigationStack {
-            ZStack{
+        GeometryReader { geo in
+            ZStack {
                 Image(.poolBackground)
                     .resizable()
                     .ignoresSafeArea()
-                
-                GeometryReader { geometry in
-                    ZStack {
-                        Image(.billiardWithDiamond)
-                            .resizable()
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fit)
-                            .padding(.horizontal, 30)
-                            .frame(height: geometry.size.height)
-                            .overlay{
-                                GeometryReader{ gg in
-                                    Text("")
-                                        .onAppear {
-                                            analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.65
-                                            analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.7
-                                        }
+                Image(.billiardWithDiamond)
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.vertical, 16)
+                    .overlay {
+                        GeometryReader { gg in
+                            ZStack {
+                                ForEach(Array(detectedObjects.enumerated()), id: \.offset) { index, poolBall in
+                                    Image(ballImageName(poolBall.label))
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .shadow(color: .black, radius: 2, x: 3, y: 4)
+                                        .position(poolBall.position)
+                                        .gesture(
+                                            DragGesture()
+                                                .onChanged { gesture in
+                                                    let minX = (gg.size.width * 0.20) / 2 + 12.5
+                                                    let minY = (gg.size.height * 0.37) / 2 + 12.5
+                                                    let maxX = analysisDiamondVM.widthPoolBoundary + minX - 25
+                                                    let maxY = analysisDiamondVM.heightPoolBoundary + minY - 25
+                                                    let newPosition = CGPoint(
+                                                        x: min(max(gesture.location.x, minX), maxX),
+                                                        y: min(max(gesture.location.y, minY), maxY)
+                                                    )
+                                                    if let index = detectedObjects.firstIndex(where: { $0.id == poolBall.id }) {
+                                                        detectedObjects[index].position = newPosition
+                                                        if poolBall.label == "white" {
+                                                            analysisDiamondVM.cueBallCoordinate = newPosition
+                                                        } else {
+                                                            analysisDiamondVM.targetBallCoordinate = newPosition
+                                                        }
+                                                    }
+                                                }
+                                        )
+                                }
+                                // Line that connects the cue ball and target ball
+                                if analysisDiamondVM.cueBallCoordinate != .zero && analysisDiamondVM.targetBallCoordinate != .zero {
+                                    let cueballPosition = CGPoint(x: analysisDiamondVM.cueBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.cueBallCoordinate.y - boundaryOrigin.y)
+                                    let targetBallPosition = CGPoint(x: analysisDiamondVM.targetBallCoordinate.x - boundaryOrigin.x, y: analysisDiamondVM.targetBallCoordinate.y - boundaryOrigin.y)
+                                    let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
+                                    Path { path in
+                                        path.move(to: analysisDiamondVM.cueBallCoordinate)
+                                        path.addLine(to: CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
+                                        path.addLine(to: analysisDiamondVM.targetBallCoordinate)
+                                    }
+                                    .stroke(Color.white, style: .init(lineWidth: 2, dash: [5]))
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 10, height: 10)
+                                        .position(CGPoint(x: aimDiamond.x + gg.size.width / 2,  y: aimDiamond.y + gg.size.height / 2))
                                 }
                             }
-                        
-                        // Boundary background
-                        Rectangle()
-                            .stroke(Color.blue, lineWidth: 0.1)
-                            .frame(width: analysisDiamondVM.widthPoolBoundary, height: analysisDiamondVM.heightPoolBoundary)
-                            .background(Color.red.opacity(0))
-                            .scaledToFit()
-                        
-                        let cueballPosition = CGPoint(x: offsetCueball.x + analysisDiamondVM.widthPoolBoundary / 2, y: abs(offsetCueball.y - analysisDiamondVM.heightPoolBoundary / 2))
-                        
-                        let targetBallPosition = CGPoint(x: offsetTargetBall.x + analysisDiamondVM.widthPoolBoundary / 2, y: abs(offsetTargetBall.y - analysisDiamondVM.heightPoolBoundary / 2))
-                        
-                        let aimDiamond = analysisDiamondVM.calculateReflectionPoint(cueBall: cueballPosition, targetBall: targetBallPosition)
-                        
-                        
-                        Image(.cueball)
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .shadow(color: .black, radius: 2, x: 3, y: 4)
-                            .offset(x: offsetCueball.x, y: offsetCueball.y)
-                            .gesture(
-                                DragGesture()
-                                    .onChanged { gesture in
-                                        let newOffset = CGPoint(x: self.startLocationCueball.x + gesture.translation.width, y: self.startLocationCueball.y + gesture.translation.height)
-                                        
-                                        // Constrain the offset within the container
-                                        if newOffset.x >= -(analysisDiamondVM.widthPoolBoundary/2) && newOffset.x <= analysisDiamondVM.widthPoolBoundary/2 &&
-                                            newOffset.y >= -(analysisDiamondVM.heightPoolBoundary/2) && newOffset.y <= analysisDiamondVM.heightPoolBoundary/2 {
-                                            self.offsetCueball = newOffset
-                                        }
-                                        
-                                    }
-                                    .onEnded { gesture in
-                                        self.startLocationCueball = self.offsetCueball
-                                        
-                                        let cueballCoordinateAfterTranslation = analysisDiamondVM.findPointTranslation(from: self.startLocationCueball, widthPoolBoundary: analysisDiamondVM.widthPoolBoundary, heightPoolBoundary: analysisDiamondVM.heightPoolBoundary)
-                                        
-                                        analysisDiamondVM.cueBallCoordinate = cueballCoordinateAfterTranslation
-                                    }
-                            )
-                        
-                        ForEach(detectedObjects, id: \.label) { poolBalls in
-                            let boundingBox = CGRect(
-                                x: poolBalls.boundingBox.minX * geometry.size.width,
-                                y: poolBalls.boundingBox.minY * geometry.size.height,
-                                width: poolBalls.boundingBox.width * geometry.size.width,
-                                height: poolBalls.boundingBox.height * geometry.size.height
-                            )
-                            
-                            Image(ballImageName(poolBalls.label))
-                                .resizable()
-                                .frame(width: boundingBox.width, height: 25)
-                                .position(x: boundingBox.midX, y: boundingBox.midY)
-                                .shadow(color: .black, radius: 2, x: 3, y: 4)
-                        }
-                        
-                        Image(.one)
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .shadow(color: .black, radius: 2, x: 3, y: 4)
-                            .offset(x: offsetTargetBall.x, y: offsetTargetBall.y)
-                            .gesture(
-                                DragGesture()
-                                    .onChanged { gesture in
-                                        let newOffset = CGPoint(x: self.startLocationTargetBall.x + gesture.translation.width, y: self.startLocationTargetBall.y + gesture.translation.height)
-                                        
-                                        // Constrain the offset within the container
-                                        if newOffset.x >= -(analysisDiamondVM.widthPoolBoundary/2) && newOffset.x <= analysisDiamondVM.widthPoolBoundary/2 &&
-                                            newOffset.y >= -(analysisDiamondVM.heightPoolBoundary/2) && newOffset.y <= analysisDiamondVM.heightPoolBoundary/2 {
-                                            self.offsetTargetBall = newOffset
-                                        }
-                                        
-                                    }
-                                    .onEnded { _ in
-                                        self.startLocationTargetBall = self.offsetTargetBall
-                                        
-                                        let targetBallCoordinateAfterTranslation = analysisDiamondVM.findPointTranslation(from: self.startLocationTargetBall, widthPoolBoundary: analysisDiamondVM.widthPoolBoundary, heightPoolBoundary: analysisDiamondVM.heightPoolBoundary)
-                                        
-                                        analysisDiamondVM.targetBallCoordinate = targetBallCoordinateAfterTranslation
-                                    }
-                            )
-                        
-                        // Drawing the path with reflection within the billiard table boundaries
-                        // titik anchor berada di kiri atas
-                        Path { path in
-                            path.move(to:CGPoint(x: offsetCueball.x + geometry.size.width / 2, y: offsetCueball.y + geometry.size.height / 2))
-                            path.addLine(to: CGPoint(x: aimDiamond.x + geometry.size.width / 2,  y: aimDiamond.y + geometry.size.height / 2))
-                            path.addLine(to: CGPoint(x: offsetTargetBall.x + geometry.size.width / 2, y: offsetTargetBall.y + geometry.size.height / 2))
-                        }
-                        .stroke(Color.white, style: .init(lineWidth: 2, dash: [5]))
-                        
-                        // Add a circle to mark the aim diamond point
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 10, height: 10)
-                            .position(CGPoint(x: aimDiamond.x + geometry.size.width / 2,  y: aimDiamond.y + geometry.size.height / 2))
-                    }
-                    .onAppear {
-                        classifyImage()
-                        print("Frame Width: \(geometry.size.width), Height: \(geometry.size.height), Image: \(image!.size.width), \(image!.size.height)")
-                    }
-                    .padding(.top, 12)
-                    
-                    // Overlay view
-                    if showOverlay {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                withAnimation(.default) {
-                                    showOverlay.toggle()
-                                }
+                            .onAppear {
+                                //                            scale = image!.size.width /  gg.size.width
+                                analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
+                                analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.80
+                                boundaryOrigin = CGPoint(x: ((gg.size.width - analysisDiamondVM.widthPoolBoundary) / 2 + 12.5),
+                                                         y: ((gg.size.height - analysisDiamondVM.heightPoolBoundary) / 2 + 12.5))
+                                classifyImage(gg)
                             }
-                        // posisi analysis nyala
-                        VStack {
-                            AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
-                        }
-                        .offset(x: 1 * (geometry.size.width / 2) )
-                        .animation(.default, value: showOverlay)
-                        .ignoresSafeArea()
-                    } else {
-                        // posisi default
-                        AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
-                            .offset(x: 2 * (geometry.size.width / 2) + 20)
-                            .ignoresSafeArea()
-                        
-                        HStack {
-                            Spacer()
-                            Button {
-                                presentationMode.wrappedValue.dismiss()
-                            } label: {
-                                
-                                Image(systemName: "camera.fill")
-                                    .font(.title2)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(height: 12)
-                                    .padding()
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .buttonBorderShape(.circle)
-                            .tint(.white)
-                            .foregroundColor(.darkGreen)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                            .offset(x: 48, y: -12)
                         }
                     }
-                }
-                .overlay(alignment: .topLeading, content: {
-                    Button(action: {
-                        navigationVM.goToFirstScreen()
-                    }) {
-                        Image("BackCross")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                    }
-                    .padding(.top, 24)
-                    .padding(.leading, -24)
-                })
             }
-            .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
-                .onEnded { value in
-                    switch(value.translation.width, value.translation.height) {
-                    case (...0, -30...30):
-                        showOverlay.toggle()
-                    case (0..., -30...30):  print("right swipe")
-                    case (-100...100, ...0):  print("up swipe")
-                    case (-100...100, 0...):  print("down swipe")
-                    default:  print("no clue")
-                    }
+            .overlay(alignment: .topLeading, content: {
+                Button(action: {
+                    navigationVM.goToFirstScreen()
+                }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.thinMaterial)
+                        .clipShape(Circle())
+//                        .frame(width: 54, height: 54)
                 }
-            )
-            .animation(.default, value: showOverlay)
+                .padding(.top, 24)
+                .padding(.leading, -36)
+            })
+            .ignoresSafeArea(.all, edges: .vertical)
+            
+            if showOverlay {
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation(.default) {
+                            showOverlay.toggle()
+                        }
+                    }
+                // posisi analysis nyala
+                VStack {
+                    AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
+                }
+                .offset(x: 1 * (geo.size.width / 2) )
+                .animation(.default, value: showOverlay)
+                .ignoresSafeArea()
+            }
+            else {
+                // posisi default
+                AnalysisDiamondView(analysisDiamondVM: $analysisDiamondVM)
+                    .offset(x: 2 * (geo.size.width / 2) + 20)
+                    .ignoresSafeArea()
+                
+                HStack {
+                    Spacer()
+                    Button {
+                        withAnimation(.default) {
+                            isShowingPhotoDisplay = false
+                        }
+                    } label: {
+                        
+                        Image(systemName: "camera.fill")
+                            .font(.title2)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 12)
+                            .padding()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.circle)
+                    .tint(.white)
+                    .foregroundColor(.darkGreen)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                    .offset(x: 48, y: -12)
+                }
+            }
         }
+        .navigationBarBackButtonHidden(true)
+        .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
+            .onEnded { value in
+                switch(value.translation.width, value.translation.height) {
+                case (...0, -30...30):
+                    showOverlay.toggle()
+                default:  return
+                }
+            }
+        )
+        .animation(.snappy, value: showOverlay)
         .navigationBarBackButtonHidden()
     }
 }
@@ -258,3 +206,5 @@ struct DiamondMainView: View {
 //#Preview{
 //    DiamondMainView()
 //}
+
+
