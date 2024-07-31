@@ -26,7 +26,6 @@ struct CameraView: View {
     @State private var isShowingCameraGuideline = false
     
     @Environment(\.dismiss) private var dismiss
-    @StateObject var navigationVM : NavigationViewModel
     var captureButton: some View {
         Button(action: {
             cameraModel.capturePhoto()
@@ -162,7 +161,7 @@ struct CameraView: View {
         .sheet(isPresented: $isShowingPhotoDisplay) {
             PhotoDisplayView(navigationVM: navigationVM, photo: $displayedPhoto, source: $photoSource, retakeAction: {
                 isShowingPhotoDisplay = false
-            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay, navigationVM: navigationVM)
+            }, cameraModel: cameraModel, ballClassificationModel: ballClassificationModel, isShowingPhotoDisplay: $isShowingPhotoDisplay)
             
         }
         .onChange(of: displayedPhoto) {

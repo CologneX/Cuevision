@@ -31,7 +31,6 @@ struct PhotoDisplayView: View {
         CGPoint(x: 0, y: 0),
         CGPoint(x: 0, y: 0)
     ]
-    @StateObject var navigationVM : NavigationViewModel
     
     var imagePoint: some View {
         ZStack {

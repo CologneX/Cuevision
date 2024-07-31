@@ -63,7 +63,7 @@ struct DiamondMainView: View {
                 Image(.poolBackground)
                     .resizable()
                     .ignoresSafeArea()
-                Image(.billiardWithDiamond)
+                Image(.poolWithDiamond)
                     .resizable()
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
@@ -117,7 +117,6 @@ struct DiamondMainView: View {
                                 }
                             }
                             .onAppear {
-                                //                            scale = image!.size.width /  gg.size.width
                                 analysisDiamondVM.heightPoolBoundary = gg.size.height * 0.63
                                 analysisDiamondVM.widthPoolBoundary = gg.size.width * 0.80
                                 boundaryOrigin = CGPoint(x: ((gg.size.width - analysisDiamondVM.widthPoolBoundary) / 2 + 12.5),
@@ -131,12 +130,10 @@ struct DiamondMainView: View {
                 Button(action: {
                     navigationVM.goToFirstScreen()
                 }) {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(.thinMaterial)
-                        .clipShape(Circle())
-//                        .frame(width: 54, height: 54)
+                    Image("BackCross")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
                 }
                 .padding(.top, 24)
                 .padding(.leading, -36)
@@ -172,7 +169,6 @@ struct DiamondMainView: View {
                             isShowingPhotoDisplay = false
                         }
                     } label: {
-                        
                         Image(systemName: "camera.fill")
                             .font(.title2)
                             .aspectRatio(contentMode: .fit)
