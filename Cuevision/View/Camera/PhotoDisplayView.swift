@@ -31,6 +31,7 @@ struct PhotoDisplayView: View {
         CGPoint(x: 0, y: 0),
         CGPoint(x: 0, y: 0)
     ]
+    
     var imagePoint: some View {
         ZStack {
             if isProcessingImage {

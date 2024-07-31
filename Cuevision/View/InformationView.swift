@@ -10,7 +10,7 @@ import SwiftUI
 struct InformationView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var navigationVM : NavigationViewModel
+    @ObservedObject var navigationVM : NavigationViewModel
     
     struct BilliardTips: Hashable {
         var image: ImageResource
@@ -25,10 +25,13 @@ struct InformationView: View {
     ]
     
     var body: some View {
-        ScrollView {
-            ZStack {
-                Image(.infoBG)
-                    .scaledToFit()
+        ZStack{
+            Image(.infoBG)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            ScrollView {
                 LazyVStack(alignment:.center, spacing: 24) {
                     ForEach(dataBilliardTips, id: \.self) { data in
                         Button {
@@ -37,6 +40,8 @@ struct InformationView: View {
                                 navigationVM.goToNextPage(.CueBallView)
                             case "Hand Form":
                                 navigationVM.goToNextPage(.HandFormView)
+                            case "Diamond System":
+                                navigationVM.goToNextPage(.DiamondSystemView)
                             default:
                                 return
                             }
@@ -47,11 +52,11 @@ struct InformationView: View {
                                     .frame(width: 250, height: 250)
                                     .padding(.trailing, 24)
                                 VStack {
-                                    Text("\(data.title)")
+                                    Text(data.title)
                                         .font(Font.custom("SFPro-ExpandedBold", size: 40.0))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
-                                    Text("\(data.subtitle)")
+                                    Text(data.subtitle)
                                         .font(.callout)
                                         .foregroundStyle(.white)
                                         .padding(.top, -20)
@@ -62,26 +67,28 @@ struct InformationView: View {
                         }
                     }
                 }
+                .padding(.all, 50)
             }
-            .padding(.all, -60)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+            .scrollIndicators(.hidden)
+            .overlay(alignment: .topLeading) {
+                Button {
+                    navigationVM.backToPreviousPage()
+                } label: {
+                    Image("back")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                }
+                .padding(.top, 36)
+                .padding(.leading, 16)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
-        .scrollIndicators(.hidden)
-        .overlay(alignment: .top, content: {
-            Button {
-                navigationVM.backToPreviousPage()
-            } label: {
-                Image("back")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-            }
-            .frame(width: 30, height: 30)
-            .padding(.top, 36)
-            .padding(.leading, -366)
-        })
-        
         .toolbarBackground(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden(true)
     }
+}
+
+#Preview {
+    InformationView(navigationVM: NavigationViewModel())
 }

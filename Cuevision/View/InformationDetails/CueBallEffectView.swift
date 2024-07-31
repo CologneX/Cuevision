@@ -24,7 +24,7 @@ struct CueBallEffectView: View {
             })
             
             VStack{
-                Text("Cue Ball Effect").font(Font.custom("SFPro-ExpandedBold", size: 40.0))
+                Text("Cue Ball Effect").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
                     .foregroundColor(.white)
                 Image("InfoCueBallEffect")
             }
