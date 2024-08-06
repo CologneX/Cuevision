@@ -12,7 +12,7 @@
 		2C4A1E702C4F628B00DBF1F8 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E6F2C4F628B00DBF1F8 /* NavigationViewModel.swift */; };
 		2C4A1E792C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */; };
 		9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9308A4A42C4E2B44003DE4C3 /* CameraView+Extensions.swift */; };
-		934510152C5825D800310E03 /* v8m2.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 934510142C5825D800310E03 /* v8m2.mlpackage */; };
+		935010A92C61EB80009E5826 /* BallClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 935010A82C61EB80009E5826 /* BallClassifier.mlpackage */; };
 		93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C832C497C59008A6C7F /* CameraService+Extensions.swift */; };
 		93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */; };
 		93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93981C852C497C59008A6C7F /* ImageResizer.swift */; };
@@ -21,7 +21,6 @@
 		93981C982C49811A008A6C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C972C49811A008A6C7F /* Assets.xcassets */; };
 		93981C9B2C498128008A6C7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93981C992C498128008A6C7F /* Preview Assets.xcassets */; };
 		939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939FABF52C5234FE00B8EE61 /* Color+Extensions.swift */; };
-		939FAC162C52AE6100B8EE61 /* v8m.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 939FAC152C52AE6100B8EE61 /* v8m.mlpackage */; };
 		93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F3E2C4110D900153DCA /* CuevisionApp.swift */; };
 		93A69F502C4110DB00153DCA /* CuevisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F4F2C4110DB00153DCA /* CuevisionTests.swift */; };
 		93A69F5A2C4110DB00153DCA /* CuevisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A69F592C4110DB00153DCA /* CuevisionUITests.swift */; };
@@ -66,7 +65,7 @@
 		2C4A1E782C4FD18600DBF1F8 /* AnalysisDiamondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDiamondViewModel.swift; sourceTree = "<group>"; };
 		9308A4A42C4E2B44003DE4C3 /* CameraView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraView+Extensions.swift"; sourceTree = "<group>"; };
 		9308DB8D2C444064007A3D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		934510142C5825D800310E03 /* v8m2.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = v8m2.mlpackage; sourceTree = "<group>"; };
+		935010A82C61EB80009E5826 /* BallClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = BallClassifier.mlpackage; sourceTree = "<group>"; };
 		93981C832C497C59008A6C7F /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
 		93981C842C497C59008A6C7F /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		93981C852C497C59008A6C7F /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
@@ -75,7 +74,6 @@
 		93981C972C49811A008A6C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93981C992C498128008A6C7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		939FABF52C5234FE00B8EE61 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		939FAC152C52AE6100B8EE61 /* v8m.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = v8m.mlpackage; sourceTree = "<group>"; };
 		93A69F3B2C4110D900153DCA /* Cuevision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuevision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A69F3E2C4110D900153DCA /* CuevisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuevisionApp.swift; sourceTree = "<group>"; };
 		93A69F4B2C4110DB00153DCA /* CuevisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuevisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,8 +212,7 @@
 				9307BD732C497A9D004C4870 /* Model */,
 				9307BD722C497A91004C4870 /* ViewModel */,
 				9307BD712C497A8D004C4870 /* Util */,
-				939FAC152C52AE6100B8EE61 /* v8m.mlpackage */,
-				934510142C5825D800310E03 /* v8m2.mlpackage */,
+				935010A82C61EB80009E5826 /* BallClassifier.mlpackage */,
 				93981C9A2C498128008A6C7F /* Preview Content */,
 				93981C972C49811A008A6C7F /* Assets.xcassets */,
 			);
@@ -412,18 +409,17 @@
 				93A69F3F2C4110D900153DCA /* CuevisionApp.swift in Sources */,
 				93BA20172C53920A00B5D217 /* DiamondSystemView.swift in Sources */,
 				93981C872C497C59008A6C7F /* PhotoCaptureProcessor.swift in Sources */,
-				939FAC162C52AE6100B8EE61 /* v8m.mlpackage in Sources */,
 				93FECF512C4A5B2900C606EA /* BilliardBallClassifierViewModel.swift in Sources */,
 				93BA20162C53920A00B5D217 /* CueBallEffectView.swift in Sources */,
 				93BA20212C53920A00B5D217 /* PhotoDisplayView.swift in Sources */,
 				93981C882C497C59008A6C7F /* ImageResizer.swift in Sources */,
 				93BA201B2C53920A00B5D217 /* CameraView.swift in Sources */,
 				93981C862C497C59008A6C7F /* CameraService+Extensions.swift in Sources */,
+				935010A92C61EB80009E5826 /* BallClassifier.mlpackage in Sources */,
 				93981C8A2C497C8C008A6C7F /* CameraService+Enums.swift in Sources */,
 				939FABF62C5234FE00B8EE61 /* Color+Extensions.swift in Sources */,
 				9308A4A52C4E2B44003DE4C3 /* CameraView+Extensions.swift in Sources */,
 				93BA201A2C53920A00B5D217 /* CameraPreview.swift in Sources */,
-				934510152C5825D800310E03 /* v8m2.mlpackage in Sources */,
 				93BA20182C53920A00B5D217 /* HandFormView.swift in Sources */,
 				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,
 				93981C8C2C497CC2008A6C7F /* CameraViewModel.swift in Sources */,
@@ -590,9 +586,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
-				DEVELOPMENT_TEAM = KNP937X993;
+				DEVELOPMENT_TEAM = P8M46V5G6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cuevision/Info.plist;
@@ -623,7 +619,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -635,9 +631,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
-				DEVELOPMENT_TEAM = KNP937X993;
+				DEVELOPMENT_TEAM = P8M46V5G6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cuevision/Info.plist;
@@ -667,7 +663,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

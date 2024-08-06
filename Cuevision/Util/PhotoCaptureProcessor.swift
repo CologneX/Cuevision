@@ -165,10 +165,10 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
     
     func cropImage(_ inputImage: UIImage, toRect cropRect: CGRect, viewWidth: CGFloat, viewHeight: CGFloat) -> UIImage?
     {
-        let imageViewScale = max(inputImage.size.width / viewWidth,
-                                 inputImage.size.height / viewHeight)
-        
-        
+//        let imageViewScale = max(inputImage.size.width / viewWidth,
+//                                 inputImage.size.height / viewHeight)
+//        
+//        
         // Scale cropRect to handle images larger than shown-on-screen size
         //        let cropZone = CGRect(x:cropRect.origin.x * imageViewScale,
         //                              y:cropRect.origin.y * imageViewScale,
