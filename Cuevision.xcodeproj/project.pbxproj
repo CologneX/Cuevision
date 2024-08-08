@@ -586,7 +586,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
 				DEVELOPMENT_TEAM = P8M46V5G6C;
 				ENABLE_PREVIEWS = YES;
@@ -594,8 +594,8 @@
 				INFOPLIST_FILE = Cuevision/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Cuevision;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app need your camera permission";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app need your permissionn to access album";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to Camera to capture the current billiard table condition to detect the ball position";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to Photos if you are not in billiard place to upload photo from your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -631,7 +631,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Cuevision/Preview Content\"";
 				DEVELOPMENT_TEAM = P8M46V5G6C;
 				ENABLE_PREVIEWS = YES;
@@ -639,8 +639,8 @@
 				INFOPLIST_FILE = Cuevision/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Cuevision;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app need your camera permission";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app need your permissionn to access album";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to Camera to capture the current billiard table condition to detect the ball position";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to Photos if you are not in billiard place to upload photo from your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
