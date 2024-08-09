@@ -25,7 +25,7 @@ struct InformationView: View {
     ]
     
     var body: some View {
-        ZStack{
+        ZStack {
             Image(.infoBG)
                 .resizable()
                 .scaledToFill()
@@ -49,8 +49,9 @@ struct InformationView: View {
                             HStack {
                                 Image(data.image)
                                     .resizable()
-                                    .frame(width: 250, height: 250)
-                                    .padding(.trailing, 24)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: 300, maxHeight: 220)
+                                //.padding(.trailing, 24)
                                 VStack {
                                     Text(data.title)
                                         .font(Font.custom("SFPro-ExpandedBold", size: 40.0))
@@ -59,20 +60,23 @@ struct InformationView: View {
                                     Text(data.subtitle)
                                         .font(.callout)
                                         .foregroundStyle(.white)
-                                        .padding(.top, -20)
+                                    //.padding(.top, -20)
                                 }
+                                //.background()
                                 .frame(maxWidth: .infinity)
+                                .padding(.leading, -70)
                             }
-                            .frame(maxWidth: 700)
+                            //.frame(maxWidth: 700)
                         }
                     }
                 }
-                .padding(.all, 50)
+                .padding(.vertical, 48)
+                .padding(.horizontal, 60)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
             .scrollIndicators(.hidden)
-            .overlay(alignment: .topLeading) {
+            .overlay(alignment: .top) {
                 Button {
                     navigationVM.backToPreviousPage()
                 } label: {
@@ -80,8 +84,8 @@ struct InformationView: View {
                         .resizable()
                         .frame(width: 30, height: 30)
                 }
-                .padding(.top, 36)
-                .padding(.leading, 16)
+                .padding(.top, 18)
+                .padding(.leading, -320)
             }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

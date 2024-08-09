@@ -21,14 +21,21 @@ struct CueBallEffectView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height:geometry.size.height)
+                
+                VStack{
+                    Text("Cue Ball Effect").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
+                        .foregroundColor(.white)
+                    Image("InfoCueBallEffect")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    //.padding(.all, 48)
+                }
+                //.background()
+                //.frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.all, 36)
+                .padding(.leading, 330)
             })
             
-            VStack{
-                Text("Cue Ball Effect").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
-                    .foregroundColor(.white)
-                Image("InfoCueBallEffect")
-            }
-            .padding(.leading, 200)
         }
         .overlay(alignment: .topTrailing, content: {
             Button(action: {

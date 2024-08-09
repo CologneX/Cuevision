@@ -21,16 +21,19 @@ struct HandFormView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height:geometry.size.height)
+                
+                VStack{
+                    Text("Hand Form").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
+                        .foregroundColor(.white)
+                    Image("InfoHandForm")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxHeight: 245)
+                }
+                .frame(maxHeight: .infinity)
+                .padding(.all, 36)
+                .padding(.leading, 280)
             })
-            
-            VStack{
-                Text("Hand Form").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
-                    .foregroundColor(.white)
-                Spacer()
-                Image("InfoHandForm")
-            }
-            .padding(.leading, 200)
-            .padding(.vertical, 60)
         }
         .overlay(alignment: .topTrailing, content: {
             Button(action: {

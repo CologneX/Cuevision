@@ -21,14 +21,18 @@ struct DiamondSystemView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height:geometry.size.height)
+                
+                VStack {
+                    Text("Diamond System").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
+                        .foregroundColor(.white)
+                    Image("InfoDiamondSystem")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                .frame(maxHeight: .infinity)
+                .padding(.all, 36)
+                .padding(.leading, 280)
             })
-            
-            VStack(alignment: .center){
-                Text("Diamond System").font(Font.custom("SFPro-ExpandedBold", fixedSize: 40.0))
-                    .foregroundColor(.white)
-                Image("InfoDiamondSystem")
-            }
-            .position(x: 580, y: 230)
         }
         .overlay(alignment: .topTrailing, content: {
             Button(action: {
