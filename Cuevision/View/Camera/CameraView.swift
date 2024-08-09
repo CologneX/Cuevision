@@ -93,13 +93,36 @@ struct CameraView: View {
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
                     HStack {
-                        Button(action: {
-                            cameraModel.switchFlash()
-                        }, label: {
-                            Image(systemName: cameraModel.isFlashOn ? "bolt.fill" : "bolt.slash.fill")
-                                .font(.system(size: 20, weight: .medium, design: .default))
-                        })
-                        .accentColor(cameraModel.isFlashOn ? .yellow : .white)
+                        VStack{
+                            Button(action: {
+                                dismiss()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(.thinMaterial)
+                                    .clipShape(Circle())
+                            })
+                            Spacer()
+                            Button(action: {
+                                cameraModel.switchFlash()
+                            }, label: {
+                                Image(systemName: cameraModel.isFlashOn ? "bolt.fill" : "bolt.slash.fill")
+                                    .font(.system(size: 20, weight: .medium, design: .default))
+                            })
+                            .accentColor(cameraModel.isFlashOn ? .yellow : .white)
+                            Spacer()
+                            Button(action: {
+                                isShowingCameraGuideline.toggle()
+                            }, label: {
+                                Image(systemName: "info.circle.fill")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(.thinMaterial)
+                                    .clipShape(Circle())
+                            })
+                        }
+                        .frame(maxHeight: .infinity)
                         
                         CameraPreview(session: cameraModel.session, currentOrientation: $cameraModel.currentOrientation)
                             .onRotate { newOrientation in
@@ -157,7 +180,7 @@ struct CameraView: View {
         //        .onDisappear {
         //            cameraModel.stopCameraSession()
         //        }
-        .padding(.top)
+        //.padding(.top)
         .sheet(isPresented: $isShowingPhotoDisplay) {
             PhotoDisplayView(navigationVM: navigationVM, photo: $displayedPhoto, source: $photoSource, retakeAction: {
                 isShowingPhotoDisplay = false
@@ -170,33 +193,33 @@ struct CameraView: View {
             }
         }
         .navigationBarBackButtonHidden()
-        .overlay(alignment: .topLeading) {
-            Button(action: {
-                dismiss()
-            }, label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(.thinMaterial)
-                    .clipShape(Circle())
-            })
-            .padding(.top,16)
-            .offset(x: -32)
-        }
-        
-        .overlay(alignment: .bottomLeading) {
-            Button(action: {
-                isShowingCameraGuideline.toggle()
-            }, label: {
-                Image(systemName: "info.circle.fill")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(.thinMaterial)
-                    .clipShape(Circle())
-            })
-            .padding(.top,16)
-            .offset(x: -32)
-        }
+        //        .overlay(alignment: .topLeading) {
+        //            Button(action: {
+        //                dismiss()
+        //            }, label: {
+        //                Image(systemName: "xmark")
+        //                    .foregroundColor(.white)
+        //                    .padding()
+        //                    .background(.thinMaterial)
+        //                    .clipShape(Circle())
+        //            })
+        //            .padding(.top,16)
+        //            .offset(x: -32)
+        //        }
+        //
+        //        .overlay(alignment: .bottomLeading) {
+        //            Button(action: {
+        //                isShowingCameraGuideline.toggle()
+        //            }, label: {
+        //                Image(systemName: "info.circle.fill")
+        //                    .foregroundColor(.white)
+        //                    .padding()
+        //                    .background(.thinMaterial)
+        //                    .clipShape(Circle())
+        //            })
+        //            .padding(.top,16)
+        //            .offset(x: -32)
+        //        }
         .sheet(isPresented: $isShowingCameraGuideline) {
             CameraGuidelineView()
         }
