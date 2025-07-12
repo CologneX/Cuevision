@@ -19,6 +19,8 @@ Cuevision is an iOS application built with Swift that helps billiard players imp
       * **Vision**: For implementing computer vision features.
       * **Core ML**: For integrating machine learning models for ball recognition.
       * **YOLOv8**: Pre-trained machine learning model, fine-tuned with billiard balls dataset made in Roboflow
+### Media
+<iframe src="https://drive.google.com/file/d/1dMzTUOL_APWMihRFCT2LAnP15jUbZOkK/view?usp=drive_link" width="640" height="480" allow="autoplay"></iframe>
 
 ## 🚀 Getting Started
 
